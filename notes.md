@@ -1,8 +1,6 @@
-# Bluetrackr-transmitter notes
+# Bluetrackr notes
 
 ## Components
-
-
 
 - [x] STM32F103
 - [x] nRF24L01+
@@ -13,6 +11,14 @@
 - [x] Pairing button
 - [x] Status LED (blue)
 - [x] Power LED (red) (blinks on low power)
+
+## Interrupts
+
+MPU_INT is active high. There is no pull down internally.
+On rising edge it means it's triggered.
+
+NRF_INT is active low. There is a pull up resistor internaly.
+On falling edge it means it's triggered.
 
 ## LEDs
 
