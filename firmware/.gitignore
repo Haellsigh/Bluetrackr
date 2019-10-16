@@ -1,2 +1,10 @@
 .metadata
 RemoteSystemsTempFiles
+
+# Firmware project files
+Drivers/
+.cproject
+.mxproject
+.project
+*.s
+*.ld
