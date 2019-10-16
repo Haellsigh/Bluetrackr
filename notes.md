@@ -12,6 +12,21 @@
 - [x] Status LED (blue)
 - [x] Power LED (red) (blinks on low power)
 
+## Power cycling
+
+#### Power management
+
+2 choices:
+ - [ ] A switch to switch the power on or off
+ - [x] Automatically switch off power on idle
+
+#### Reset
+
+2 choices:
+  - [ ] Use the switch
+  - [x] Reset button on NRST pin
+
+
 ## Interrupts
 
 MPU_INT is active high. There is no pull down internally.
@@ -31,6 +46,7 @@ Press the pairing button on both devices at the same time.
  - The **receiver** begins transmitting on the last channel. It broadcasts the (fixed) channel it's going to take in a few seconds.
  - The **transmitter** switches to the channel and pairing is done.
 
+The channels paired are stored in the backup registers of the µc. (See [reference](https://www.st.com/content/ccc/resource/technical/document/reference_manual/59/b9/ba/7f/11/af/43/d5/CD00171190.pdf/files/CD00171190.pdf/jcr:content/translations/en.CD00171190.pdf) page 83.)
 
 | Component | Schematic | PCB |
 |-----------|:----------|:---:|
