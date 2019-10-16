@@ -8,3 +8,6 @@ Drivers/
 .project
 *.s
 *.ld
+
+# Project build files
+Debug/
