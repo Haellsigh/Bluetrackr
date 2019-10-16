@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 9)
+    (drawings 8)
     (tracks 0)
     (zones 0)
     (modules 29)
@@ -1467,18 +1467,6 @@
     )
   )
 
-  (dimension 53.975 (width 0.15) (layer Dwgs.User)
-    (gr_text "53.975 mm" (at 153.9875 107.345) (layer Dwgs.User)
-      (effects (font (size 1 1) (thickness 0.15)))
-    )
-    (feature1 (pts (xy 180.975 70.485) (xy 180.975 106.631421)))
-    (feature2 (pts (xy 127 70.485) (xy 127 106.631421)))
-    (crossbar (pts (xy 127 106.045) (xy 180.975 106.045)))
-    (arrow1a (pts (xy 180.975 106.045) (xy 179.848496 106.631421)))
-    (arrow1b (pts (xy 180.975 106.045) (xy 179.848496 105.458579)))
-    (arrow2a (pts (xy 127 106.045) (xy 128.126504 106.631421)))
-    (arrow2b (pts (xy 127 106.045) (xy 128.126504 105.458579)))
-  )
   (gr_arc (start 179.705 100.33) (end 179.705 101.6) (angle -90) (layer Edge.Cuts) (width 0.05))
   (gr_arc (start 128.27 100.33) (end 127 100.33) (angle -90) (layer Edge.Cuts) (width 0.05))
   (gr_arc (start 128.27 72.39) (end 128.27 71.12) (angle -90) (layer Edge.Cuts) (width 0.05))
