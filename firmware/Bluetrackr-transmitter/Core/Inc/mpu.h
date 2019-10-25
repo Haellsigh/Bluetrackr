@@ -26,8 +26,6 @@
 
 #define MPU9250_EXT_SENS_DATA_00 0x49
 
-
-
 #define AK8963_WIA 0x00
 #define AK8963_INFO 0x01
 #define AK8963_ST_1 0x02
@@ -53,60 +51,63 @@
 /* Structure and Valiable ---------------------------------------------------------*/
 
 typedef enum {
-	MPU9250_RESULT_OK = 0x00,
-	MPU9250_RESULT_FAIL
+	MPU9250_RESULT_OK = 0x00, MPU9250_RESULT_FAIL
 } MPU9250_Result_t;
 
 typedef enum {
-    ACCEL_SCALE_2G  = 0x00,
-    ACCEL_SCALE_4G  = 0x08,
-    ACCEL_SCALE_8G  = 0x10,
-    ACCEL_SCALE_16G = 0x18
+	ACCEL_SCALE_2G = 0x00,
+	ACCEL_SCALE_4G = 0x08,
+	ACCEL_SCALE_8G = 0x10,
+	ACCEL_SCALE_16G = 0x18
 } MPU9250_ACCEL_SCALE_t;
 
 typedef enum {
-    GYRO_SCALE_250dps  = 0x00,
-    GYRO_SCALE_500dps  = 0x08,
-    GYRO_SCALE_1000dps = 0x10,
-    GYRO_SCALE_2000dps = 0x18
+	GYRO_SCALE_250dps = 0x00,
+	GYRO_SCALE_500dps = 0x08,
+	GYRO_SCALE_1000dps = 0x10,
+	GYRO_SCALE_2000dps = 0x18
 } MPU9250_GYRO_SCALE_t;
 
 typedef struct {
-    SPI_HandleTypeDef *hspi;//SPI handle
-    GPIO_TypeDef *GPIOx;//CS pin GPIOx
-    uint16_t GPIO_PIN ;//CS pin number
+	SPI_HandleTypeDef *hspi; //SPI handle
+	GPIO_TypeDef *GPIOx; //CS pin GPIOx
+	uint16_t GPIO_PIN; //CS pin number
 
-    MPU9250_GYRO_SCALE_t ACCEL_SCALE;
-    MPU9250_GYRO_SCALE_t GYRO_SCALE;
+	MPU9250_ACCEL_SCALE_t ACCEL_SCALE;
+	MPU9250_GYRO_SCALE_t GYRO_SCALE;
 
-    float ARES;//Accel resolution
-    float GRES;//Gyro resolution
-    float MAG_SENSITIVITY[3];
+	float ARES; //Accel resolution
+	float GRES; //Gyro resolution
+	float MAG_SENSITIVITY[3];
 
-    float ACCEL_OFFSET[3];
-    float GYRO_OFFSET[3];
-    float MAG_OFFSET[3];
+	float ACCEL_OFFSET[3];
+	float GYRO_OFFSET[3];
+	float MAG_OFFSET[3];
 } MPU9250_CONFIG_t;
 
 typedef struct {
-    float accel[3];
-    uint16_t accel_raw[3];
-    float gyro[3];
-    uint16_t gyro_raw[3];
-    float mag[3];
-    uint16_t mag_raw[3];
-    float temperature;
-    uint16_t temperature_raw;
+	float accel[3];
+	uint16_t accel_raw[3];
+	float gyro[3];
+	uint16_t gyro_raw[3];
+	float mag[3];
+	uint16_t mag_raw[3];
+	float temperature;
+	uint16_t temperature_raw;
 } MPU9250_DATA_t;
 
 /* Fanction ---------------------------------------------------------*/
 
 MPU9250_Result_t MPU9250_Initialize(MPU9250_CONFIG_t *MPU9250_CONFIG);
 MPU9250_Result_t MPU9250_Config(MPU9250_CONFIG_t *MPU9250_CONFIG);
-MPU9250_Result_t MPU9250_MAG_Selftest(MPU9250_CONFIG_t *MPU9250_CONFIG,MPU9250_DATA_t *MPU9250_DATA);
-MPU9250_Result_t MPU9250_Update7DOF(MPU9250_CONFIG_t *MPU9250_CONFIG,MPU9250_DATA_t *MPU9250_DATA);
-MPU9250_Result_t MPU9250_UpdateMAG(MPU9250_CONFIG_t *MPU9250_CONFIG,MPU9250_DATA_t *MPU9250_DATA);
-MPU9250_Result_t MPU9250_GetMAG(MPU9250_CONFIG_t *MPU9250_CONFIG,MPU9250_DATA_t *MPU9250_DATA);
+MPU9250_Result_t MPU9250_MAG_Selftest(MPU9250_CONFIG_t *MPU9250_CONFIG,
+		MPU9250_DATA_t *MPU9250_DATA);
+MPU9250_Result_t MPU9250_Update7DOF(MPU9250_CONFIG_t *MPU9250_CONFIG,
+		MPU9250_DATA_t *MPU9250_DATA);
+MPU9250_Result_t MPU9250_UpdateMAG(MPU9250_CONFIG_t *MPU9250_CONFIG,
+		MPU9250_DATA_t *MPU9250_DATA);
+MPU9250_Result_t MPU9250_GetMAG(MPU9250_CONFIG_t *MPU9250_CONFIG,
+		MPU9250_DATA_t *MPU9250_DATA);
 MPU9250_Result_t MPU9250_Calibrate(MPU9250_CONFIG_t *MPU9250_CONFIG);
 
 #endif
