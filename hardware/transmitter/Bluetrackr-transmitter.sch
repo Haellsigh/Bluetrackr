@@ -991,7 +991,8 @@ Text Label 9400 5550 2    50   ~ 0
 NRF_CE
 Text Label 9400 5650 2    50   ~ 0
 NRF_INT
-NoConn ~ 7000 1400
-Text Notes 6700 1600 0    50   ~ 0
-no power from\nprogramming
+Text Label 7000 1400 0    50   ~ 0
+NRST
+Text Label 3450 2650 2    50   ~ 0
+NRST
 $EndSCHEMATC
