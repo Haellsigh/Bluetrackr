@@ -22,9 +22,9 @@
 ## 0.1.2
 
 ### Added
-- [24/11/2019] Replaced the unused programming pin with NRST to support st-link reset.
+- Replaced the unused programming pin with NRST to support st-link reset.
 ### Changed
-- Use net labels instead of global labels.
+- [1984e59] Use net labels instead of global labels.
 ### Deprecated
 ### Removed
 ### Fixed
