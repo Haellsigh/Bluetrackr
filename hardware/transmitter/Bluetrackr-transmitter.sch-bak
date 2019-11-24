@@ -6,8 +6,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Bluetrackr-transmitter"
-Date ""
-Rev ""
+Date "2019-11-24"
+Rev "2"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -28,16 +28,16 @@ $EndComp
 $Comp
 L power:+3V3 #PWR0101
 U 1 1 5DA27C6F
-P 5550 2250
-F 0 "#PWR0101" H 5550 2100 50  0001 C CNN
-F 1 "+3V3" H 5565 2423 50  0000 C CNN
-F 2 "" H 5550 2250 50  0001 C CNN
-F 3 "" H 5550 2250 50  0001 C CNN
-	1    5550 2250
+P 5350 2250
+F 0 "#PWR0101" H 5350 2100 50  0001 C CNN
+F 1 "+3V3" H 5365 2423 50  0000 C CNN
+F 2 "" H 5350 2250 50  0001 C CNN
+F 3 "" H 5350 2250 50  0001 C CNN
+	1    5350 2250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5550 2250 5550 2350
+	5350 2250 5350 2350
 Wire Wire Line
 	5650 2450 5650 2350
 Wire Wire Line
@@ -139,14 +139,6 @@ Wire Wire Line
 	4600 2950 4600 2850
 Wire Wire Line
 	4600 2850 4850 2850
-Text GLabel 6150 5150 2    50   Input ~ 0
-SWCLK
-Text GLabel 6150 5050 2    50   Input ~ 0
-SWDIO
-Text GLabel 9700 1700 0    50   Input ~ 0
-MPU_INT
-Text GLabel 9700 1800 0    50   Input ~ 0
-MPU_CS
 NoConn ~ 9700 1400
 NoConn ~ 9700 1500
 $Comp
@@ -171,10 +163,6 @@ F 3 "" H 9150 900 50  0001 C CNN
 	1    9150 900 
 	1    0    0    -1  
 $EndComp
-Text GLabel 4850 4850 0    50   Input ~ 0
-MPU_INT
-Text GLabel 4850 3750 0    50   Input ~ 0
-MPU_CS
 $Comp
 L Regulator_Linear:MIC5205-3.3YM5 U1
 U 1 1 5DA6326B
@@ -290,7 +278,7 @@ Wire Wire Line
 	1950 1550 1950 1400
 Wire Wire Line
 	1950 1400 1700 1400
-Text Notes 750  900  0    118  ~ 0
+Text Notes 950  900  0    79   ~ 16
 3.3V REGULATOR
 $Comp
 L Connector:Conn_01x02_Female J2
@@ -492,10 +480,6 @@ F 3 "" H 10300 3850 50  0001 C CNN
 	1    10300 3850
 	1    0    0    -1  
 $EndComp
-Text GLabel 3650 1200 2    50   Input ~ 0
-VBAT_SENSE
-Text GLabel 6150 3750 2    50   Input ~ 0
-VBAT_SENSE
 $Comp
 L power:+BATT #PWR0122
 U 1 1 5DAC02A5
@@ -564,12 +548,8 @@ F 3 "" H 5550 1100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5450 1200 5550 1200
-Text GLabel 4950 1200 0    50   Input ~ 0
-BTN_PAIR
 Wire Wire Line
 	5550 1100 5550 1200
-Text GLabel 4850 4550 0    50   Input ~ 0
-BTN_PAIR
 $Comp
 L RF:NRF24L01_Breakout U3
 U 1 1 5DAF7EB6
@@ -604,36 +584,6 @@ F 3 "" H 9900 6150 50  0001 C CNN
 	1    9900 6150
 	1    0    0    -1  
 $EndComp
-Text GLabel 9400 5350 0    50   Input ~ 0
-NRF_CS
-Text GLabel 9400 5550 0    50   Input ~ 0
-NRF_CE
-Text GLabel 4850 3850 0    50   Input ~ 0
-NRF_CS
-Text GLabel 4850 4250 0    50   Input ~ 0
-NRF_CE
-Text GLabel 4850 4750 0    50   Input ~ 0
-NRF_INT
-Text GLabel 6150 4450 2    50   Input ~ 0
-SPI_MOSI
-Text GLabel 6150 4350 2    50   Input ~ 0
-SPI_MISO
-Text GLabel 6150 4250 2    50   Input ~ 0
-SPI_SCK
-Text GLabel 9400 5050 0    50   Input ~ 0
-SPI_MOSI
-Text GLabel 9400 5150 0    50   Input ~ 0
-SPI_MISO
-Text GLabel 9400 5250 0    50   Input ~ 0
-SPI_SCK
-Text GLabel 9700 1200 0    50   Input ~ 0
-SPI_SCK
-Text GLabel 9700 1300 0    50   Input ~ 0
-SPI_MOSI
-Text GLabel 9700 1600 0    50   Input ~ 0
-SPI_MISO
-Text GLabel 9400 5650 0    50   Input ~ 0
-NRF_INT
 $Comp
 L Device:C C8
 U 1 1 5DA70C62
@@ -699,10 +649,6 @@ F 3 "~" H 6800 1200 50  0001 C CNN
 	1    6800 1200
 	1    0    0    -1  
 $EndComp
-Text GLabel 7000 1300 2    50   Input ~ 0
-SWCLK
-Text GLabel 7000 1100 2    50   Input ~ 0
-SWDIO
 $Comp
 L power:GND #PWR0129
 U 1 1 5DAD06ED
@@ -718,9 +664,6 @@ Wire Wire Line
 	7000 1200 7400 1200
 Wire Wire Line
 	7400 1200 7400 1300
-NoConn ~ 7000 1400
-Text Notes 6700 1600 0    50   ~ 0
-no power from\nprogramming
 $Comp
 L Mechanical:MountingHole H4
 U 1 1 5DA718A1
@@ -802,10 +745,6 @@ F 3 "" H 1400 3900 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	1400 3800 1400 3900
-Text GLabel 1400 3000 1    50   Input ~ 0
-LED_STATUS
-Text GLabel 1800 3000 1    50   Input ~ 0
-LED_POWER
 $Comp
 L Device:R R2
 U 1 1 5DA85E55
@@ -847,10 +786,6 @@ Wire Wire Line
 	1800 3100 1800 3000
 Wire Wire Line
 	1400 3100 1400 3000
-Text GLabel 6150 3950 2    50   Input ~ 0
-LED_STATUS
-Text GLabel 6150 4050 2    50   Input ~ 0
-LED_POWER
 $Comp
 L power:GND #PWR0132
 U 1 1 5DA98822
@@ -993,4 +928,67 @@ Wire Wire Line
 	9150 1200 9150 1100
 Wire Wire Line
 	9150 1100 9700 1100
+Connection ~ 5350 2350
+Text Label 7000 1100 0    50   ~ 0
+SWDIO
+Text Label 7000 1300 0    50   ~ 0
+SWCLK
+Text Label 6150 5050 0    50   ~ 0
+SWDIO
+Text Label 6150 5150 0    50   ~ 0
+SWCLK
+Text Label 6150 3750 0    50   ~ 0
+VBAT_SENSE
+Text Label 6150 3950 0    50   ~ 0
+LED_STATUS
+Text Label 6150 4050 0    50   ~ 0
+LED_POWER
+Text Label 6150 4250 0    50   ~ 0
+SPI_SCK
+Text Label 6150 4350 0    50   ~ 0
+SPI_MISO
+Text Label 6150 4450 0    50   ~ 0
+SPI_MOSI
+Text Label 4850 3750 2    50   ~ 0
+MPU_CS
+Text Label 4850 3850 2    50   ~ 0
+NRF_CSN
+Text Label 4850 4250 2    50   ~ 0
+NRF_CE
+Text Label 4850 4550 2    50   ~ 0
+BTN_PAIR
+Text Label 4850 4750 2    50   ~ 0
+NRF_INT
+Text Label 4850 4850 2    50   ~ 0
+MPU_INT
+Text Label 1400 3000 1    50   ~ 0
+LED_STATUS
+Text Label 1800 3000 1    50   ~ 0
+LED_POWER
+Text Label 3650 1200 0    50   ~ 0
+VBAT_SENSE
+Text Label 4950 1200 2    50   ~ 0
+BTN_PAIR
+Text Label 9700 1200 2    50   ~ 0
+SPI_SCK
+Text Label 9700 1300 2    50   ~ 0
+SPI_MOSI
+Text Label 9700 1600 2    50   ~ 0
+SPI_MISO
+Text Label 9700 1700 2    50   ~ 0
+MPU_INT
+Text Label 9700 1800 2    50   ~ 0
+MPU_CS
+Text Label 9400 5250 2    50   ~ 0
+SPI_SCK
+Text Label 9400 5350 2    50   ~ 0
+NRF_CSN
+Text Label 9400 5150 2    50   ~ 0
+SPI_MISO
+Text Label 9400 5050 2    50   ~ 0
+SPI_MOSI
+Text Label 9400 5550 2    50   ~ 0
+NRF_CE
+Text Label 9400 5650 2    50   ~ 0
+NRF_INT
 $EndSCHEMATC
