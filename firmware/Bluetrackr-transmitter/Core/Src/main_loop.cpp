@@ -1,13 +1,46 @@
 #include "main_loop.h"
 #include "main.h"
 
-#include "delay.h"
+#include <blt/delay.hpp>
+#include <blt/error_handler.hpp>
+#include <blt/gpio.hpp>
+#include <nrf24/nrf24.hpp>
+#include <spi/spi.hpp>
 
 //#include "mpu.h"
 
+using namespace blt;
+using namespace gpio;
+
 void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
-  // Initializes delay library
-  blt::delayInit();
+  // Initialises delay library
+  delay::init();
+
+  // Outputs
+  using led_status = gpio::pin_out<PortA, pin2>;
+  using led_power = gpio::pin_out<PortA, pin3>;
+  using leds = gpio::pin_out<PortA, pin2, pin3>;
+
+  // Inputs
+  using btn_pair = gpio::pin_in<PortB, pin8>;
+
+  // nRF24L01 pins
+  using csn = gpio::pin_out<PortB, NRF_CSN_Pin>;
+  using ce = gpio::pin_out<PortB, NRF_CE_Pin>;
+
+  // Reset leds
+  leds::off();
+
+  blt::delay::ms(50);
+
+  // Initialises the radio
+  nrf24::device<spi::device, csn, ce> radio(hspi);
+  radio.init();
+  // delay::ms(500);
+
+  if (!radio.setDataRate(nrf24::DataRate::k2Mbps)) {
+    blt::error_handler();
+  }
 
   /*MPU9250_CONFIG_t cfg;
   cfg.ACCEL_SCALE = ACCEL_SCALE_16G;
@@ -39,23 +72,10 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
 
   // MPU9250_DATA_t data;
   // int8_t datastr[30] = "";
-  /* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1) {
-    /* USER CODE END WHILE */
-    /* USER CODE BEGIN 3 */
-    // MPU9250_Update7DOF(&cfg, &data);
-
-    /*sprintf(datastr, "%6.2f, %6.2f, %6.2f\r\n", data.gyro[0], data.gyro[1],
-            data.gyro[2]);*/
-
-    // HAL_UART_Transmit(&huart1, datastr, strlen(datastr), 0xFFFF);
-    HAL_Delay(100);
-    HAL_GPIO_TogglePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin);
-  }
+  led_status::on();
 
   while (true) {
+    // MPU9250_Update7DOF(&cfg, &data);
   }
 }

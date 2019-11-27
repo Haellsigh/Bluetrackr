@@ -22,7 +22,7 @@
 ## 0.1.2
 
 ### Added
-- Replaced the unused programming pin with NRST to support st-link reset.
+- [a86c5df] Replaced the unused programming pin with NRST to support stlink reset.
 ### Changed
 - [1984e59] Use net labels instead of global labels.
 ### Deprecated
