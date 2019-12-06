@@ -1,5 +1,4 @@
-#include <mpu9250.h>
-#include <blt/delay.hpp>
+#include "mpu9250.h"
 
 namespace blt {
 

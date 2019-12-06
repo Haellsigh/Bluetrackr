@@ -1,13 +1,16 @@
 #ifndef BLT_ERROR_HANDLER_H_
 #define BLT_ERROR_HANDLER_H_
 
-#include <blt/delay.hpp>
-#include <blt/gpio.hpp>
+#include <blt/gpio.hh>
+#include <blt/time.hh>
 
 namespace blt {
 
-static const void error_handler() {
-  using led_power = gpio::pin_out<gpio::PortA, gpio::pin3>;
+static void error_handler() {
+  using namespace gpio;
+
+  delay::init();
+  using led_power = gpio::pin_out<PA, p3>;
 
   while (true) {
     delay::ms(100);

@@ -58,14 +58,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define NRF_IRQ_Pin GPIO_PIN_3
-#define NRF_IRQ_GPIO_Port GPIOC
 #define B1_Pin GPIO_PIN_0
 #define B1_GPIO_Port GPIOA
-#define NRF_SCK_Pin GPIO_PIN_5
-#define NRF_SCK_GPIO_Port GPIOA
-#define EXT_RESET_Pin GPIO_PIN_5
-#define EXT_RESET_GPIO_Port GPIOC
+#define NRF_CSN_Pin GPIO_PIN_2
+#define NRF_CSN_GPIO_Port GPIOB
+#define NRF_IRQ_Pin GPIO_PIN_10
+#define NRF_IRQ_GPIO_Port GPIOB
 #define LD3_Pin GPIO_PIN_6
 #define LD3_GPIO_Port GPIOC
 #define LD6_Pin GPIO_PIN_7
@@ -78,14 +76,8 @@ void Error_Handler(void);
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
-#define NRF_MISO_Pin GPIO_PIN_4
-#define NRF_MISO_GPIO_Port GPIOB
-#define NRF_MOSI_Pin GPIO_PIN_5
-#define NRF_MOSI_GPIO_Port GPIOB
-#define NRF_CE_Pin GPIO_PIN_8
+#define NRF_CE_Pin GPIO_PIN_5
 #define NRF_CE_GPIO_Port GPIOB
-#define NRF_CSN_Pin GPIO_PIN_9
-#define NRF_CSN_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

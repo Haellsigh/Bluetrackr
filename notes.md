@@ -18,13 +18,29 @@
 
 2 choices:
  - [ ] A switch to switch the power on or off
- - [x] Automatically switch off power on idle
+ - [x] Automatically switch off power on accelerometer idle
+
+Setup an interrupt on the MPU9250 to trigger when the device is moved, somehow.
+
+#### Charging
+
+TP4056 cannot charge the battery while it is under load. (Discovered after the first prototype)
+
+Solution: Use the +Vin pins to detect USB power, and use it instead of the battery power. The regulator can handle it. Circuit with diodes.
+
+## Programming
+
+#### Power
+
+Don't use power from the reset connector
 
 #### Reset
 
 2 choices:
-  - [ ] Use the switch
+  - [x] Use the button
   - [x] Reset button on NRST pin
+
+Use both.
 
 
 ## Interrupts
@@ -37,8 +53,12 @@ On falling edge it means it's triggered.
 
 ## LEDs
 
- - Status LED (blue) is blinking when the device is connected. Off if it is not connected.
+ - Status LED (blue) blinks when the device first connect. Off in normal state.
+ - Maybe add a shake function to show status? On shake detection, it blinks to show the connection status.
+ - Power LED blinks fast when there is an error
  - Power LED is slowly blinking when the power is low.
+
+
 
 ## Pairing process
 

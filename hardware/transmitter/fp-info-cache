@@ -1,4 +1,4 @@
-16582608689277130
+16790762345051886
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -80,6 +80,13 @@ Battery
 BatteryHolder_Keystone_1060_1x2032
 http://www.keyelco.com/product-pdf.cfm?p=726
 CR2032 BR2032 BatteryHolder Battery
+0
+2
+2
+Battery
+BatteryHolder_Keystone_2460_1xAA
+https://www.keyelco.com/product-pdf.cfm?p=1025
+AA battery cell holder
 0
 2
 2
@@ -1179,6 +1186,13 @@ Button_Switch_SMD
 SW_Push_1P1T_NO_CK_PTS125Sx43PSMTR
 C&K Switches 1P1T SMD PTS125 Series 12mm Tact Switch with Pegs, https://www.ckswitches.com/media/1462/pts125.pdf
 Button Tactile Switch SPST 1P1T
+0
+4
+2
+Button_Switch_SMD
+SW_Push_1P1T_NO_Vertical_Wuerth_434133025816
+https://katalog.we-online.com/em/datasheet/434133025816.pdf
+tactile switch Wurth Wuerth
 0
 4
 2
@@ -6636,9 +6650,9 @@ SMA THT Female Jack Horizontal
 5
 2
 Connector_Coaxial
-SMA_Samtec_SMA-J-P-H-ST-EM1_EdgeMount
-http://suddendocs.samtec.com/prints/sma-j-p-x-st-em1-mkt.pdf
-SMA
+SMA_Samtec_SMA-J-P-X-ST-EM1_EdgeMount
+Connector SMA, 0Hz to 20GHz, 50Ohm, Edge Mount (http://suddendocs.samtec.com/prints/sma-j-p-x-st-em1-mkt.pdf)
+SMA Straight Samtec Edge Mount
 0
 5
 2
@@ -8127,6 +8141,41 @@ connector Molex  top entry
 53
 52
 Connector_FFC-FPC
+TE_0-1734839-5_1x05-1MP_P0.5mm_Horizontal
+TE FPC connector, 05 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+7
+6
+Connector_FFC-FPC
+TE_0-1734839-6_1x06-1MP_P0.5mm_Horizontal
+TE FPC connector, 06 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+8
+7
+Connector_FFC-FPC
+TE_0-1734839-7_1x07-1MP_P0.5mm_Horizontal
+TE FPC connector, 07 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+9
+8
+Connector_FFC-FPC
+TE_0-1734839-8_1x08-1MP_P0.5mm_Horizontal
+TE FPC connector, 08 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+10
+9
+Connector_FFC-FPC
+TE_0-1734839-9_1x09-1MP_P0.5mm_Horizontal
+TE FPC connector, 09 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+11
+10
+Connector_FFC-FPC
 TE_1-84952-0_1x10-1MP_P1.0mm_Horizontal
 TE FPC connector, 10 bottom-side contacts, 1.0mm pitch, 1.0mm height, SMT, http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=84952&DocType=Customer+Drawing&DocLang=English&DocFormat=pdf&PartCntxt=84952-4
 te fpc 84952
@@ -8263,6 +8312,76 @@ Connector_FFC-FPC
 TE_1-84953-9_1x19-1MP_P1.0mm_Horizontal
 TE FPC connector, 19 top-side contacts, 1.0mm pitch, 1.0mm height, SMT, http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=84953&DocType=Customer+Drawing&DocLang=English&DocFormat=pdf&PartCntxt=84953-4
 te fpc 84953
+0
+21
+20
+Connector_FFC-FPC
+TE_1-1734839-0_1x10-1MP_P0.5mm_Horizontal
+TE FPC connector, 10 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+12
+11
+Connector_FFC-FPC
+TE_1-1734839-1_1x11-1MP_P0.5mm_Horizontal
+TE FPC connector, 11 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+13
+12
+Connector_FFC-FPC
+TE_1-1734839-2_1x12-1MP_P0.5mm_Horizontal
+TE FPC connector, 12 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+14
+13
+Connector_FFC-FPC
+TE_1-1734839-3_1x13-1MP_P0.5mm_Horizontal
+TE FPC connector, 13 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+15
+14
+Connector_FFC-FPC
+TE_1-1734839-4_1x14-1MP_P0.5mm_Horizontal
+TE FPC connector, 14 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+16
+15
+Connector_FFC-FPC
+TE_1-1734839-5_1x15-1MP_P0.5mm_Horizontal
+TE FPC connector, 15 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+17
+16
+Connector_FFC-FPC
+TE_1-1734839-6_1x16-1MP_P0.5mm_Horizontal
+TE FPC connector, 16 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+18
+17
+Connector_FFC-FPC
+TE_1-1734839-7_1x17-1MP_P0.5mm_Horizontal
+TE FPC connector, 17 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+19
+18
+Connector_FFC-FPC
+TE_1-1734839-8_1x18-1MP_P0.5mm_Horizontal
+TE FPC connector, 18 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+20
+19
+Connector_FFC-FPC
+TE_1-1734839-9_1x19-1MP_P0.5mm_Horizontal
+TE FPC connector, 19 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
 0
 21
 20
@@ -8407,6 +8526,76 @@ te fpc 84953
 31
 30
 Connector_FFC-FPC
+TE_2-1734839-0_1x20-1MP_P0.5mm_Horizontal
+TE FPC connector, 20 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+22
+21
+Connector_FFC-FPC
+TE_2-1734839-1_1x21-1MP_P0.5mm_Horizontal
+TE FPC connector, 21 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+23
+22
+Connector_FFC-FPC
+TE_2-1734839-2_1x22-1MP_P0.5mm_Horizontal
+TE FPC connector, 22 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+24
+23
+Connector_FFC-FPC
+TE_2-1734839-3_1x23-1MP_P0.5mm_Horizontal
+TE FPC connector, 23 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+25
+24
+Connector_FFC-FPC
+TE_2-1734839-4_1x24-1MP_P0.5mm_Horizontal
+TE FPC connector, 24 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+26
+25
+Connector_FFC-FPC
+TE_2-1734839-5_1x25-1MP_P0.5mm_Horizontal
+TE FPC connector, 25 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+27
+26
+Connector_FFC-FPC
+TE_2-1734839-6_1x26-1MP_P0.5mm_Horizontal
+TE FPC connector, 26 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+28
+27
+Connector_FFC-FPC
+TE_2-1734839-7_1x27-1MP_P0.5mm_Horizontal
+TE FPC connector, 27 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+29
+28
+Connector_FFC-FPC
+TE_2-1734839-8_1x28-1MP_P0.5mm_Horizontal
+TE FPC connector, 28 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+30
+29
+Connector_FFC-FPC
+TE_2-1734839-9_1x29-1MP_P0.5mm_Horizontal
+TE FPC connector, 29 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+31
+30
+Connector_FFC-FPC
 TE_3-84952-0_1x30-1MP_P1.0mm_Horizontal
 TE FPC connector, 30 bottom-side contacts, 1.0mm pitch, 1.0mm height, SMT, http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=84952&DocType=Customer+Drawing&DocLang=English&DocFormat=pdf&PartCntxt=84952-4
 te fpc 84952
@@ -8420,6 +8609,153 @@ te fpc 84953
 0
 32
 31
+Connector_FFC-FPC
+TE_3-1734839-0_1x30-1MP_P0.5mm_Horizontal
+TE FPC connector, 30 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+32
+31
+Connector_FFC-FPC
+TE_3-1734839-1_1x31-1MP_P0.5mm_Horizontal
+TE FPC connector, 31 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+33
+32
+Connector_FFC-FPC
+TE_3-1734839-2_1x32-1MP_P0.5mm_Horizontal
+TE FPC connector, 32 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+34
+33
+Connector_FFC-FPC
+TE_3-1734839-3_1x33-1MP_P0.5mm_Horizontal
+TE FPC connector, 33 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+35
+34
+Connector_FFC-FPC
+TE_3-1734839-4_1x34-1MP_P0.5mm_Horizontal
+TE FPC connector, 34 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+36
+35
+Connector_FFC-FPC
+TE_3-1734839-5_1x35-1MP_P0.5mm_Horizontal
+TE FPC connector, 35 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+37
+36
+Connector_FFC-FPC
+TE_3-1734839-6_1x36-1MP_P0.5mm_Horizontal
+TE FPC connector, 36 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+38
+37
+Connector_FFC-FPC
+TE_3-1734839-7_1x37-1MP_P0.5mm_Horizontal
+TE FPC connector, 37 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+39
+38
+Connector_FFC-FPC
+TE_3-1734839-8_1x38-1MP_P0.5mm_Horizontal
+TE FPC connector, 38 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+40
+39
+Connector_FFC-FPC
+TE_3-1734839-9_1x39-1MP_P0.5mm_Horizontal
+TE FPC connector, 39 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+41
+40
+Connector_FFC-FPC
+TE_4-1734839-0_1x40-1MP_P0.5mm_Horizontal
+TE FPC connector, 40 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+42
+41
+Connector_FFC-FPC
+TE_4-1734839-1_1x41-1MP_P0.5mm_Horizontal
+TE FPC connector, 41 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+43
+42
+Connector_FFC-FPC
+TE_4-1734839-2_1x42-1MP_P0.5mm_Horizontal
+TE FPC connector, 42 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+44
+43
+Connector_FFC-FPC
+TE_4-1734839-3_1x43-1MP_P0.5mm_Horizontal
+TE FPC connector, 43 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+45
+44
+Connector_FFC-FPC
+TE_4-1734839-4_1x44-1MP_P0.5mm_Horizontal
+TE FPC connector, 44 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+46
+45
+Connector_FFC-FPC
+TE_4-1734839-5_1x45-1MP_P0.5mm_Horizontal
+TE FPC connector, 45 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+47
+46
+Connector_FFC-FPC
+TE_4-1734839-6_1x46-1MP_P0.5mm_Horizontal
+TE FPC connector, 46 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+48
+47
+Connector_FFC-FPC
+TE_4-1734839-7_1x47-1MP_P0.5mm_Horizontal
+TE FPC connector, 47 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+49
+48
+Connector_FFC-FPC
+TE_4-1734839-8_1x48-1MP_P0.5mm_Horizontal
+TE FPC connector, 48 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+50
+49
+Connector_FFC-FPC
+TE_4-1734839-9_1x49-1MP_P0.5mm_Horizontal
+TE FPC connector, 49 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+51
+50
+Connector_FFC-FPC
+TE_5-1734839-0_1x50-1MP_P0.5mm_Horizontal
+TE FPC connector, 50 top-side contacts, 0.5mm pitch, SMT, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1734839%7FC%7Fpdf%7FEnglish%7FENG_CD_1734839_C_C_1734839.pdf%7F4-1734839-0
+te fpc 1734839
+0
+52
+51
 Connector_FFC-FPC
 TE_84952-4_1x04-1MP_P1.0mm_Horizontal
 TE FPC connector, 04 bottom-side contacts, 1.0mm pitch, 1.0mm height, SMT, http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=84952&DocType=Customer+Drawing&DocLang=English&DocFormat=pdf&PartCntxt=84952-4
@@ -8515,6 +8851,13 @@ Connector_HDMI
 HDMI_A_Contact_Technology_HDMI-19APL2_Horizontal
 HDMI Contact Technology Type A http://www.contactswitch.com/en/download.aspx?id=1449
 HDMI Contact Technology Type A
+0
+23
+20
+Connector_HDMI
+HDMI_A_Kycon_KDMIX-SL1-NS-WS-B15_VerticalRightAngle
+HDMI, Type A, Kycon KDMIX-SL1-NS-WS-B15, Vertical Right Angle, http://www.kycon.com/Pub_Eng_Draw/KDMIX-SL1-NS-WS-B15.pdf
+hdmi type a
 0
 23
 20
@@ -14420,6 +14763,125 @@ connector Molex KK-254 side entry
 16
 16
 Connector_Molex
+Molex_KK-396_A-41791-0002_1x02_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0002 example for new part number: 26-60-4020, 2 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+2
+2
+Connector_Molex
+Molex_KK-396_A-41791-0003_1x03_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0003 example for new part number: 26-60-4030, 3 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+3
+3
+Connector_Molex
+Molex_KK-396_A-41791-0004_1x04_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0004 example for new part number: 26-60-4040, 4 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+4
+4
+Connector_Molex
+Molex_KK-396_A-41791-0005_1x05_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0005 example for new part number: 26-60-4050, 5 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+5
+5
+Connector_Molex
+Molex_KK-396_A-41791-0006_1x06_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0006 example for new part number: 26-60-4060, 6 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+6
+6
+Connector_Molex
+Molex_KK-396_A-41791-0007_1x07_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0007 example for new part number: 26-60-4070, 7 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+7
+7
+Connector_Molex
+Molex_KK-396_A-41791-0008_1x08_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0008 example for new part number: 26-60-4080, 8 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+8
+8
+Connector_Molex
+Molex_KK-396_A-41791-0009_1x09_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0009 example for new part number: 26-60-4090, 9 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+9
+9
+Connector_Molex
+Molex_KK-396_A-41791-0010_1x10_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0010 example for new part number: 26-60-4100, 10 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+10
+10
+Connector_Molex
+Molex_KK-396_A-41791-0011_1x11_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0011 example for new part number: 26-60-4110, 11 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+11
+11
+Connector_Molex
+Molex_KK-396_A-41791-0012_1x12_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0012 example for new part number: 26-60-4120, 12 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+12
+12
+Connector_Molex
+Molex_KK-396_A-41791-0013_1x13_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0013 example for new part number: 26-60-4130, 13 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+13
+13
+Connector_Molex
+Molex_KK-396_A-41791-0014_1x14_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0014 example for new part number: 26-60-4140, 14 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+14
+14
+Connector_Molex
+Molex_KK-396_A-41791-0015_1x15_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0015 example for new part number: 26-60-4150, 15 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+15
+15
+Connector_Molex
+Molex_KK-396_A-41791-0016_1x16_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0016 example for new part number: 26-60-4160, 16 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+16
+16
+Connector_Molex
+Molex_KK-396_A-41791-0017_1x17_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0017 example for new part number: 26-60-4170, 17 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+17
+17
+Connector_Molex
+Molex_KK-396_A-41791-0018_1x18_P3.96mm_Vertical
+Molex KK 396 Interconnect System, old/engineering part number: A-41791-0018 example for new part number: 26-60-4180, 18 Pins (https://www.molex.com/pdm_docs/sd/026604020_sd.pdf), generated with kicad-footprint-generator
+connector Molex KK-396 vertical
+0
+18
+18
+Connector_Molex
 Molex_Mega-Fit_76825-0002_2x01_P5.70mm_Horizontal
 Molex Mega-Fit Power Connectors, 76825-0002 (compatible alternatives: 172064-0002, 172064-1002), 1 Pins per row (http://www.molex.com/pdm_docs/sd/1720640002_sd.pdf), generated with kicad-footprint-generator
 connector Molex Mega-Fit top entry
@@ -14547,8 +15009,8 @@ connector Molex Mega-Fit side entry
 12
 Connector_Molex
 Molex_Micro-Fit_3.0_43045-0200_2x01_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-0200 (compatible alternatives: 43045-0201, 43045-0202), 1 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-0200 (alternative finishes: 43045-020x), 1 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 2
 2
@@ -14581,9 +15043,16 @@ connector Molex Micro-Fit_3.0 side entry
 4
 3
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-0221_2x01-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-0221 (alternative finishes: 43045-022x), 1 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+4
+3
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-0400 (compatible alternatives: 43045-0401, 43045-0402), 2 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-0400 (alternative finishes: 43045-040x), 2 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 4
 4
@@ -14616,9 +15085,16 @@ connector Molex Micro-Fit_3.0 side entry
 6
 5
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-0421_2x02-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-0421 (alternative finishes: 43045-042x), 2 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+6
+5
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-0600_2x03_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-0600 (compatible alternatives: 43045-0601, 43045-0602), 3 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-0600 (alternative finishes: 43045-060x), 3 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 6
 6
@@ -14651,9 +15127,16 @@ connector Molex Micro-Fit_3.0 side entry
 8
 7
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-0621_2x03-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-0621 (alternative finishes: 43045-062x), 3 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+8
+7
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-0800_2x04_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-0800 (compatible alternatives: 43045-0801, 43045-0802), 4 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-0800 (alternative finishes: 43045-080x), 4 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 8
 8
@@ -14686,9 +15169,16 @@ connector Molex Micro-Fit_3.0 side entry
 10
 9
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-0821_2x04-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-0821 (alternative finishes: 43045-082x), 4 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+10
+9
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-1000_2x05_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-1000 (compatible alternatives: 43045-1001, 43045-1002), 5 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-1000 (alternative finishes: 43045-100x), 5 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 10
 10
@@ -14721,9 +15211,16 @@ connector Molex Micro-Fit_3.0 side entry
 12
 11
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-1021_2x05-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-1021 (alternative finishes: 43045-102x), 5 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+12
+11
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-1200_2x06_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-1200 (compatible alternatives: 43045-1201, 43045-1202), 6 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-1200 (alternative finishes: 43045-120x), 6 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 12
 12
@@ -14756,9 +15253,16 @@ connector Molex Micro-Fit_3.0 side entry
 14
 13
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-1221_2x06-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-1221 (alternative finishes: 43045-122x), 6 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+14
+13
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-1400_2x07_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-1400 (compatible alternatives: 43045-1401, 43045-1402), 7 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-1400 (alternative finishes: 43045-140x), 7 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 14
 14
@@ -14791,9 +15295,16 @@ connector Molex Micro-Fit_3.0 side entry
 16
 15
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-1421_2x07-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-1421 (alternative finishes: 43045-142x), 7 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+16
+15
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-1600_2x08_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-1600 (compatible alternatives: 43045-1601, 43045-1602), 8 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-1600 (alternative finishes: 43045-160x), 8 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 16
 16
@@ -14826,9 +15337,16 @@ connector Molex Micro-Fit_3.0 side entry
 18
 17
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-1621_2x08-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-1621 (alternative finishes: 43045-162x), 8 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+18
+17
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-1800_2x09_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-1800 (compatible alternatives: 43045-1801, 43045-1802), 9 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-1800 (alternative finishes: 43045-180x), 9 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 18
 18
@@ -14861,9 +15379,16 @@ connector Molex Micro-Fit_3.0 side entry
 20
 19
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-1821_2x09-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-1821 (alternative finishes: 43045-182x), 9 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+20
+19
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-2000 (compatible alternatives: 43045-2001, 43045-2002), 10 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-2000 (alternative finishes: 43045-200x), 10 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 20
 20
@@ -14896,9 +15421,16 @@ connector Molex Micro-Fit_3.0 side entry
 22
 21
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-2021_2x10-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-2021 (alternative finishes: 43045-202x), 10 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+22
+21
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-2200_2x11_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-2200 (compatible alternatives: 43045-2201, 43045-2202), 11 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-2200 (alternative finishes: 43045-220x), 11 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 22
 22
@@ -14931,9 +15463,16 @@ connector Molex Micro-Fit_3.0 side entry
 24
 23
 Connector_Molex
+Molex_Micro-Fit_3.0_43045-2221_2x11-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-2221 (alternative finishes: 43045-222x), 11 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
+0
+24
+23
+Connector_Molex
 Molex_Micro-Fit_3.0_43045-2400_2x12_P3.00mm_Horizontal
-Molex Micro-Fit 3.0 Connector System, 43045-2400 (compatible alternatives: 43045-2401, 43045-2402), 12 Pins per row (https://www.molex.com/pdm_docs/sd/430450200_sd.pdf), generated with kicad-footprint-generator
-connector Molex Micro-Fit_3.0 top entry
+Molex Micro-Fit 3.0 Connector System, 43045-2400 (alternative finishes: 43045-240x), 12 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 24
 24
@@ -14962,6 +15501,13 @@ Connector_Molex
 Molex_Micro-Fit_3.0_43045-2418_2x12-1MP_P3.00mm_Vertical
 Molex Micro-Fit 3.0 Connector System, 43045-2418 (compatible alternatives: 43045-2419, 43045-2420), 12 Pins per row (http://www.molex.com/pdm_docs/sd/430450218_sd.pdf), generated with kicad-footprint-generator
 connector Molex Micro-Fit_3.0 side entry
+0
+26
+25
+Connector_Molex
+Molex_Micro-Fit_3.0_43045-2421_2x12-1MP_P3.00mm_Horizontal
+Molex Micro-Fit 3.0 Connector System, 43045-2421 (alternative finishes: 43045-242x), 12 Pins per row (https://www.molex.com/pdm_docs/sd/430450221_sd.pdf), generated with kicad-footprint-generator
+connector Molex Micro-Fit_3.0 horizontal
 0
 26
 25
@@ -17395,6 +17941,174 @@ connector Molex Picoflex side entry
 26
 26
 Connector_Molex
+Molex_SL_171971-0002_1x02_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0002 (compatible alternatives: 171971-0102, 171971-0202), 2 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+2
+2
+Connector_Molex
+Molex_SL_171971-0003_1x03_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0003 (compatible alternatives: 171971-0103, 171971-0203), 3 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+3
+3
+Connector_Molex
+Molex_SL_171971-0004_1x04_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0004 (compatible alternatives: 171971-0104, 171971-0204), 4 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+4
+4
+Connector_Molex
+Molex_SL_171971-0005_1x05_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0005 (compatible alternatives: 171971-0105, 171971-0205), 5 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+5
+5
+Connector_Molex
+Molex_SL_171971-0006_1x06_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0006 (compatible alternatives: 171971-0106, 171971-0206), 6 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+6
+6
+Connector_Molex
+Molex_SL_171971-0007_1x07_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0007 (compatible alternatives: 171971-0107, 171971-0207), 7 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+7
+7
+Connector_Molex
+Molex_SL_171971-0008_1x08_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0008 (compatible alternatives: 171971-0108, 171971-0208), 8 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+8
+8
+Connector_Molex
+Molex_SL_171971-0009_1x09_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0009 (compatible alternatives: 171971-0109, 171971-0209), 9 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+9
+9
+Connector_Molex
+Molex_SL_171971-0010_1x10_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0010 (compatible alternatives: 171971-0110, 171971-0210), 10 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+10
+10
+Connector_Molex
+Molex_SL_171971-0011_1x11_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0011 (compatible alternatives: 171971-0111, 171971-0211), 11 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+11
+11
+Connector_Molex
+Molex_SL_171971-0012_1x12_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0012 (compatible alternatives: 171971-0112, 171971-0212), 12 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+12
+12
+Connector_Molex
+Molex_SL_171971-0013_1x13_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0013 (compatible alternatives: 171971-0113, 171971-0213), 13 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+13
+13
+Connector_Molex
+Molex_SL_171971-0014_1x14_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0014 (compatible alternatives: 171971-0114, 171971-0214), 14 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+14
+14
+Connector_Molex
+Molex_SL_171971-0015_1x15_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0015 (compatible alternatives: 171971-0115, 171971-0215), 15 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+15
+15
+Connector_Molex
+Molex_SL_171971-0016_1x16_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0016 (compatible alternatives: 171971-0116, 171971-0216), 16 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+16
+16
+Connector_Molex
+Molex_SL_171971-0017_1x17_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0017 (compatible alternatives: 171971-0117, 171971-0217), 17 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+17
+17
+Connector_Molex
+Molex_SL_171971-0018_1x18_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0018 (compatible alternatives: 171971-0118, 171971-0218), 18 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+18
+18
+Connector_Molex
+Molex_SL_171971-0019_1x19_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0019 (compatible alternatives: 171971-0119, 171971-0219), 19 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+19
+19
+Connector_Molex
+Molex_SL_171971-0020_1x20_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0020 (compatible alternatives: 171971-0120, 171971-0220), 20 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+20
+20
+Connector_Molex
+Molex_SL_171971-0021_1x21_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0021 (compatible alternatives: 171971-0121, 171971-0221), 21 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+21
+21
+Connector_Molex
+Molex_SL_171971-0022_1x22_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0022 (compatible alternatives: 171971-0122, 171971-0222), 22 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+22
+22
+Connector_Molex
+Molex_SL_171971-0023_1x23_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0023 (compatible alternatives: 171971-0123, 171971-0223), 23 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+23
+23
+Connector_Molex
+Molex_SL_171971-0024_1x24_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0024 (compatible alternatives: 171971-0124, 171971-0224), 24 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+24
+24
+Connector_Molex
+Molex_SL_171971-0025_1x25_P2.54mm_Vertical
+Molex Stackable Linear Connector, 171971-0025 (compatible alternatives: 171971-0125, 171971-0225), 25 Pins per row (https://www.molex.com/pdm_docs/sd/1719710002_sd.pdf), generated with kicad-footprint-generator
+connector Molex SL vertical
+0
+25
+25
+Connector_Molex
 Molex_SPOX_5267-02A_1x02_P2.50mm_Vertical
 Molex SPOX Connector System, 5267-02A, 2 Pins per row (http://www.molex.com/pdm_docs/sd/022035035_sd.pdf), generated with kicad-footprint-generator
 connector Molex SPOX side entry
@@ -18445,12 +19159,33 @@ PCI bus Edge Connector
 240
 120
 Connector_PCBEdge
-BUS_PCIexpress
-PCIexpress Bus Edge Connector
-PCIexpress Bus Edge Connector
+BUS_PCIexpress_x1
+PCIexpress Bus Edge Connector x1 http://www.ritrontek.com/uploadfile/2016/1026/20161026105231124.pdf#page=70
+PCIe
 0
-70
 36
+36
+Connector_PCBEdge
+BUS_PCIexpress_x4
+PCIexpress Bus Edge Connector x1 http://www.ritrontek.com/uploadfile/2016/1026/20161026105231124.pdf#page=70
+PCIe
+0
+64
+64
+Connector_PCBEdge
+BUS_PCIexpress_x8
+PCIexpress Bus Edge Connector x1 http://www.ritrontek.com/uploadfile/2016/1026/20161026105231124.pdf#page=70
+PCIe
+0
+98
+98
+Connector_PCBEdge
+BUS_PCIexpress_x16
+PCIexpress Bus Edge Connector x1 http://www.ritrontek.com/uploadfile/2016/1026/20161026105231124.pdf#page=70
+PCIe
+0
+164
+164
 Connector_PCBEdge
 Samtec_MECF-05-0_-L-DV_2x05_P1.27mm_Polarized_Edge
 Highspeed card edge connector for PCB's with 05 contacts (polarized)
@@ -37226,6 +37961,20 @@ RJ12 connector
 6
 6
 Connector_RJ
+RJ25_Wayconn_MJEA-660X1_Horizontal
+RJ25 6P6C Socket 90 degrees, https://wayconn.com/wp-content/themes/way/datasheet/MJEA-660X1XXX_RJ25_6P6C_PCB_RA.pdf
+RJ12 RJ18 RJ25 jack connector 6P6C
+0
+6
+6
+Connector_RJ
+RJ45_Abracon_ARJP11A-MA_Horizontal
+Shielded RJ45 ethernet connector with transformer and POE (https://abracon.com/Magnetics/lan/ARJP11A.PDF)
+ethernet 8p8c transformer poe rj45
+0
+15
+14
+Connector_RJ
 RJ45_Amphenol_54602-x08_Horizontal
 8 Pol Shallow Latch Connector, Modjack, RJ45 (https://cdn.amphenol-icc.com/media/wysiwyg/files/drawing/c-bmj-0102.pdf)
 RJ45
@@ -37239,6 +37988,13 @@ RJ45 8p8c ethernet cat5
 0
 14
 13
+Connector_RJ
+RJ45_Amphenol_RJHSE538X-02
+Shielded, 2 LED, 2 Ports, http://www.amphenolinfocom.eu/NavData/Drawings/RJHSE-538X-02-REVC.pdf
+RJ45 8p8c dual ethernet cat5
+0
+26
+25
 Connector_RJ
 RJ45_Amphenol_RJHSE5380
 Shielded, https://www.amphenolcanada.com/ProductSearch/drawings/AC/RJHSE538X.pdf
@@ -37296,6 +38052,20 @@ AJP92A8813 8P8C RJ45 ethernet plug
 8
 8
 Connector_RJ
+RJ45_Pulse_JK0654219NL_Horizontal
+10/100/1000 Base-T RJ45 single port with LEDs https://media.digikey.com/pdf/Data%20Sheets/Pulse%20PDFs/JK%20Series.pdf#page=2
+RJ45 8p8c ethernet
+0
+18
+17
+Connector_RJ
+RJ45_Pulse_JXD6-0001NL_Horizontal
+RJ45 ethernet transformer with magnetics (https://productfinder.pulseeng.com/doc_type/WEB301/doc_num/JXD6-0001NL/doc_part/JXD6-0001NL.pdf)
+ethernet 8p8c transformer magjack
+0
+12
+11
+Connector_RJ
 RJ45_Wuerth_7499010121A_Horizontal
 10/100Base-TX RJ45 ethernet magnetic transformer connector horizontal https://katalog.we-online.de/pbs/datasheet/7499010121A.pdf
 RJ45 ethernet magnetic
@@ -37309,6 +38079,13 @@ ethernet lan connector
 0
 32
 29
+Connector_RJ
+RJ45_Wuerth_74980111211_Horizontal
+RJ45 LAN Transformer 10/100BaseT (https://katalog.we-online.de/pbs/datasheet/74980111211.pdf)
+lan magnetics transformer
+0
+14
+13
 Connector_SATA_SAS
 SAS-mini_TEConnectivity_1888174_Vertical
 36pin mini SAS connector, http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1888174&DocType=Customer+Drawing&DocLang=English
@@ -37323,6 +38100,13 @@ SATA
 0
 24
 23
+Connector_Samtec
+Samtec_FMC_ASP-134486-01_10x40_P1.27mm_Vertical
+http://suddendocs.samtec.com/prints/asp-134486-01-mkt.pdf
+FMC HPC
+0
+400
+400
 Connector_Samtec
 Samtec_FMC_ASP-134602-01_10x40_P1.27mm_Vertical
 https://www.marutsu.co.jp/contents/shop/marutsu/ds/asp-134602-01.pdf
@@ -41041,6 +41825,13 @@ USB C Type-C Receptacle USB2.0
 20
 17
 Connector_USB
+USB_Micro-AB_Molex_47590-0001
+Micro USB AB receptable, right-angle inverted (https://www.molex.com/pdm_docs/sd/475900001_sd.pdf)
+Micro AB USB SMD
+0
+14
+6
+Connector_USB
 USB_Micro-B_Amphenol_10103594-0001LF_Horizontal
 Micro USB Type B 10103594-0001LF, http://cdn.amphenol-icc.com/media/wysiwyg/files/drawing/10103594.pdf
 USB USB_B USB_micro USB_OTG
@@ -43659,6 +44450,13 @@ Diode Mini-MELF Handsoldering
 2
 2
 Diode_SMD
+D_PowerDI-5
+PowerDI,Diode,Vishay,https://www.diodes.com/assets/Package-Files/PowerDI5.pdf
+PowerDI diode vishay
+0
+3
+2
+Diode_SMD
 D_PowerDI-123
 http://www.diodes.com/_files/datasheets/ds30497.pdf
 PowerDI diode vishay
@@ -45864,6 +46662,13 @@ LVR200 PTC resettable polyswitch
 2
 2
 Fuse
+Fuse_Littelfuse-NANO2-451_453
+Littelfuse NANO2 https://www.littelfuse.com/~/media/electronics/datasheets/fuses/littelfuse_fuse_451_453_datasheet.pdf.pdf
+Fuse Nano2
+0
+2
+2
+Fuse
 Fuse_Littelfuse_372_D8.50mm
 Fuse, Littelfuse, 372, 8.5x8mm, https://www.littelfuse.com/~/media/electronics/datasheets/fuses/littelfuse_fuse_372_datasheet.pdf.pdf
 fuse tht radial
@@ -46417,6 +47222,13 @@ inductor
 2
 2
 Inductor_SMD
+L_Coilcraft_XAL60xx_6.36x6.56mm
+Coilcraft XAL60xx series, https://www.coilcraft.com/pdfs/xal60xx.pdf
+L Coilcraft XAL60xx
+0
+2
+2
+Inductor_SMD
 L_Coilcraft_XAL5030
 L_Coilcraft_XAL5030
 L Coilcraft XAL5030
@@ -46816,6 +47628,13 @@ Inductor Sumida SMD CDMC6D28
 2
 2
 Inductor_SMD
+L_Sunlord_MWSA0518_5.4x5.2mm
+Inductor, Sunlord, MWSA0518, 5.4mmx5.2mm
+inductor Sunlord smd
+0
+2
+2
+Inductor_SMD
 L_TDK_NLV25_2.5x2.0mm
 TDK NLV25, 2.5x2.0x1.8mm, https://product.tdk.com/info/en/catalog/datasheets/inductor_commercial_standard_nlv25-ef_en.pdf
 tdk nlv25 nlcv25 nlfv25
@@ -47049,6 +47868,20 @@ inductor taiyo-yuden nr smd
 Inductor_SMD
 L_Taiyo-Yuden_NR-80xx_HandSoldering
 Inductor, Taiyo Yuden, NR series, Taiyo-Yuden_NR-80xx, 8.0mmx8.0mm
+inductor taiyo-yuden nr smd
+0
+2
+2
+Inductor_SMD
+L_Taiyo-Yuden_NR-10050_9.8x10.0mm
+Inductor, Taiyo Yuden, NR series, Taiyo-Yuden_NR-10050, 9.8mmx10.0mm, https://ds.yuden.co.jp/TYCOMPAS/or/specSheet?pn=NR10050T1R3N
+inductor taiyo-yuden nr smd
+0
+2
+2
+Inductor_SMD
+L_Taiyo-Yuden_NR-10050_9.8x10.0mm_HandSoldering
+Inductor, Taiyo Yuden, NR series, Taiyo-Yuden_NR-10050, 9.8mmx10.0mm, https://ds.yuden.co.jp/TYCOMPAS/or/specSheet?pn=NR10050T1R3N
 inductor taiyo-yuden nr smd
 0
 2
@@ -49847,6 +50680,13 @@ LED RGB NeoPixel Mini
 4
 4
 LED_SMD
+LED_SK6812_EC15_1.5x1.5mm
+http://www.newstar-ledstrip.com/product/20181119172602110.pdf
+LED RGB NeoPixel
+0
+4
+4
+LED_SMD
 LED_SK6812_PLCC4_5.0x5.0mm_P3.2mm
 https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
 LED RGB NeoPixel
@@ -49867,6 +50707,13 @@ LED RGB NeoPixel
 0
 6
 6
+LED_SMD
+LED_Yuji_5730
+LED,Yuji,5730,https://cdn.shopify.com/s/files/1/0344/6401/files/YJWJ014-1.1_YJ-BC-5730L-G02.pdf
+LED Yuji 5730
+0
+3
+2
 LED_SMD
 LED_miniPLCC_2315
 https://docs.broadcom.com/cs/Satellite?blobcol=urldata&blobheader=application%2Fpdf&blobheadername1=Content-Disposition&blobheadername2=Content-Type&blobheadername3=MDT-Type&blobheadervalue1=attachment%3Bfilename%3DAV02-2205EN_DS_ASMT-TxBM_2014-05-09.pdf&blobheadervalue2=application%2Fx-download&blobheadervalue3=abinary%253B%2Bcharset%253DUTF-8&blobkey=id&blobnocache=true&blobtable=MungoBlobs&blobwhere=1430858274704&ssbinary=true
@@ -52073,6 +52920,20 @@ SMD SMT crystal oscillator hand-soldering
 4
 4
 Oscillator
+Oscillator_SMD_IDT_JS6-6_5.0x3.2mm_P1.27mm
+SMD Crystal Oscillator IDT https://www.idt.com/document/dst/xu-family-datasheet#page=15, 5.0x3.2mm
+SMD SMT crystal oscillator
+0
+6
+6
+Oscillator
+Oscillator_SMD_IDT_JU6-6_7.0x5.0mm_P2.54mm
+SMD Crystal Oscillator IDT https://www.idt.com/document/dst/xu-family-datasheet#page=17, 7.0x5.0mm
+SMD SMT crystal oscillator
+0
+6
+6
+Oscillator
 Oscillator_SMD_IQD_IQXO70-4Pin_7.5x5.0mm
 IQD Crystal Clock Oscillator IQXO-70, http://www.iqdfrequencyproducts.com/products/details/iqxo-70-11-30.pdf, 7.5x5.0mm^2 package
 SMD SMT crystal oscillator
@@ -53263,16 +54124,30 @@ LFCSP NoLead
 35
 21
 Package_CSP
+LFCSP-24-1EP_4x4mm_P0.5mm_EP2.3x2.3mm
+LFCSP, 24 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp_24_14.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP NoLead
+0
+29
+25
+Package_CSP
+LFCSP-24-1EP_4x4mm_P0.5mm_EP2.3x2.3mm_ThermalVias
+LFCSP, 24 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp_24_14.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP NoLead
+0
+39
+25
+Package_CSP
 LFCSP-24-1EP_4x4mm_P0.5mm_EP2.5x2.5mm
-LFCSP, 24 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp_24_7.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-LFCSP DFN_QFN
+LFCSP, 24 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp_24_7.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP NoLead
 0
 29
 25
 Package_CSP
 LFCSP-24-1EP_4x4mm_P0.5mm_EP2.5x2.5mm_ThermalVias
-LFCSP, 24 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp_24_7.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-LFCSP DFN_QFN
+LFCSP, 24 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp_24_7.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP NoLead
 0
 39
 25
@@ -53327,15 +54202,15 @@ LFCSP NoLead
 65
 Package_CSP
 LFCSP-72-1EP_10x10mm_P0.5mm_EP5.3x5.3mm
-LFCSP, 72 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/ADAU1452_1451_1450.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-LFCSP DFN_QFN
+LFCSP, 72 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/ADAU1452_1451_1450.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP NoLead
 0
 82
 73
 Package_CSP
 LFCSP-72-1EP_10x10mm_P0.5mm_EP5.3x5.3mm_ThermalVias
-LFCSP, 72 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/ADAU1452_1451_1450.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-LFCSP DFN_QFN
+LFCSP, 72 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/ADAU1452_1451_1450.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP NoLead
 0
 99
 73
@@ -53360,6 +54235,20 @@ LFCSP 48
 0
 49
 49
+Package_CSP
+LFCSP-WD-10-1EP_3x3mm_P0.5mm_EP1.64x2.38mm
+LFCSP-WD, 10 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp-10/CP_10_9.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP-WD NoLead
+0
+17
+11
+Package_CSP
+LFCSP-WD-10-1EP_3x3mm_P0.5mm_EP1.64x2.38mm_ThermalVias
+LFCSP-WD, 10 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/lfcspcp/cp-10/CP_10_9.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LFCSP-WD NoLead
+0
+24
+11
 Package_CSP
 ST_WLCSP-25_Die425
 WLCSP-25, 5x5 raster, 2.097x2.493mm package, pitch 0.4mm; see section 7.6 of http://www.st.com/resource/en/datasheet/stm32l031f6.pdf
@@ -53754,15 +54643,15 @@ QFN 0.5
 57
 Package_DFN_QFN
 DFN-6-1EP_1.2x1.2mm_P0.4mm_EP0.3x0.94mm_PullBack
-DFN, 6 Pin (http://www.onsemi.com/pub/Collateral/NCP133-D.PDF), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-DFN DFN_QFN
+DFN, 6 Pin (http://www.onsemi.com/pub/Collateral/NCP133-D.PDF), generated with kicad-footprint-generator ipc_noLead_generator.py
+DFN NoLead
 0
 9
 7
 Package_DFN_QFN
 DFN-6-1EP_2x1.8mm_P0.5mm_EP1.2x1.6mm
-DFN, 6 Pin (https://www.diodes.com/assets/Package-Files/U-DFN2018-6.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-DFN DFN_QFN
+DFN, 6 Pin (https://www.diodes.com/assets/Package-Files/U-DFN2018-6.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+DFN NoLead
 0
 11
 7
@@ -53782,8 +54671,8 @@ DFN 0.65
 7
 Package_DFN_QFN
 DFN-6-1EP_3x2mm_P0.5mm_EP1.65x1.35mm
-DFN, 6 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/ltc-legacy-dfn/(DCB6)%20DFN%2005-08-1715%20Rev%20A.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-DFN DFN_QFN
+DFN, 6 Pin (https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/ltc-legacy-dfn/(DCB6)%20DFN%2005-08-1715%20Rev%20A.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+DFN NoLead
 0
 11
 7
@@ -53796,8 +54685,8 @@ DFN 0.95
 7
 Package_DFN_QFN
 DFN-6-1EP_3x3mm_P1mm_EP1.5x2.4mm
-DFN, 6 Pin (https://www.silabs.com/documents/public/data-sheets/Si7020-A20.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-DFN DFN_QFN
+DFN, 6 Pin (https://www.silabs.com/documents/public/data-sheets/Si7020-A20.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+DFN NoLead
 0
 11
 7
@@ -53817,8 +54706,8 @@ DFN NoLead
 9
 Package_DFN_QFN
 DFN-8-1EP_2x2mm_P0.5mm_EP0.9x1.5mm
-DFN, 8 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8127-AVR-8-bit-Microcontroller-ATtiny4-ATtiny5-ATtiny9-ATtiny10_Datasheet.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-DFN DFN_QFN
+DFN, 8 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8127-AVR-8-bit-Microcontroller-ATtiny4-ATtiny5-ATtiny9-ATtiny10_Datasheet.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+DFN NoLead
 0
 13
 9
@@ -53880,8 +54769,8 @@ DFN 0.5
 9
 Package_DFN_QFN
 DFN-8-1EP_3x3mm_P0.65mm_EP1.7x2.05mm
-DFN, 8 Pin (http://www.ixysic.com/home/pdfs.nsf/www/IX4426-27-28.pdf/$file/IX4426-27-28.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-DFN DFN_QFN
+DFN, 8 Pin (http://www.ixysic.com/home/pdfs.nsf/www/IX4426-27-28.pdf/$file/IX4426-27-28.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+DFN NoLead
 0
 13
 9
@@ -54216,8 +55105,8 @@ QFN 0.5
 47
 Package_DFN_QFN
 MLF-6-1EP_1.6x1.6mm_P0.5mm_EP0.5x1.26mm
-MLF, 6 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/mic5353.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-MLF DFN_QFN
+MLF, 6 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/mic5353.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+MLF NoLead
 0
 9
 7
@@ -54237,15 +55126,15 @@ DFN MLF 0.65
 9
 Package_DFN_QFN
 MLF-20-1EP_4x4mm_P0.5mm_EP2.6x2.6mm
-MLF, 20 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/doc8246.pdf#page=263), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-MLF DFN_QFN
+MLF, 20 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/doc8246.pdf#page=263), generated with kicad-footprint-generator ipc_noLead_generator.py
+MLF NoLead
 0
 25
 21
 Package_DFN_QFN
 MLF-20-1EP_4x4mm_P0.5mm_EP2.6x2.6mm_ThermalVias
-MLF, 20 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/doc8246.pdf#page=263), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-MLF DFN_QFN
+MLF, 20 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/doc8246.pdf#page=263), generated with kicad-footprint-generator ipc_noLead_generator.py
+MLF NoLead
 0
 30
 21
@@ -55738,7 +56627,7 @@ ST_UFQFPN-20_3x3mm_P0.5mm
 UFQFPN 20-lead, 3 x 3 mm, 0.5 mm pitch, ultra thin fine pitch quad flat package (http://www.st.com/resource/en/datasheet/stm8s003f3.pdf)
 UFQFPN 0.5
 0
-40
+20
 20
 Package_DFN_QFN
 ST_UQFN-6L_1.5x1.7mm_Pitch0.5mm
@@ -56609,6 +57498,34 @@ VQFN NoLead
 47
 33
 Package_DFN_QFN
+VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm
+VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py
+VQFN NoLead
+0
+53
+47
+Package_DFN_QFN
+VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm_ThermalVias
+VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py
+VQFN NoLead
+0
+66
+47
+Package_DFN_QFN
+VQFN-48-1EP_7x7mm_P0.5mm_EP5.15x5.15mm
+VQFN, 48 Pin (http://www.ti.com/lit/ds/symlink/cc1312r.pdf#page=48), generated with kicad-footprint-generator ipc_noLead_generator.py
+VQFN NoLead
+0
+53
+49
+Package_DFN_QFN
+VQFN-48-1EP_7x7mm_P0.5mm_EP5.15x5.15mm_ThermalVias
+VQFN, 48 Pin (http://www.ti.com/lit/ds/symlink/cc1312r.pdf#page=48), generated with kicad-footprint-generator ipc_noLead_generator.py
+VQFN NoLead
+0
+79
+49
+Package_DFN_QFN
 WDFN-8-1EP_2x2.2mm_P0.5mm_EP0.80x0.54
 https://www.onsemi.com/pub/Collateral/511BN.PDF
 WDFN-8 1EP 2.2X2.0 0.5P
@@ -56617,8 +57534,8 @@ WDFN-8 1EP 2.2X2.0 0.5P
 9
 Package_DFN_QFN
 WDFN-8-1EP_3x2mm_P0.5mm_EP1.3x1.4mm
-WDFN, 8 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/8L_TDFN_2x3_MNY_C04-0129E-MNY.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-WDFN DFN_QFN
+WDFN, 8 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/8L_TDFN_2x3_MNY_C04-0129E-MNY.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+WDFN NoLead
 0
 13
 9
@@ -56631,8 +57548,8 @@ DFN 0.5
 8
 Package_DFN_QFN
 WDFN-12-1EP_3x3mm_P0.45mm_EP1.7x2.5mm
-WDFN, 12 Pin (https://www.diodes.com/assets/Datasheets/PAM2306.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-WDFN DFN_QFN
+WDFN, 12 Pin (https://www.diodes.com/assets/Datasheets/PAM2306.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+WDFN NoLead
 0
 17
 13
@@ -59004,14 +59921,14 @@ LQFP QFP
 44
 Package_QFP
 LQFP-48-1EP_7x7mm_P0.5mm_EP3.6x3.6mm
-LQFP, 48 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/LTC7810.pdf), generated with kicad-footprint-generator ipc_qfp_generator.py
+LQFP, 48 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/LTC7810.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py
 LQFP QFP
 0
 58
 49
 Package_QFP
 LQFP-48-1EP_7x7mm_P0.5mm_EP3.6x3.6mm_ThermalVias
-LQFP, 48 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/LTC7810.pdf), generated with kicad-footprint-generator ipc_qfp_generator.py
+LQFP, 48 Pin (http://www.analog.com/media/en/technical-documentation/data-sheets/LTC7810.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py
 LQFP QFP
 0
 75
@@ -59207,7 +60124,7 @@ QFP 0.8
 80
 Package_QFP
 PQFP-100_14x20mm_P0.65mm
-PQFP, 100 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+PQFP, 100 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 PQFP QFP
 0
 100
@@ -59235,28 +60152,28 @@ PQFP 132 Intel 386EX
 132
 Package_QFP
 PQFP-144_28x28mm_P0.65mm
-PQFP, 144 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+PQFP, 144 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 PQFP QFP
 0
 144
 144
 Package_QFP
 PQFP-160_28x28mm_P0.65mm
-PQFP, 160 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+PQFP, 160 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 PQFP QFP
 0
 160
 160
 Package_QFP
 PQFP-208_28x28mm_P0.5mm
-PQFP, 208 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+PQFP, 208 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 PQFP QFP
 0
 208
 208
 Package_QFP
 PQFP-240_32.1x32.1mm_P0.5mm
-PQFP, 240 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+PQFP, 240 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 PQFP QFP
 0
 240
@@ -59298,14 +60215,14 @@ QFP 0.5
 49
 Package_QFP
 TQFP-48-1EP_7x7mm_P0.5mm_EP5x5mm
-TQFP, 48 Pin (https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC2100_datasheet_Rev1.08.pdf (page 45)), generated with kicad-footprint-generator ipc_qfp_generator.py
+TQFP, 48 Pin (https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC2100_datasheet_Rev1.08.pdf (page 45)), generated with kicad-footprint-generator ipc_gullwing_generator.py
 TQFP QFP
 0
 65
 49
 Package_QFP
 TQFP-48-1EP_7x7mm_P0.5mm_EP5x5mm_ThermalVias
-TQFP, 48 Pin (https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC2100_datasheet_Rev1.08.pdf (page 45)), generated with kicad-footprint-generator ipc_qfp_generator.py
+TQFP, 48 Pin (https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC2100_datasheet_Rev1.08.pdf (page 45)), generated with kicad-footprint-generator ipc_gullwing_generator.py
 TQFP QFP
 0
 91
@@ -59347,7 +60264,7 @@ QFP 0.4
 64
 Package_QFP
 TQFP-64_10x10mm_P0.5mm
-TQFP, 64 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+TQFP, 64 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 TQFP QFP
 0
 64
@@ -59403,7 +60320,7 @@ QFP 0.4
 100
 Package_QFP
 TQFP-100_14x14mm_P0.5mm
-TQFP, 100 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+TQFP, 100 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 TQFP QFP
 0
 100
@@ -59431,42 +60348,42 @@ QFP 0.4
 144
 Package_QFP
 TQFP-144_20x20mm_P0.5mm
-TQFP, 144 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+TQFP, 144 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 TQFP QFP
 0
 144
 144
 Package_QFP
 TQFP-176_24x24mm_P0.5mm
-TQFP, 176 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+TQFP, 176 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 TQFP QFP
 0
 176
 176
 Package_QFP
 VQFP-80_14x14mm_P0.65mm
-VQFP, 80 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+VQFP, 80 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 VQFP QFP
 0
 80
 80
 Package_QFP
 VQFP-100_14x14mm_P0.5mm
-VQFP, 100 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+VQFP, 100 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 VQFP QFP
 0
 100
 100
 Package_QFP
 VQFP-128_14x14mm_P0.4mm
-VQFP, 128 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+VQFP, 128 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 VQFP QFP
 0
 128
 128
 Package_QFP
 VQFP-176_20x20mm_P0.4mm
-VQFP, 176 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_qfp_generator.py
+VQFP, 176 Pin (http://www.microsemi.com/index.php?option=com_docman&task=doc_download&gid=131095), generated with kicad-footprint-generator ipc_gullwing_generator.py
 VQFP QFP
 0
 176
@@ -60726,8 +61643,8 @@ SSOP 0.65
 20
 Package_SO
 SSOP-20_5.3x7.2mm_P0.65mm
-20-Lead Plastic Shrink Small Outline (SS)-5.30 mm Body [SSOP] (see Microchip Packaging Specification 00000049BS.pdf)
-SSOP 0.65
+SSOP, 20 Pin (http://ww1.microchip.com/downloads/en/DeviceDoc/40001800C.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py
+SSOP SO
 0
 20
 20
@@ -61265,8 +62182,8 @@ RTC C3
 10
 Package_SON
 SON-8-1EP_3x2mm_P0.5mm_EP1.4x1.6mm
-SON, 8 Pin (http://www.fujitsu.com/downloads/MICRO/fsa/pdf/products/memory/fram/MB85RS16-DS501-00014-6v0-E.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-SON DFN_QFN
+SON, 8 Pin (http://www.fujitsu.com/downloads/MICRO/fsa/pdf/products/memory/fram/MB85RS16-DS501-00014-6v0-E.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+SON NoLead
 0
 13
 9
@@ -61356,15 +62273,15 @@ Texas_S-PVSON-N10_ThermalVias
 11
 Package_SON
 Texas_S-PWSON-N8_EP1.2x2mm
-WSON, 8 Pin (http://www.ti.com/lit/ds/symlink/lp2951.pdf#page=27), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-WSON DFN_QFN
+WSON, 8 Pin (http://www.ti.com/lit/ds/symlink/lp2951.pdf#page=27), generated with kicad-footprint-generator ipc_noLead_generator.py
+WSON NoLead
 0
 11
 9
 Package_SON
 Texas_S-PWSON-N8_EP1.2x2mm_ThermalVias
-WSON, 8 Pin (http://www.ti.com/lit/ds/symlink/lp2951.pdf#page=27), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-WSON DFN_QFN
+WSON, 8 Pin (http://www.ti.com/lit/ds/symlink/lp2951.pdf#page=27), generated with kicad-footprint-generator ipc_noLead_generator.py
+WSON NoLead
 0
 18
 9
@@ -61412,15 +62329,15 @@ VSON 0.65
 5
 Package_SON
 VSON-10-1EP_3x3mm_P0.5mm_EP1.2x2mm
-VSON, 10 Pin (http://rohmfs.rohm.com/en/products/databook/datasheet/ic/power/switching_regulator/bd8314nuv-e.pdf (Page 20)), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-VSON
+VSON, 10 Pin (http://rohmfs.rohm.com/en/products/databook/datasheet/ic/power/switching_regulator/bd8314nuv-e.pdf (Page 20)), generated with kicad-footprint-generator ipc_noLead_generator.py
+VSON NoLead
 0
 15
 11
 Package_SON
 VSON-10-1EP_3x3mm_P0.5mm_EP1.2x2mm_ThermalVias
-VSON, 10 Pin (http://rohmfs.rohm.com/en/products/databook/datasheet/ic/power/switching_regulator/bd8314nuv-e.pdf (Page 20)), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-VSON
+VSON, 10 Pin (http://rohmfs.rohm.com/en/products/databook/datasheet/ic/power/switching_regulator/bd8314nuv-e.pdf (Page 20)), generated with kicad-footprint-generator ipc_noLead_generator.py
+VSON NoLead
 0
 18
 11
@@ -61510,15 +62427,15 @@ WSON 8 1EP
 9
 Package_SON
 WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm
-WSON, 8 Pin (http://www.winbond.com/resource-files/w25q32jv%20revg%2003272018%20plus.pdf (page 68)), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-WSON DFN_QFN
+WSON, 8 Pin (http://www.winbond.com/resource-files/w25q32jv%20revg%2003272018%20plus.pdf (page 68)), generated with kicad-footprint-generator ipc_noLead_generator.py
+WSON NoLead
 0
 13
 9
 Package_SON
 WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4mm
-WSON, 8 Pin (http://ww1.microchip.com/downloads/en/AppNotes/S72030.pdf), generated with kicad-footprint-generator ipc_dfn_qfn_generator.py
-WSON DFN_QFN
+WSON, 8 Pin (http://ww1.microchip.com/downloads/en/AppNotes/S72030.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+WSON NoLead
 0
 13
 9
@@ -61674,28 +62591,14 @@ LFPAK33
 LFPAK33 SOT-1210 https://assets.nexperia.com/documents/outline-drawing/SOT1210.pdf
 LFPAK33 SOT-1210
 0
-21
+17
 5
 Package_TO_SOT_SMD
 LFPAK56
 LFPAK56 https://assets.nexperia.com/documents/outline-drawing/SOT669.pdf
 LFPAK56 SOT-669 Power-SO8
 0
-19
-5
-Package_TO_SOT_SMD
-LFPAK56_ThermalVias-1
-LFPAK56 https://assets.nexperia.com/documents/outline-drawing/SOT669.pdf
-LFPAK56 SOT669 Thermal Vias 0.4mm Power-SO8
-0
-63
-5
-Package_TO_SOT_SMD
-LFPAK56_ThermalVias-2
-LFPAK56 https://assets.nexperia.com/documents/outline-drawing/SOT669.pdf
-LFPAK56 SOT669 Thermical Vias Power-SO8
-0
-30
+18
 5
 Package_TO_SOT_SMD
 OnSemi_ECH8
@@ -61706,10 +62609,10 @@ ECH8 SOT28-FL SOT-28-FL
 8
 Package_TO_SOT_SMD
 PQFN_8x8
-Low profile 8x8mm PQFN package e.g. https://www.fairchildsemi.com/datasheets/FD/FDMT80080DC.pdf
+Low Profile 8x8mm PQFN, Dual Cool 88, https://www.onsemi.com/pub/Collateral/FDMT80080DC-D.pdf
 pqfn vdfn mosfet
 0
-16
+9
 3
 Package_TO_SOT_SMD
 PowerMacro_M234_NoHole
@@ -62458,7 +63361,7 @@ Vishay_PowerPAK_SC70-6L_Single
 Vishay PowerPAK SC70 single transistor package http://www.vishay.com/docs/70486/70486.pdf
 powerpak sc70 sc-70
 0
-10
+6
 3
 Package_TO_SOT_THT
 Fairchild_TO-220F-6L
@@ -65068,6 +65971,13 @@ RF_Converter
 Anaren_0805_2012Metric-6
 https://cdn.anaren.com/product-documents/Xinger/DirectionalCouplers/DC4759J5020AHF/DC4759J5020AHF_DataSheet(Rev_E).pdf
 coupler rf
+0
+6
+6
+RF_Converter
+Balun_Johanson_1.6x0.8mm
+6-pin 1.6x0.8 mm balun footprint
+Johanson balun filter
 0
 6
 6
@@ -67829,6 +68739,13 @@ Diodes SIP-3 Ammo Pack
 0
 3
 3
+Sensor_Current
+Honeywell_CSLW
+https://sensing.honeywell.com/honeywell-sensing-cslw-series-product-sheet-005861-1-en.pdf
+Miniature Wired Open-Loop Current Sensor
+0
+5
+5
 Sensor_Current
 LEM_HO8-NP
 LEM HO 8/15/25-NP Current Transducer (https://www.lem.com/sites/default/files/products_datasheets/ho-np-0000_series.pdf)

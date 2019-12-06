@@ -1,9 +1,9 @@
 #ifndef BLT_LIBS_SPI_H_
 #define BLT_LIBS_SPI_H_
 
+#include <blt/utils.hh>
 #include <main.h>
 
-#include <blt/utils.hpp>
 
 namespace blt {
 
@@ -23,7 +23,7 @@ class device : public utils::noncopyable {
     uint8_t result;
     // Default timeout is 2s
     if (HAL_SPI_TransmitReceive(hspi, &data, &result, 1, 2000) != HAL_OK) {
-      Error_Handler();
+      return 0;
     }
 
     return result;
