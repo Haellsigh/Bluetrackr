@@ -33,15 +33,16 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
   led_status::set();
   if (!radio.init())
     blt::error_handler();
+  radio.setAutoAck(true);
   // radio.setAutoAck(true);
   // radio.enableAckPayload();
-  radio.setAutoRetransmit(nrf24::AutoRetransmitDelay::k4000us, 15);
+  radio.setAutoRetransmit(nrf24::AutoRetransmitDelay::k3000us, 10);
   // Single byte payloads to test the speed
-  // radio.setPayloadSize(32);
+  // radio.setPayloadSize(1);
   radio.setPALevel(nrf24::PowerAmplifier::kMinimum);
 
-  radio.openWritingPipe(0x544d52687C);
-  radio.openReadingPipe(1, 0xABCDABCD71);
+  radio.openWritingPipe(0x544D52687C);
+  // radio.openReadingPipe(1, 0xABCDABCD71);
 
   radio.stopListening();
   led_status::clear();
@@ -50,10 +51,9 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
     if (btn_pair::read()) {
       while (btn_pair::read())
         ;
-      const uint8_t data[] = "11112222333344445555666677778888";
       led_status::set();
+      const uint8_t data[] = "11112222333344445555666677778888";
       if (!radio.write(data, 32, false)) {
-        led_status::clear();
         led_power::set();
         delay::ms(500);
         led_power::clear();

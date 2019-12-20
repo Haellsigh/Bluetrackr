@@ -44,15 +44,15 @@ void main_loop(SPI_HandleTypeDef* hspi) {
     blt::error_handler();
   // radio.setAutoAck(true);
   // radio.enableAckPayload();
-  radio.setAutoRetransmit(true, nrf24::AutoRetransmitDelay::k4000us, 15);
+  radio.setAutoRetransmit(nrf24::AutoRetransmitDelay::k4000us, 15);
   // Single byte payloads to test the speed
-  radio.setPayloadSize(32);
+  // radio.setPayloadSize(1);
   radio.setPALevel(nrf24::PowerAmplifier::kMinimum);
 
   radio.openWritingPipe(0xABCDABCD71);
-  radio.openReadingPipe(1, 0x544d52687C);
+  radio.openReadingPipe(0, 0x544D52687C);
 
-  radio.startListening();
+  radio.stopListening();
   led_blue::clear();
 
   /*MPU9250_CONFIG_t cfg;
@@ -87,11 +87,21 @@ void main_loop(SPI_HandleTypeDef* hspi) {
   // int8_t datastr[30] = "";
 
   while (true) {
+    delay::ms(1000);
+    led_blue::set();
+    const uint8_t data[] = "11112222333344445555666677778888";
+    if (!radio.write(data, 32, true)) {
+      led_red::set();
+      delay::ms(500);
+      led_red::clear();
+    }
+    led_blue::clear();
+
     // MPU9250_Update7DOF(&cfg, &data);
-    while (!radio.available())
+    /*while (!radio.available())
       ;
     leds::set();
     delay::ms(1000);
-    leds::clear();
+    leds::clear();*/
   }
 }

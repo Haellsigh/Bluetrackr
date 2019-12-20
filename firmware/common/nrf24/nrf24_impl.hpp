@@ -417,6 +417,7 @@ uint8_t device<spidevice, csn, ce>::writePayload(const uint8_t* buf,
   }
 
   end();
+
   return status;
 }
 
@@ -605,15 +606,19 @@ void device<spidevice, csn, ce>::setPayloadSize(uint8_t size) {
   m_payloadSize = std::min(size, kMaxPayloadSize);
 }
 
+/*!
+ * \brief Sets the power amplifier gain level.
+ */
 template <typename spidevice, typename csn, typename ce>
 void device<spidevice, csn, ce>::setPALevel(PowerAmplifier level) {
-  // Only keep bits 3-7 because bits 1-2 are the power settings and bit 0 is unused
-  uint8_t setup = readRegister(Register::kRfSetup) & bit::maskRange<3, 7>();
-
-  // The + 1 sets the unused bit 0 to 1
-  // This preserves compatibility with the SI24R1 chip
-  uint8_t levelBits = bit::shift<1, uint8_t>(level) + 1;
-  setup |= levelBits;
+  // Get current RF configuration
+  uint8_t setup = readRegister(Register::kRfSetup);
+  // Clear bits 0-1-2
+  setup &= ~bit::maskRange<0, 2>();
+  // Write power level
+  setup |= bit::shift<1>(static_cast<uint8_t>(level));
+  if (!m_pVariant)
+    setup |= bit::maskBits<0>();  // Sets the LNA gain for non p-variants
 
   writeRegister(Register::kRfSetup, setup);
 }
@@ -797,9 +802,9 @@ bool device<spidevice, csn, ce>::write(const uint8_t* buf,
 
   ce::clear();
 
-  uint8_t status = 0;
-  bit::set<b::kStatusRxDataReady, b::kStatusTxDataSent, b::kStatusMaxRetransmits>(status);
-  status = writeRegister(Register::kStatus, status);
+  uint8_t status =
+      writeRegister(Register::kStatus, m::kConfigMaskMaxRet | m::kConfigMaskTxDataSent |
+                                           m::kConfigMaskRxDataReady);
 
   // Maximum retries exceeded
   if (status & m::kConfigMaskMaxRet) {

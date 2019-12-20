@@ -28,9 +28,9 @@ static constexpr uint8_t maskRange() {
 /*!
  * \brief Shifts in by n bits.
  */
-template <uint8_t n, typename Tout, typename Tin>
-static constexpr Tout shift(Tin in = 1) {
-  return static_cast<Tout>(in) << n;
+template <uint8_t n, typename Tout>
+static constexpr Tout shift(Tout in = 1) {
+  return in << n;
 }
 
 /*!
