@@ -10,7 +10,7 @@ static void error_handler() {
   using namespace gpio;
 
   delay::init();
-  using led_power = gpio::pin_out<PA, p3>;
+  using led_power = gpio::pin_out<PC, p6>;
 
   while (true) {
     delay::ms(100);

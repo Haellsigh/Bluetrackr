@@ -3,9 +3,9 @@
  * \brief nRF24L01+ library implementation
  */
 
+#include <nrf24_custom/nrf24.hh>
 #include <algorithm>  // For min/max
 #include <cstring>    // For memcpy
-#include <nrf24/nrf24.hh>
 
 namespace blt {
 

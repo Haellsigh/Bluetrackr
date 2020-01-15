@@ -376,6 +376,6 @@ class device {
 
 }  // namespace blt
 
-#include "nrf24_impl.hpp"
+#include <nrf24_custom/nrf24_impl.hpp>
 
 #endif  // BLT_LIBS_NRF24_H_

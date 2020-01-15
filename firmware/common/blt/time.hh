@@ -21,6 +21,8 @@ static void init() {
     DWT->CYCCNT = 0;
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
   }
+#else
+  // Nothing to initialize because the SysTick is initialized by the HAL.
 #endif
 }
 

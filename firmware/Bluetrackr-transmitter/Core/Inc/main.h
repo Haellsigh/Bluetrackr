@@ -70,10 +70,8 @@ void Error_Handler(void);
 #define NRF_CSN_GPIO_Port GPIOB
 #define NRF_INT_Pin GPIO_PIN_10
 #define NRF_INT_GPIO_Port GPIOB
-#define NRF_INT_EXTI_IRQn EXTI15_10_IRQn
 #define MPU_INT_Pin GPIO_PIN_11
 #define MPU_INT_GPIO_Port GPIOB
-#define MPU_INT_EXTI_IRQn EXTI15_10_IRQn
 #define NRF_CE_Pin GPIO_PIN_5
 #define NRF_CE_GPIO_Port GPIOB
 #define BTN_PAIR_Pin GPIO_PIN_8
