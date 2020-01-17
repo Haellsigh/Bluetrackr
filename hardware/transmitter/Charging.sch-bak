@@ -1,0 +1,288 @@
+EESchema Schematic File Version 4
+LIBS:Bluetrackr-transmitter-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 2
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L power:+BATT #PWR?
+U 1 1 5E261B16
+P 4450 2200
+F 0 "#PWR?" H 4450 2050 50  0001 C CNN
+F 1 "+BATT" V 4465 2327 50  0000 L CNN
+F 2 "" H 4450 2200 50  0001 C CNN
+F 3 "" H 4450 2200 50  0001 C CNN
+	1    4450 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Battery_Management:MCP73831-2-OT U?
+U 1 1 5E281195
+P 3950 2400
+F 0 "U?" H 3550 2750 50  0000 C CNN
+F 1 "MCP73831-2-OT" H 3500 2650 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5" H 4000 2150 50  0001 L CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001984g.pdf" H 3800 2350 50  0001 C CNN
+	1    3950 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VBUS #PWR?
+U 1 1 5E2863D6
+P 5250 2400
+F 0 "#PWR?" H 5250 2250 50  0001 C CNN
+F 1 "VBUS" H 5265 2573 50  0000 C CNN
+F 2 "" H 5250 2400 50  0001 C CNN
+F 3 "" H 5250 2400 50  0001 C CNN
+	1    5250 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E28A984
+P 5000 2500
+AR Path="/5E28A984" Ref="R?"  Part="1" 
+AR Path="/5E25DD0B/5E28A984" Ref="R?"  Part="1" 
+F 0 "R?" H 5070 2546 50  0000 L CNN
+F 1 "2k" H 5070 2455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 4930 2500 50  0001 C CNN
+F 3 "~" H 5000 2500 50  0001 C CNN
+	1    5000 2500
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:LED D?
+U 1 1 5E28A98A
+P 4600 2500
+AR Path="/5E28A98A" Ref="D?"  Part="1" 
+AR Path="/5E25DD0B/5E28A98A" Ref="D?"  Part="1" 
+F 0 "D?" H 4600 2250 50  0000 C CNN
+F 1 "POWER_LED" H 4600 2350 50  0000 C CNN
+F 2 "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 4600 2500 50  0001 C CNN
+F 3 "~" H 4600 2500 50  0001 C CNN
+	1    4600 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 2500 4450 2500
+Wire Wire Line
+	4750 2500 4850 2500
+Wire Wire Line
+	5250 2400 5250 2500
+Wire Wire Line
+	5250 2500 5150 2500
+Wire Wire Line
+	4450 2200 4450 2300
+Wire Wire Line
+	4450 2300 4350 2300
+$Comp
+L power:GND #PWR?
+U 1 1 5E2907CD
+P 3950 2800
+F 0 "#PWR?" H 3950 2550 50  0001 C CNN
+F 1 "GND" H 3955 2627 50  0000 C CNN
+F 2 "" H 3950 2800 50  0001 C CNN
+F 3 "" H 3950 2800 50  0001 C CNN
+	1    3950 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 2700 3950 2800
+$Comp
+L power:GND #PWR?
+U 1 1 5E2A302B
+P 3450 3000
+F 0 "#PWR?" H 3450 2750 50  0001 C CNN
+F 1 "GND" H 3455 2827 50  0000 C CNN
+F 2 "" H 3450 3000 50  0001 C CNN
+F 3 "" H 3450 3000 50  0001 C CNN
+	1    3450 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E2A34A2
+P 3450 2750
+F 0 "R?" H 3520 2796 50  0000 L CNN
+F 1 "4.7k" H 3520 2705 50  0000 L CNN
+F 2 "" V 3380 2750 50  0001 C CNN
+F 3 "~" H 3450 2750 50  0001 C CNN
+	1    3450 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3550 2500 3450 2500
+Wire Wire Line
+	3450 2500 3450 2600
+Wire Wire Line
+	3450 2900 3450 3000
+Text Notes 3350 2800 2    50   ~ 0
+charge current\n213 mA   
+$Comp
+L power:VBUS #PWR?
+U 1 1 5E2A5F92
+P 3950 2000
+F 0 "#PWR?" H 3950 1850 50  0001 C CNN
+F 1 "VBUS" H 3965 2173 50  0000 C CNN
+F 2 "" H 3950 2000 50  0001 C CNN
+F 3 "" H 3950 2000 50  0001 C CNN
+	1    3950 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+BATT #PWR?
+U 1 1 5E2A7AF7
+P 5900 2350
+F 0 "#PWR?" H 5900 2200 50  0001 C CNN
+F 1 "+BATT" V 5915 2477 50  0000 L CNN
+F 2 "" H 5900 2350 50  0001 C CNN
+F 3 "" H 5900 2350 50  0001 C CNN
+	1    5900 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VBUS #PWR?
+U 1 1 5E2A7FA0
+P 6200 1850
+F 0 "#PWR?" H 6200 1700 50  0001 C CNN
+F 1 "VBUS" H 6215 2023 50  0000 C CNN
+F 2 "" H 6200 1850 50  0001 C CNN
+F 3 "" H 6200 1850 50  0001 C CNN
+	1    6200 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 2000 3950 2100
+$Comp
+L User_Transistor:CJ2333 Q?
+U 1 1 5E2AB0B5
+P 6200 2350
+F 0 "Q?" V 6449 2350 50  0000 C CNN
+F 1 "CJ2333" V 6540 2350 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 6400 2275 50  0001 L CIN
+F 3 "https://datasheet.lcsc.com/szlcsc/Changjiang-Electronics-Tech-CJ-CJ2333_C77678.pdf" H 6200 2350 50  0001 L CNN
+	1    6200 2350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5900 2350 5900 2450
+Wire Wire Line
+	5900 2450 6000 2450
+$Comp
+L power:VCC #PWR?
+U 1 1 5E2AC6D3
+P 6500 2350
+F 0 "#PWR?" H 6500 2200 50  0001 C CNN
+F 1 "VCC" H 6515 2523 50  0000 C CNN
+F 2 "" H 6500 2350 50  0001 C CNN
+F 3 "" H 6500 2350 50  0001 C CNN
+	1    6500 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5E2ADE3D
+P 6500 2700
+F 0 "C?" H 6615 2746 50  0000 L CNN
+F 1 "1u" H 6615 2655 50  0000 L CNN
+F 2 "" H 6538 2550 50  0001 C CNN
+F 3 "~" H 6500 2700 50  0001 C CNN
+	1    6500 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E2AF969
+P 6500 2950
+F 0 "#PWR?" H 6500 2700 50  0001 C CNN
+F 1 "GND" H 6505 2777 50  0000 C CNN
+F 2 "" H 6500 2950 50  0001 C CNN
+F 3 "" H 6500 2950 50  0001 C CNN
+	1    6500 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L User_Diode:BAT60J D?
+U 1 1 5E2B134A
+P 6700 2200
+F 0 "D?" V 6746 2120 50  0000 R CNN
+F 1 "BAT60J" V 6655 2120 50  0000 R CNN
+F 2 "Diode_SMD:D_SOD-323" H 6700 2025 50  0001 C CNN
+F 3 "https://www.st.com/resource/en/datasheet/bat60.pdf" H 6700 2200 50  0001 C CNN
+	1    6700 2200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6400 2450 6500 2450
+Wire Wire Line
+	6500 2450 6500 2350
+Wire Wire Line
+	6500 2550 6500 2450
+Connection ~ 6500 2450
+Wire Wire Line
+	6700 2350 6700 2450
+Wire Wire Line
+	6700 2450 6500 2450
+Wire Wire Line
+	6200 1850 6200 1950
+Wire Wire Line
+	6700 2050 6700 1950
+Wire Wire Line
+	6700 1950 6200 1950
+Connection ~ 6200 1950
+Wire Wire Line
+	6200 1950 6200 2150
+$Comp
+L Device:R R?
+U 1 1 5E2B609A
+P 7300 2200
+AR Path="/5E2B609A" Ref="R?"  Part="1" 
+AR Path="/5E25DD0B/5E2B609A" Ref="R?"  Part="1" 
+F 0 "R?" H 7370 2246 50  0000 L CNN
+F 1 "270k" H 7370 2155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 7230 2200 50  0001 C CNN
+F 3 "~" H 7300 2200 50  0001 C CNN
+	1    7300 2200
+	-1   0    0    1   
+$EndComp
+Connection ~ 6700 1950
+$Comp
+L power:GND #PWR?
+U 1 1 5E2B6D1D
+P 7300 2450
+F 0 "#PWR?" H 7300 2200 50  0001 C CNN
+F 1 "GND" H 7305 2277 50  0000 C CNN
+F 2 "" H 7300 2450 50  0001 C CNN
+F 3 "" H 7300 2450 50  0001 C CNN
+	1    7300 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 2350 7300 2450
+Wire Wire Line
+	6500 2850 6500 2950
+Text Notes 6250 3300 0    50   ~ 0
+Load sharing circuit
+Wire Notes Line
+	5750 1600 7450 1600
+Wire Notes Line
+	7450 1600 7450 3200
+Wire Notes Line
+	7450 3200 5750 3200
+Wire Notes Line
+	5750 3200 5750 1600
+Wire Wire Line
+	7300 1950 7300 2050
+Wire Wire Line
+	6700 1950 7300 1950
+$EndSCHEMATC
