@@ -17,8 +17,8 @@
 
 ## 0.1.1
 
-- Initial prototype, in testing as of 24/11/2019.
-- The transmitter failed to work. The exact same code on the receiver worked however.
+- Initial transmitter prototype, in testing as of 24/11/2019.
+- The transmitter failed to work. Using the same code on a STM32F072Discovery board seems to work however.
 - The next iteration will remove the 
 
 ## 0.1.2

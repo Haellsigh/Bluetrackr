@@ -1,4 +1,4 @@
-#include "main_loop.h"
+#include "main_loop.hh"
 #include "main.h"
 
 #include <blt/gpio.hh>
@@ -25,18 +25,18 @@ uint8_t payload_length;
 
 void main_loop(SPI_HandleTypeDef* hspi) {
   // Outputs
-  using led_orange = gpio::pin_out<PC, p8>;
-  using led_red    = gpio::pin_out<PC, p6>;
-  using led_green  = gpio::pin_out<PC, p9>;
-  using led_blue   = gpio::pin_out<PC, p7>;
-  using leds       = gpio::pin_out<PC, p6, p7, p8, p9>;
+  // using led_orange = gpio::pin_out<PC, p8>;
+  // using led_red    = gpio::pin_out<PC, p6>;
+  using led_green = gpio::pin_out<PC, p9>;
+  using led_blue  = gpio::pin_out<PC, p7>;
+  using leds      = gpio::pin_out<PC, p6, p7, p8, p9>;
 
   // Inputs
   // using btn_pair = gpio::pin_in<PortA, pin0>;
 
   // nRF24L01 pins
-  using csn = gpio::pin_out<PB, NRF_CSN_Pin>;
-  using ce  = gpio::pin_out<PB, NRF_CE_Pin>;
+  // using csn = gpio::pin_out<PB, NRF_CSN_Pin>;
+  using ce = gpio::pin_out<PB, NRF_CE_Pin>;
 
   delay::init();
   leds::clear();

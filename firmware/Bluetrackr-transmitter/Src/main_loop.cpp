@@ -1,4 +1,4 @@
-#include "main_loop.h"
+#include "main_loop.hh"
 #include "main.h"
 
 #include <blt/gpio.hh>

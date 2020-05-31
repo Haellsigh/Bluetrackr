@@ -67,15 +67,3 @@ Press the pairing button on both devices at the same time.
  - The **transmitter** switches to the channel and pairing is done.
 
 The channels paired are stored in the backup registers of the µc. (See [reference](https://www.st.com/content/ccc/resource/technical/document/reference_manual/59/b9/ba/7f/11/af/43/d5/CD00171190.pdf/files/CD00171190.pdf/jcr:content/translations/en.CD00171190.pdf) page 83.)
-
-| Component | Schematic | PCB |
-|-----------|:----------|:---:|
-| STM32F103 | yes       | no |
-| nRF24L01+ | yes       | no |
-| TP4056 | yes       | no |
-| MPU9250 | yes       | no |
-| Programming header | yes       | no |
-| Vbat sensing | yes       | no |
-| Pairing button | yes       | no |
-| Status LED (blue) | no       | no |
-| Power LED (red) | no       | no |
