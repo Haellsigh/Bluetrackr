@@ -1,4 +1,4 @@
-target_sources(Bluetrackr-receiver PRIVATE
+target_sources(Bluetrackr-receiver.elf PRIVATE
   main.c
   main_loop.cpp
   nrf24_hal.c

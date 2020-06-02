@@ -112,14 +112,19 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
 
   // RX/TX disabled
   ce::clear();
-  // cs_mpu::clear();
+  cs_mpu::clear();
 
   nRF24_LL_INIT(hspi);
   delay::ms(50);
   if (!nRF24_Check()) {
     blt::error_handler();
   }
+
+  while (true) {
+  }
+
   nRF24_Init();
+  led_status::clear();
 
   // This is simple transmitter with Enhanced ShockBurst (to one logic address):
   //   - TX address: 'ESB'
@@ -157,13 +162,6 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
   // Wake the transceiver
   nRF24_SetPowerMode(nRF24_PWR_UP);
 
-  /// End radio init
-  led_status::clear();
-  delay::ms(500);
-  led_status::set();
-  delay::ms(500);
-  led_status::clear();
-
   // Some variables
   uint32_t packets_lost = 0;  // global counter of lost packets
   uint8_t  otx;
@@ -172,6 +170,10 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
 
   payload_length = 10;
   uint32_t i, j = 0;
+
+  led_power::set();
+  delay::ms(2000);
+  led_status::clear();
 
   while (true) {
     // Prepare data packet

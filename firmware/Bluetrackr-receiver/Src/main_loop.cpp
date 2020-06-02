@@ -25,7 +25,7 @@ uint8_t payload_length;
 
 void main_loop(SPI_HandleTypeDef* hspi) {
   // Outputs
-  // using led_orange = gpio::pin_out<PC, p8>;
+  using led_orange = gpio::pin_out<PC, p8>;
   // using led_red    = gpio::pin_out<PC, p6>;
   using led_green = gpio::pin_out<PC, p9>;
   using led_blue  = gpio::pin_out<PC, p7>;
@@ -149,6 +149,7 @@ void main_loop(SPI_HandleTypeDef* hspi) {
   // MPU9250_DATA_t data;
   // int8_t datastr[30] = "";
 
+  led_orange::set();
   while (true) {
     if (nRF24_GetStatus_RXFIFO() != nRF24_STATUS_RXFIFO_EMPTY) {
       pipe = nRF24_ReadPayload(nRF24_payload, &payload_length);
@@ -156,10 +157,11 @@ void main_loop(SPI_HandleTypeDef* hspi) {
       nRF24_ClearIRQFlags();
 
       led_green::set();
-      delay::ms(500);
+      delay::ms(1000);
       led_green::clear();
     }
   }
+  led_orange::clear();
 
   /*while (true) {
     delay::ms(1000);

@@ -1,5 +1,5 @@
-target_include_directories(Bluetrackr-transmitter PRIVATE /)
-target_sources(Bluetrackr-transmitter PRIVATE
+target_include_directories(Bluetrackr-transmitter.elf PRIVATE /)
+target_sources(Bluetrackr-transmitter.elf PRIVATE
   main.h
   error_handler.hh
   main_loop.hh

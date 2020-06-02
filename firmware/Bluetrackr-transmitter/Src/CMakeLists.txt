@@ -1,4 +1,4 @@
-target_sources(Bluetrackr-transmitter PRIVATE
+target_sources(Bluetrackr-transmitter.elf PRIVATE
   main.c
   main_loop.cpp
   mpu.c
