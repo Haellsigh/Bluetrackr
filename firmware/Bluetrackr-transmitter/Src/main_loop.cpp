@@ -25,9 +25,9 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
   using btn_pair = gpio::pin_in<PB, p8>;
 
   // nRF24L01 pins
-  using cs_mpu = gpio::pin_out<PB, MPU_CS_Pin>;
-  using csn    = gpio::pin_out<PB, NRF_CSN_Pin>;
-  using ce     = gpio::pin_out<PB, NRF_CE_Pin>;
+  using csn_mpu = gpio::pin_out<PB, MPU_CS_Pin>;
+  using csn     = gpio::pin_out<PB, NRF_CSN_Pin>;
+  using ce      = gpio::pin_out<PB, NRF_CE_Pin>;
 
   delay::init();
   leds::clear();
@@ -37,7 +37,7 @@ void main_loop(ADC_HandleTypeDef* hadc, SPI_HandleTypeDef* hspi) {
 
   // RX/TX disabled
   ce::clear();
-  cs_mpu::clear();
+  csn_mpu::set();
 
   nRF24_LL_INIT(hspi);
   delay::ms(50);
