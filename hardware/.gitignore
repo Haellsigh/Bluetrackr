@@ -1,5 +1,7 @@
-# Hardware outputs gerbers
-outputs/
+# KiCad
+*.*-bak
+*.net
 
-# Project outputs
+# KiCad outputs (gerbers, bom)
+out/
 bom/

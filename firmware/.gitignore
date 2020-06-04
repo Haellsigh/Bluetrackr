@@ -1,15 +1,10 @@
-.metadata
-RemoteSystemsTempFiles
-
-# Firmware project files
-Drivers/
-.cproject
+# STM32CubeMX project
 .mxproject
-.project
-*.s
-*.ld
-*.settings
-*.launch
+*.gpdsc
 
-# Project build files
-Debug/
+# Build files
+build-*/
+
+# Qt Creator files
+.cmake/
+*.user
