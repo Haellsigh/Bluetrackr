@@ -4,7 +4,7 @@
 
 ### Transmitter schematic:
 
-![schematic](https://raw.githubusercontent.com/Haellsigh/Bluetrackr/master/doc/images/transmitter_schematic.png)
+![schematic](doc/images/transmitter-schematic.svg?raw=true&sanitize=true)
 
 ### Transmitter PCB:
 
