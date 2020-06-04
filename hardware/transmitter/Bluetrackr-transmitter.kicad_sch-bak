@@ -1721,6 +1721,43 @@
   (no_connect (at 54.61 73.66))
   (no_connect (at 325.12 57.15))
   (no_connect (at 299.72 62.23))
+  (no_connect (at 217.17 138.43))
+  (no_connect (at 217.17 140.97))
+  (no_connect (at 217.17 143.51))
+  (no_connect (at 217.17 148.59))
+  (no_connect (at 217.17 151.13))
+  (no_connect (at 217.17 156.21))
+  (no_connect (at 217.17 168.91))
+  (no_connect (at 217.17 173.99))
+  (no_connect (at 217.17 179.07))
+  (no_connect (at 217.17 181.61))
+  (no_connect (at 217.17 184.15))
+  (no_connect (at 217.17 186.69))
+  (no_connect (at 217.17 189.23))
+  (no_connect (at 217.17 191.77))
+  (no_connect (at 217.17 194.31))
+  (no_connect (at 217.17 196.85))
+  (no_connect (at 217.17 199.39))
+  (no_connect (at 247.65 123.19))
+  (no_connect (at 247.65 125.73))
+  (no_connect (at 247.65 138.43))
+  (no_connect (at 247.65 140.97))
+  (no_connect (at 247.65 143.51))
+  (no_connect (at 247.65 146.05))
+  (no_connect (at 247.65 148.59))
+  (no_connect (at 247.65 156.21))
+  (no_connect (at 247.65 161.29))
+  (no_connect (at 247.65 163.83))
+  (no_connect (at 247.65 166.37))
+  (no_connect (at 247.65 168.91))
+  (no_connect (at 247.65 171.45))
+  (no_connect (at 247.65 173.99))
+  (no_connect (at 247.65 176.53))
+  (no_connect (at 247.65 179.07))
+  (no_connect (at 247.65 181.61))
+  (no_connect (at 247.65 184.15))
+  (no_connect (at 247.65 186.69))
+  (no_connect (at 247.65 189.23))
   (no_connect (at 54.61 58.42))
 
   (wire (pts (xy 31.75 83.82) (xy 31.75 86.36))
@@ -2519,7 +2556,7 @@
   (text "Load sharing circuit" (at 26.67 165.1 0)
     (effects (font (size 2 2)) (justify left bottom))
   )
-  (text "Voltage divider" (at 26.67 214.63 0)
+  (text "Voltage sense" (at 26.67 214.63 0)
     (effects (font (size 2 2)) (justify left bottom))
   )
   (text "179 mA" (at 39.37 147.32 180)
@@ -2739,7 +2776,7 @@
 
   (symbol (lib_id "power:PWR_FLAG") (at 336.55 215.9 180) (unit 1)
     (uuid "74614f0a-29d1-418f-88b8-e77369481dff")
-    (property "Reference" "#FLG?" (id 0) (at 336.55 217.805 0)
+    (property "Reference" "#FLG01" (id 0) (at 336.55 217.805 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "PWR_FLAG" (id 1) (at 336.55 220.2244 0))
@@ -2753,7 +2790,7 @@
 
   (symbol (lib_id "power:PWR_FLAG") (at 346.71 215.9 180) (unit 1)
     (uuid "7b519107-9783-4e3c-923e-a04e141dd5fd")
-    (property "Reference" "#FLG0102" (id 0) (at 346.71 217.805 0)
+    (property "Reference" "#FLG02" (id 0) (at 346.71 217.805 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "PWR_FLAG" (id 1) (at 346.71 220.2244 0))
@@ -2767,7 +2804,7 @@
 
   (symbol (lib_id "power:PWR_FLAG") (at 356.87 213.36 0) (unit 1)
     (uuid "4fda9896-3b56-4e89-b484-6ad9c0d1ec69")
-    (property "Reference" "#FLG0101" (id 0) (at 356.87 211.455 0)
+    (property "Reference" "#FLG03" (id 0) (at 356.87 211.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "PWR_FLAG" (id 1) (at 356.87 209.0356 0))
@@ -2879,7 +2916,7 @@
 
   (symbol (lib_id "power:+BATT") (at 106.68 73.66 0) (unit 1)
     (uuid "c8159ff4-4630-466c-b642-80860032c7cf")
-    (property "Reference" "#PWR0103" (id 0) (at 106.68 77.47 0)
+    (property "Reference" "#PWR018" (id 0) (at 106.68 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+BATT" (id 1) (at 107.0483 69.3356 0))
@@ -2893,7 +2930,7 @@
 
   (symbol (lib_id "power:VCC") (at 106.68 130.81 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005e239471")
-    (property "Reference" "#PWR018" (id 0) (at 106.68 134.62 0)
+    (property "Reference" "#PWR020" (id 0) (at 106.68 134.62 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VCC" (id 1) (at 107.061 126.4158 0))
@@ -2963,7 +3000,7 @@
 
   (symbol (lib_id "power:+3V3") (at 204.47 45.72 0) (unit 1)
     (uuid "e811cb27-3761-400f-8d29-e25e81995bc3")
-    (property "Reference" "#PWR031" (id 0) (at 204.47 49.53 0)
+    (property "Reference" "#PWR030" (id 0) (at 204.47 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (id 1) (at 204.851 41.3258 0))
@@ -3117,7 +3154,7 @@
 
   (symbol (lib_id "power:VCC") (at 336.55 213.36 0) (unit 1)
     (uuid "ed7e11ed-6c1c-4d2d-ab25-a69e4a6d17b5")
-    (property "Reference" "#PWR?" (id 0) (at 336.55 217.17 0)
+    (property "Reference" "#PWR049" (id 0) (at 336.55 217.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VCC" (id 1) (at 336.931 208.9658 0))
@@ -3131,7 +3168,7 @@
 
   (symbol (lib_id "power:+1V8") (at 344.17 127 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005f5398e9")
-    (property "Reference" "#PWR049" (id 0) (at 344.17 130.81 0)
+    (property "Reference" "#PWR050" (id 0) (at 344.17 130.81 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+1V8" (id 1) (at 344.551 122.6058 0))
@@ -3145,7 +3182,7 @@
 
   (symbol (lib_id "power:+1V8") (at 344.17 158.75 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005f51f0c6")
-    (property "Reference" "#PWR050" (id 0) (at 344.17 162.56 0)
+    (property "Reference" "#PWR051" (id 0) (at 344.17 162.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+1V8" (id 1) (at 344.551 154.3558 0))
@@ -3159,7 +3196,7 @@
 
   (symbol (lib_id "power:VBUS") (at 346.71 213.36 0) (unit 1)
     (uuid "03815ab4-d07d-40a7-a6af-983919a4e904")
-    (property "Reference" "#PWR?" (id 0) (at 346.71 217.17 0)
+    (property "Reference" "#PWR052" (id 0) (at 346.71 217.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VBUS" (id 1) (at 347.091 208.9658 0))
@@ -3173,7 +3210,7 @@
 
   (symbol (lib_id "power:+1V8") (at 349.25 48.26 0) (unit 1)
     (uuid "c2d894f5-a002-44e5-b15f-1c4423b02fcb")
-    (property "Reference" "#PWR051" (id 0) (at 349.25 52.07 0)
+    (property "Reference" "#PWR053" (id 0) (at 349.25 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+1V8" (id 1) (at 349.631 43.8658 0))
@@ -3187,7 +3224,7 @@
 
   (symbol (lib_id "power:+3V3") (at 359.41 127 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005f5398f8")
-    (property "Reference" "#PWR053" (id 0) (at 359.41 130.81 0)
+    (property "Reference" "#PWR056" (id 0) (at 359.41 130.81 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (id 1) (at 359.791 122.6058 0))
@@ -3201,7 +3238,7 @@
 
   (symbol (lib_id "power:+3V3") (at 359.41 158.75 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005f51f0d5")
-    (property "Reference" "#PWR054" (id 0) (at 359.41 162.56 0)
+    (property "Reference" "#PWR057" (id 0) (at 359.41 162.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (id 1) (at 359.791 154.3558 0))
@@ -3355,7 +3392,7 @@
 
   (symbol (lib_id "power:GND") (at 106.68 81.28 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005e29cfdb")
-    (property "Reference" "#PWR020" (id 0) (at 106.68 87.63 0)
+    (property "Reference" "#PWR019" (id 0) (at 106.68 87.63 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 106.807 85.6742 0))
@@ -3439,7 +3476,7 @@
 
   (symbol (lib_id "power:GND") (at 204.47 58.42 0) (unit 1)
     (uuid "03bc3a52-47d5-4713-b1bd-c9a8387cc555")
-    (property "Reference" "#PWR032" (id 0) (at 204.47 64.77 0)
+    (property "Reference" "#PWR031" (id 0) (at 204.47 64.77 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 204.597 62.8142 0))
@@ -3453,7 +3490,7 @@
 
   (symbol (lib_id "power:GND") (at 204.47 130.81 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005eea291f")
-    (property "Reference" "#PWR030" (id 0) (at 204.47 137.16 0)
+    (property "Reference" "#PWR032" (id 0) (at 204.47 137.16 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 204.597 135.2042 0))
@@ -3551,7 +3588,7 @@
 
   (symbol (lib_id "power:GND") (at 349.25 66.04 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005f456027")
-    (property "Reference" "#PWR052" (id 0) (at 349.25 72.39 0)
+    (property "Reference" "#PWR054" (id 0) (at 349.25 72.39 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 349.377 70.4342 0))
@@ -3565,7 +3602,7 @@
 
   (symbol (lib_id "power:GND") (at 356.87 215.9 0) (unit 1)
     (uuid "6312b39b-cde1-4abe-b153-1b2dcfd55fbd")
-    (property "Reference" "#PWR0101" (id 0) (at 356.87 222.25 0)
+    (property "Reference" "#PWR055" (id 0) (at 356.87 222.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 356.997 220.2942 0))
@@ -4087,7 +4124,7 @@
 
   (symbol (lib_id "Device:C") (at 204.47 52.07 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005da70c62")
-    (property "Reference" "C8" (id 0) (at 207.391 50.9016 0)
+    (property "Reference" "C7" (id 0) (at 207.391 50.9016 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10u" (id 1) (at 207.391 53.213 0)
@@ -4103,7 +4140,7 @@
 
   (symbol (lib_id "Device:C") (at 204.47 124.46 0) (unit 1)
     (uuid "00000000-0000-0000-0000-00005eea369a")
-    (property "Reference" "C7" (id 0) (at 207.391 123.2916 0)
+    (property "Reference" "C8" (id 0) (at 207.391 123.2916 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1u" (id 1) (at 207.391 125.603 0)
@@ -4421,14 +4458,14 @@
   )
 
   (symbol_instances
-    (path "/4fda9896-3b56-4e89-b484-6ad9c0d1ec69"
-      (reference "#FLG0101") (unit 1)
+    (path "/74614f0a-29d1-418f-88b8-e77369481dff"
+      (reference "#FLG01") (unit 1)
     )
     (path "/7b519107-9783-4e3c-923e-a04e141dd5fd"
-      (reference "#FLG0102") (unit 1)
+      (reference "#FLG02") (unit 1)
     )
-    (path "/74614f0a-29d1-418f-88b8-e77369481dff"
-      (reference "#FLG?") (unit 1)
+    (path "/4fda9896-3b56-4e89-b484-6ad9c0d1ec69"
+      (reference "#FLG03") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005f04fcd4"
       (reference "#PWR01") (unit 1)
@@ -4481,10 +4518,13 @@
     (path "/00000000-0000-0000-0000-00005dad06ed"
       (reference "#PWR017") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e239471"
+    (path "/c8159ff4-4630-466c-b642-80860032c7cf"
       (reference "#PWR018") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005e29cfdb"
+      (reference "#PWR019") (unit 1)
+    )
+    (path "/00000000-0000-0000-0000-00005e239471"
       (reference "#PWR020") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da66b94"
@@ -4514,13 +4554,13 @@
     (path "/00000000-0000-0000-0000-00005edd0800"
       (reference "#PWR029") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005eea291f"
+    (path "/e811cb27-3761-400f-8d29-e25e81995bc3"
       (reference "#PWR030") (unit 1)
     )
-    (path "/e811cb27-3761-400f-8d29-e25e81995bc3"
+    (path "/03bc3a52-47d5-4713-b1bd-c9a8387cc555"
       (reference "#PWR031") (unit 1)
     )
-    (path "/03bc3a52-47d5-4713-b1bd-c9a8387cc555"
+    (path "/00000000-0000-0000-0000-00005eea291f"
       (reference "#PWR032") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da2beca"
@@ -4571,35 +4611,32 @@
     (path "/00000000-0000-0000-0000-00005f52bec9"
       (reference "#PWR048") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f5398e9"
+    (path "/ed7e11ed-6c1c-4d2d-ab25-a69e4a6d17b5"
       (reference "#PWR049") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f51f0c6"
+    (path "/00000000-0000-0000-0000-00005f5398e9"
       (reference "#PWR050") (unit 1)
     )
-    (path "/c2d894f5-a002-44e5-b15f-1c4423b02fcb"
+    (path "/00000000-0000-0000-0000-00005f51f0c6"
       (reference "#PWR051") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f456027"
+    (path "/03815ab4-d07d-40a7-a6af-983919a4e904"
       (reference "#PWR052") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f5398f8"
+    (path "/c2d894f5-a002-44e5-b15f-1c4423b02fcb"
       (reference "#PWR053") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f51f0d5"
+    (path "/00000000-0000-0000-0000-00005f456027"
       (reference "#PWR054") (unit 1)
     )
     (path "/6312b39b-cde1-4abe-b153-1b2dcfd55fbd"
-      (reference "#PWR0101") (unit 1)
+      (reference "#PWR055") (unit 1)
     )
-    (path "/c8159ff4-4630-466c-b642-80860032c7cf"
-      (reference "#PWR0103") (unit 1)
+    (path "/00000000-0000-0000-0000-00005f5398f8"
+      (reference "#PWR056") (unit 1)
     )
-    (path "/03815ab4-d07d-40a7-a6af-983919a4e904"
-      (reference "#PWR?") (unit 1)
-    )
-    (path "/ed7e11ed-6c1c-4d2d-ab25-a69e4a6d17b5"
-      (reference "#PWR?") (unit 1)
+    (path "/00000000-0000-0000-0000-00005f51f0d5"
+      (reference "#PWR057") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005ed75ddf"
       (reference "C1") (unit 1)
@@ -4619,10 +4656,10 @@
     (path "/00000000-0000-0000-0000-00005edb94b1"
       (reference "C6") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005eea369a"
+    (path "/00000000-0000-0000-0000-00005da70c62"
       (reference "C7") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005da70c62"
+    (path "/00000000-0000-0000-0000-00005eea369a"
       (reference "C8") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005daa5180"
