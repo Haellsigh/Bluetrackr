@@ -1,4 +1,4 @@
-update=24/11/2019 01:12:08
+update=04/06/2020 17:00:44
 version=1
 last_client=kicad
 [general]
@@ -238,13 +238,31 @@ uViaDrill=0.35
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
+[LibeditFrame]
+version=1
 [schematic_editor]
 version=1
-PageLayoutDescrFile=
+PageLayoutDescrFile=empty.kicad_wks
 PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
 NetFmtName=Pcbnew
 SpiceAjustPassiveValues=0
+SubpartIdSeparator=0
+SubpartFirstId=65
 LabSize=50
+TextOffsetRatio=0.3
+LineThickness=6
+BusThickness=12
+WireThickness=6
+PinSymbolSize=25
+JunctionSize=40
+FieldNameTemplates=(templatefields)
 ERC_TestSimilarLabels=1
+ERC_CheckUniqueGlobalLabels=1
+ERC_CheckBusDriverConflicts=1
+ERC_CheckBusEntryConflicts=1
+ERC_CheckBusToBusConflicts=1
+ERC_CheckBusToNetConflicts=1
+[SchematicFrame]
+version=1
+[sheetnames]
+1=389906d2-1243-4775-8614-4a54d2b99743:
