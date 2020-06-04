@@ -1,4 +1,4 @@
-update=04/06/2020 21:12:17
+update=04/06/2020 21:41:15
 version=1
 last_client=kicad
 [general]
@@ -18,8 +18,6 @@ version=1
 version=1
 [ModEditFrame]
 version=1
-[sheetnames]
-1=e91d786f-5276-49b1-ab7b-e29902f19b0d:
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -324,10 +322,12 @@ uViaDrill=0.35
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
+[sheetnames]
+1=f0cf30e8-4e3e-4e39-9ae8-2d021894fba6:
 [schematic_editor]
 version=1
 PageLayoutDescrFile=empty.kicad_wks
-PlotDirectoryName=../../doc/
+PlotDirectoryName=../../doc/images/
 NetFmtName=Pcbnew
 SpiceAjustPassiveValues=0
 SubpartIdSeparator=0
