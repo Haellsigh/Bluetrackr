@@ -1,4 +1,4 @@
-update=10/06/2020 21:59:01
+update=10/06/2020 22:13:45
 version=1
 last_client=kicad
 [general]
@@ -18,8 +18,6 @@ version=1
 version=1
 [SchematicFrame]
 version=1
-[sheetnames]
-1=b42c1fb3-2b05-48c6-9dff-afe9bc613492:
 [schematic_editor]
 version=1
 PageLayoutDescrFile=empty.kicad_wks
@@ -358,3 +356,5 @@ uViaDrill=0.35
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
+[sheetnames]
+1=ac6a5655-7f34-4f01-a845-26146ded5070:
