@@ -1,4 +1,4 @@
-update=10/06/2020 22:25:19
+update=11/06/2020 01:15:14
 version=1
 last_client=kicad
 [general]
@@ -15,8 +15,6 @@ LibDir=
 [LibeditFrame]
 version=1
 [ModEditFrame]
-version=1
-[SchematicFrame]
 version=1
 [schematic_editor]
 version=1
@@ -40,8 +38,6 @@ ERC_CheckBusDriverConflicts=1
 ERC_CheckBusEntryConflicts=1
 ERC_CheckBusToBusConflicts=1
 ERC_CheckBusToNetConflicts=1
-[sheetnames]
-1=ac6a5655-7f34-4f01-a845-26146ded5070:
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -168,7 +164,7 @@ DimensionPrecision=1
 SolderMaskClearance=0.05
 SolderMaskMinWidth=0
 SolderPasteClearance=0
-SolderPasteRatio=-0
+SolderPasteRatio=0
 [pcbnew/Layer.F.Cu]
 Name=F.Cu
 Type=0
@@ -358,3 +354,7 @@ uViaDrill=0.35
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
+[SchematicFrame]
+version=1
+[sheetnames]
+1=a2251fa2-4b9e-4200-acac-a5f05521f339:
