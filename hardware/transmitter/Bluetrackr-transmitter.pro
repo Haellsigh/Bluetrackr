@@ -1,4 +1,4 @@
-update=10/06/2020 18:38:43
+update=10/06/2020 21:29:53
 version=1
 last_client=kicad
 [general]
@@ -352,9 +352,9 @@ dPairGap=0.2
 dPairViaGap=0.25
 [LibeditFrame]
 version=1
-[SchematicFrame]
-version=1
 [ModEditFrame]
 version=1
+[SchematicFrame]
+version=1
 [sheetnames]
-1=53f20391-19d4-4f49-bbec-08d08e371665:
+1=b42c1fb3-2b05-48c6-9dff-afe9bc613492:
