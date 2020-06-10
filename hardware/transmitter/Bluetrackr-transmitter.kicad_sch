@@ -2553,7 +2553,7 @@
   (symbol (lib_id "power:VCC") (at 30.48 129.54 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005e239471")
-    (property "Reference" "#PWR024" (id 0) (at 30.48 133.35 0)
+    (property "Reference" "#PWR01" (id 0) (at 30.48 133.35 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VCC" (id 1) (at 30.861 125.1458 0))
@@ -2568,7 +2568,7 @@
   (symbol (lib_id "power:+BATT") (at 35.56 184.15 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005f08c4ae")
-    (property "Reference" "#PWR02" (id 0) (at 35.56 187.96 0)
+    (property "Reference" "#PWR03" (id 0) (at 35.56 187.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+BATT" (id 1) (at 35.941 179.7558 0))
@@ -2583,7 +2583,7 @@
   (symbol (lib_id "power:VBUS") (at 43.18 171.45 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75dca")
-    (property "Reference" "#PWR05" (id 0) (at 43.18 175.26 0)
+    (property "Reference" "#PWR06" (id 0) (at 43.18 175.26 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VBUS" (id 1) (at 43.561 167.0558 0))
@@ -2598,7 +2598,7 @@
   (symbol (lib_id "power:+2V5") (at 50.8 129.54 0) (unit 1)
     (in_bom yes)
     (uuid "f8988ca4-9812-47b3-bff7-0d3e7c8fbe8c")
-    (property "Reference" "#PWR026" (id 0) (at 50.8 133.35 0)
+    (property "Reference" "#PWR07" (id 0) (at 50.8 133.35 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+2V5" (id 1) (at 51.1683 125.2156 0))
@@ -2613,7 +2613,7 @@
   (symbol (lib_id "power:VCC") (at 50.8 184.15 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75dd9")
-    (property "Reference" "#PWR09" (id 0) (at 50.8 187.96 0)
+    (property "Reference" "#PWR08" (id 0) (at 50.8 187.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VCC" (id 1) (at 51.181 179.7558 0))
@@ -2643,7 +2643,7 @@
   (symbol (lib_id "power:VBUS") (at 96.52 116.84 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75dbe")
-    (property "Reference" "#PWR012" (id 0) (at 96.52 120.65 0)
+    (property "Reference" "#PWR016" (id 0) (at 96.52 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VBUS" (id 1) (at 96.901 112.4458 0))
@@ -2658,7 +2658,7 @@
   (symbol (lib_id "power:+BATT") (at 96.52 177.8 0) (unit 1)
     (in_bom yes)
     (uuid "80e73d48-461a-41a2-ba91-634be0fb5dab")
-    (property "Reference" "#PWR06" (id 0) (at 96.52 181.61 0)
+    (property "Reference" "#PWR018" (id 0) (at 96.52 181.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+BATT" (id 1) (at 96.8883 173.4756 0))
@@ -2673,7 +2673,7 @@
   (symbol (lib_id "power:+BATT") (at 106.68 73.66 0) (unit 1)
     (in_bom yes)
     (uuid "c8159ff4-4630-466c-b642-80860032c7cf")
-    (property "Reference" "#PWR022" (id 0) (at 106.68 77.47 0)
+    (property "Reference" "#PWR020" (id 0) (at 106.68 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+BATT" (id 1) (at 107.0483 69.3356 0))
@@ -2688,7 +2688,7 @@
   (symbol (lib_id "power:+BATT") (at 109.22 121.92 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005f07f090")
-    (property "Reference" "#PWR019" (id 0) (at 109.22 125.73 0)
+    (property "Reference" "#PWR022" (id 0) (at 109.22 125.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+BATT" (id 1) (at 109.601 117.5258 0))
@@ -2703,7 +2703,7 @@
   (symbol (lib_id "power:VBUS") (at 109.22 138.43 0) (unit 1)
     (in_bom yes)
     (uuid "22960c7d-7d17-4493-b542-26579e36f65f")
-    (property "Reference" "#PWR07" (id 0) (at 109.22 142.24 0)
+    (property "Reference" "#PWR023" (id 0) (at 109.22 142.24 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VBUS" (id 1) (at 109.5883 134.1056 0))
@@ -2718,7 +2718,7 @@
   (symbol (lib_id "power:+BATT") (at 119.38 138.43 0) (unit 1)
     (in_bom yes)
     (uuid "ac24b8a6-44f0-4268-8024-26c811b0aa36")
-    (property "Reference" "#PWR016" (id 0) (at 119.38 142.24 0)
+    (property "Reference" "#PWR026" (id 0) (at 119.38 142.24 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+BATT" (id 1) (at 119.7483 134.1056 0))
@@ -2748,7 +2748,7 @@
   (symbol (lib_id "power:+2V5") (at 166.37 229.87 0) (unit 1)
     (in_bom yes)
     (uuid "d86c518c-945b-4d31-acbb-2249daea2b3e")
-    (property "Reference" "#PWR038" (id 0) (at 166.37 233.68 0)
+    (property "Reference" "#PWR033" (id 0) (at 166.37 233.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+2V5" (id 1) (at 166.7383 225.5456 0))
@@ -2763,7 +2763,7 @@
   (symbol (lib_id "power:+2V5") (at 176.53 110.49 0) (unit 1)
     (in_bom yes)
     (uuid "d7068d27-e06c-48dd-876a-90c00b27f7b1")
-    (property "Reference" "#PWR040" (id 0) (at 176.53 114.3 0)
+    (property "Reference" "#PWR035" (id 0) (at 176.53 114.3 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+2V5" (id 1) (at 176.8983 106.1656 0))
@@ -2778,7 +2778,7 @@
   (symbol (lib_id "power:+2V5") (at 204.47 45.72 0) (unit 1)
     (in_bom yes)
     (uuid "7f0fcc85-88b4-471e-99e7-343c7925e6fe")
-    (property "Reference" "#PWR034" (id 0) (at 204.47 49.53 0)
+    (property "Reference" "#PWR037" (id 0) (at 204.47 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+2V5" (id 1) (at 204.8383 41.3956 0))
@@ -2793,7 +2793,7 @@
   (symbol (lib_id "power:+2V5") (at 236.22 34.29 0) (unit 1)
     (in_bom yes)
     (uuid "3a69e54a-4107-4586-ab54-0040e93f3608")
-    (property "Reference" "#PWR042" (id 0) (at 236.22 38.1 0)
+    (property "Reference" "#PWR039" (id 0) (at 236.22 38.1 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+2V5" (id 1) (at 236.5883 29.9656 0))
@@ -2808,7 +2808,7 @@
   (symbol (lib_id "power:+2V5") (at 304.8 105.41 0) (unit 1)
     (in_bom yes)
     (uuid "b4a0fff8-f125-44a1-9ee2-f95485d68013")
-    (property "Reference" "#PWR?" (id 0) (at 304.8 109.22 0)
+    (property "Reference" "#PWR043" (id 0) (at 304.8 109.22 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+2V5" (id 1) (at 305.1683 101.0856 0))
@@ -2823,7 +2823,7 @@
   (symbol (lib_id "power:VCC") (at 314.96 229.87 0) (unit 1)
     (in_bom yes)
     (uuid "ed7e11ed-6c1c-4d2d-ab25-a69e4a6d17b5")
-    (property "Reference" "#PWR053" (id 0) (at 314.96 233.68 0)
+    (property "Reference" "#PWR045" (id 0) (at 314.96 233.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VCC" (id 1) (at 315.341 225.4758 0))
@@ -2838,7 +2838,7 @@
   (symbol (lib_id "power:+2V5") (at 320.04 34.29 0) (unit 1)
     (in_bom yes)
     (uuid "a038abff-d879-4f7a-9acf-3cbdb331b289")
-    (property "Reference" "#PWR?" (id 0) (at 320.04 38.1 0)
+    (property "Reference" "#PWR047" (id 0) (at 320.04 38.1 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+2V5" (id 1) (at 320.4083 29.9656 0))
@@ -2853,7 +2853,7 @@
   (symbol (lib_id "power:VBUS") (at 325.12 229.87 0) (unit 1)
     (in_bom yes)
     (uuid "03815ab4-d07d-40a7-a6af-983919a4e904")
-    (property "Reference" "#PWR056" (id 0) (at 325.12 233.68 0)
+    (property "Reference" "#PWR049" (id 0) (at 325.12 233.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VBUS" (id 1) (at 325.501 225.4758 0))
@@ -2868,7 +2868,7 @@
   (symbol (lib_id "power:GND") (at 31.75 86.36 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005f04fcd4")
-    (property "Reference" "#PWR01" (id 0) (at 31.75 92.71 0)
+    (property "Reference" "#PWR02" (id 0) (at 31.75 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 31.877 90.7542 0))
@@ -2883,7 +2883,7 @@
   (symbol (lib_id "power:GND") (at 39.37 86.36 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005e270979")
-    (property "Reference" "#PWR03" (id 0) (at 39.37 92.71 0)
+    (property "Reference" "#PWR04" (id 0) (at 39.37 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 39.497 90.7542 0))
@@ -2898,7 +2898,7 @@
   (symbol (lib_id "power:GND") (at 40.64 149.86 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da66b94")
-    (property "Reference" "#PWR025" (id 0) (at 40.64 156.21 0)
+    (property "Reference" "#PWR05" (id 0) (at 40.64 156.21 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 40.767 154.2542 0))
@@ -2913,7 +2913,7 @@
   (symbol (lib_id "power:GND") (at 50.8 199.39 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75de5")
-    (property "Reference" "#PWR010" (id 0) (at 50.8 205.74 0)
+    (property "Reference" "#PWR09" (id 0) (at 50.8 205.74 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 50.927 203.7842 0))
@@ -2928,7 +2928,7 @@
   (symbol (lib_id "power:GND") (at 54.61 146.05 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da706eb")
-    (property "Reference" "#PWR027" (id 0) (at 54.61 152.4 0)
+    (property "Reference" "#PWR010" (id 0) (at 54.61 152.4 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 54.737 150.4442 0))
@@ -2943,7 +2943,7 @@
   (symbol (lib_id "power:GND") (at 62.23 66.04 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005e270988")
-    (property "Reference" "#PWR015" (id 0) (at 62.23 72.39 0)
+    (property "Reference" "#PWR012" (id 0) (at 62.23 72.39 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 62.357 70.4342 0))
@@ -2958,7 +2958,7 @@
   (symbol (lib_id "power:GND") (at 69.85 63.5 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005e27098e")
-    (property "Reference" "#PWR018" (id 0) (at 69.85 69.85 0)
+    (property "Reference" "#PWR013" (id 0) (at 69.85 69.85 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 69.977 67.8942 0))
@@ -2973,7 +2973,7 @@
   (symbol (lib_id "power:GND") (at 71.12 186.69 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75e03")
-    (property "Reference" "#PWR020" (id 0) (at 71.12 193.04 0)
+    (property "Reference" "#PWR014" (id 0) (at 71.12 193.04 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 71.247 191.0842 0))
@@ -2988,7 +2988,7 @@
   (symbol (lib_id "power:GND") (at 83.82 142.24 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75dae")
-    (property "Reference" "#PWR04" (id 0) (at 83.82 148.59 0)
+    (property "Reference" "#PWR015" (id 0) (at 83.82 148.59 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 83.947 146.6342 0))
@@ -3003,7 +3003,7 @@
   (symbol (lib_id "power:GND") (at 96.52 137.16 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75da7")
-    (property "Reference" "#PWR013" (id 0) (at 96.52 143.51 0)
+    (property "Reference" "#PWR017" (id 0) (at 96.52 143.51 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 96.647 141.5542 0))
@@ -3018,7 +3018,7 @@
   (symbol (lib_id "power:GND") (at 100.33 48.26 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005dad06ed")
-    (property "Reference" "#PWR021" (id 0) (at 100.33 54.61 0)
+    (property "Reference" "#PWR019" (id 0) (at 100.33 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 100.457 52.6542 0))
@@ -3033,7 +3033,7 @@
   (symbol (lib_id "power:GND") (at 106.68 81.28 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005e29cfdb")
-    (property "Reference" "#PWR023" (id 0) (at 106.68 87.63 0)
+    (property "Reference" "#PWR021" (id 0) (at 106.68 87.63 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 106.807 85.6742 0))
@@ -3048,7 +3048,7 @@
   (symbol (lib_id "power:GND") (at 109.22 151.13 0) (unit 1)
     (in_bom yes)
     (uuid "f8a31ff5-42c2-47c8-88c6-e6dd9de8d357")
-    (property "Reference" "#PWR08" (id 0) (at 109.22 157.48 0)
+    (property "Reference" "#PWR024" (id 0) (at 109.22 157.48 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 109.3343 155.4544 0))
@@ -3063,7 +3063,7 @@
   (symbol (lib_id "power:GND") (at 109.22 193.04 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005daa0979")
-    (property "Reference" "#PWR014" (id 0) (at 109.22 199.39 0)
+    (property "Reference" "#PWR025" (id 0) (at 109.22 199.39 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 109.347 197.4342 0))
@@ -3078,7 +3078,7 @@
   (symbol (lib_id "power:GND") (at 119.38 151.13 0) (unit 1)
     (in_bom yes)
     (uuid "d44d7718-741d-45d8-af91-99e90d088e86")
-    (property "Reference" "#PWR017" (id 0) (at 119.38 157.48 0)
+    (property "Reference" "#PWR027" (id 0) (at 119.38 157.48 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 119.4943 155.4544 0))
@@ -3123,7 +3123,7 @@
   (symbol (lib_id "power:GND") (at 151.13 133.35 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005eea291f")
-    (property "Reference" "#PWR036" (id 0) (at 151.13 139.7 0)
+    (property "Reference" "#PWR031" (id 0) (at 151.13 139.7 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 151.257 137.7442 0))
@@ -3138,7 +3138,7 @@
   (symbol (lib_id "power:GND") (at 160.02 138.43 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da2beca")
-    (property "Reference" "#PWR037" (id 0) (at 160.02 144.78 0)
+    (property "Reference" "#PWR032" (id 0) (at 160.02 144.78 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 160.147 142.8242 0))
@@ -3153,7 +3153,7 @@
   (symbol (lib_id "power:GND") (at 166.37 247.65 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005daa60ce")
-    (property "Reference" "#PWR039" (id 0) (at 166.37 254 0)
+    (property "Reference" "#PWR034" (id 0) (at 166.37 254 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 166.497 252.0442 0))
@@ -3168,7 +3168,7 @@
   (symbol (lib_id "power:GND") (at 176.53 212.09 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da29114")
-    (property "Reference" "#PWR041" (id 0) (at 176.53 218.44 0)
+    (property "Reference" "#PWR036" (id 0) (at 176.53 218.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 176.657 216.4842 0))
@@ -3183,7 +3183,7 @@
   (symbol (lib_id "power:GND") (at 204.47 58.42 0) (unit 1)
     (in_bom yes)
     (uuid "03bc3a52-47d5-4713-b1bd-c9a8387cc555")
-    (property "Reference" "#PWR035" (id 0) (at 204.47 64.77 0)
+    (property "Reference" "#PWR038" (id 0) (at 204.47 64.77 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 204.597 62.8142 0))
@@ -3198,7 +3198,7 @@
   (symbol (lib_id "power:GND") (at 236.22 69.85 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005dafc602")
-    (property "Reference" "#PWR043" (id 0) (at 236.22 76.2 0)
+    (property "Reference" "#PWR040" (id 0) (at 236.22 76.2 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 236.347 74.2442 0))
@@ -3213,7 +3213,7 @@
   (symbol (lib_id "power:GND") (at 284.48 87.63 0) (unit 1)
     (in_bom yes)
     (uuid "45d6196c-56de-4bb5-b2f4-dad9243b0a03")
-    (property "Reference" "#PWR?" (id 0) (at 284.48 93.98 0)
+    (property "Reference" "#PWR041" (id 0) (at 284.48 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 284.5943 91.9544 0))
@@ -3228,7 +3228,7 @@
   (symbol (lib_id "power:GND") (at 299.72 87.63 0) (unit 1)
     (in_bom yes)
     (uuid "54ad0498-571b-41c4-9190-508a3f787117")
-    (property "Reference" "#PWR?" (id 0) (at 299.72 93.98 0)
+    (property "Reference" "#PWR042" (id 0) (at 299.72 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 299.8343 91.9544 0))
@@ -3243,7 +3243,7 @@
   (symbol (lib_id "power:GND") (at 304.8 123.19 0) (unit 1)
     (in_bom yes)
     (uuid "03ac74f9-28b4-48ce-9f09-655b79508f88")
-    (property "Reference" "#PWR?" (id 0) (at 304.8 129.54 0)
+    (property "Reference" "#PWR044" (id 0) (at 304.8 129.54 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 304.9143 127.5144 0))
@@ -3258,7 +3258,7 @@
   (symbol (lib_id "power:GND") (at 317.5 82.55 0) (unit 1)
     (in_bom yes)
     (uuid "0de0c642-e25e-40a4-a71b-cf4436633a2f")
-    (property "Reference" "#PWR?" (id 0) (at 317.5 88.9 0)
+    (property "Reference" "#PWR046" (id 0) (at 317.5 88.9 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 317.6143 86.8744 0))
@@ -3273,7 +3273,7 @@
   (symbol (lib_id "power:GND") (at 322.58 82.55 0) (unit 1)
     (in_bom yes)
     (uuid "4ee6db0e-0b19-41df-b28e-9473ba6f4dc1")
-    (property "Reference" "#PWR?" (id 0) (at 322.58 88.9 0)
+    (property "Reference" "#PWR048" (id 0) (at 322.58 88.9 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 322.6943 86.8744 0))
@@ -3288,7 +3288,7 @@
   (symbol (lib_id "power:GND") (at 335.28 232.41 0) (unit 1)
     (in_bom yes)
     (uuid "6312b39b-cde1-4abe-b153-1b2dcfd55fbd")
-    (property "Reference" "#PWR059" (id 0) (at 335.28 238.76 0)
+    (property "Reference" "#PWR050" (id 0) (at 335.28 238.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 335.407 236.8042 0))
@@ -3303,7 +3303,7 @@
   (symbol (lib_id "power:GND") (at 340.36 74.93 0) (unit 1)
     (in_bom yes)
     (uuid "f007148b-18d3-41a4-aeed-c0c326f194f2")
-    (property "Reference" "#PWR?" (id 0) (at 340.36 81.28 0)
+    (property "Reference" "#PWR051" (id 0) (at 340.36 81.28 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 340.4743 79.2544 0))
@@ -3386,7 +3386,7 @@
   (symbol (lib_id "Device:R") (at 62.23 59.69 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005e270967")
-    (property "Reference" "R4" (id 0) (at 64.008 58.5216 0)
+    (property "Reference" "R1" (id 0) (at 64.008 58.5216 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "5.1k" (id 1) (at 64.008 60.833 0)
@@ -3403,7 +3403,7 @@
   (symbol (lib_id "Device:R") (at 69.85 57.15 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005e27096d")
-    (property "Reference" "R5" (id 0) (at 71.628 55.9816 0)
+    (property "Reference" "R2" (id 0) (at 71.628 55.9816 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "5.1k" (id 1) (at 71.628 58.293 0)
@@ -3420,7 +3420,7 @@
   (symbol (lib_id "Device:R") (at 71.12 180.34 180) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75dfc")
-    (property "Reference" "R6" (id 0) (at 69.342 181.5084 0)
+    (property "Reference" "R3" (id 0) (at 69.342 181.5084 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100k" (id 1) (at 69.342 179.197 0)
@@ -3437,7 +3437,7 @@
   (symbol (lib_id "Device:R") (at 83.82 135.89 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75db4")
-    (property "Reference" "R1" (id 0) (at 85.598 134.7216 0)
+    (property "Reference" "R4" (id 0) (at 85.598 134.7216 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "5.6k" (id 1) (at 85.598 137.033 0)
@@ -3454,7 +3454,7 @@
   (symbol (lib_id "Device:R") (at 102.87 180.34 270) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da9bcc0")
-    (property "Reference" "R2" (id 0) (at 102.87 175.0822 90))
+    (property "Reference" "R5" (id 0) (at 102.87 175.0822 90))
     (property "Value" "47k" (id 1) (at 102.87 177.3936 90))
     (property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" (id 2) (at 102.87 178.562 90)
       (effects (font (size 1.27 1.27)) hide)
@@ -3467,7 +3467,7 @@
   (symbol (lib_id "Device:R") (at 109.22 186.69 180) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da9c2b5")
-    (property "Reference" "R3" (id 0) (at 110.998 185.5216 0)
+    (property "Reference" "R6" (id 0) (at 110.998 185.5216 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "100k" (id 1) (at 110.998 187.833 0)
@@ -3535,7 +3535,7 @@
   (symbol (lib_id "Device:C_Small") (at 35.56 147.32 90) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da6a7e4")
-    (property "Reference" "C4" (id 0) (at 35.56 141.5034 90))
+    (property "Reference" "C1" (id 0) (at 35.56 141.5034 90))
     (property "Value" "10u" (id 1) (at 35.56 143.8148 90))
     (property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" (id 2) (at 35.56 147.32 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -3548,7 +3548,7 @@
   (symbol (lib_id "Device:C_Small") (at 45.72 147.32 90) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da6b416")
-    (property "Reference" "C5" (id 0) (at 45.72 141.5034 90))
+    (property "Reference" "C2" (id 0) (at 45.72 141.5034 90))
     (property "Value" "10u" (id 1) (at 45.72 143.8148 90))
     (property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" (id 2) (at 45.72 147.32 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -3561,7 +3561,7 @@
   (symbol (lib_id "Device:C_Small") (at 54.61 140.97 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da6feb8")
-    (property "Reference" "C6" (id 0) (at 56.9468 139.8016 0)
+    (property "Reference" "C4" (id 0) (at 56.9468 139.8016 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "470p" (id 1) (at 56.9468 142.113 0)
@@ -3638,7 +3638,7 @@
   (symbol (lib_id "Device:C") (at 50.8 193.04 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75ddf")
-    (property "Reference" "C2" (id 0) (at 53.721 191.8716 0)
+    (property "Reference" "C3" (id 0) (at 53.721 191.8716 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1u" (id 1) (at 53.721 194.183 0)
@@ -3655,7 +3655,7 @@
   (symbol (lib_id "Device:C") (at 109.22 144.78 0) (unit 1)
     (in_bom yes)
     (uuid "3a05ad16-65f7-458c-bd5f-777f80a44ed8")
-    (property "Reference" "C1" (id 0) (at 112.1411 143.6306 0)
+    (property "Reference" "C5" (id 0) (at 112.1411 143.6306 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4.7u" (id 1) (at 112.141 145.929 0)
@@ -3672,7 +3672,7 @@
   (symbol (lib_id "Device:C") (at 119.38 144.78 0) (unit 1)
     (in_bom yes)
     (uuid "ac122f3e-f12a-4bed-9183-84d99057cad8")
-    (property "Reference" "C3" (id 0) (at 122.3011 143.6306 0)
+    (property "Reference" "C6" (id 0) (at 122.3011 143.6306 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4.7u" (id 1) (at 122.301 145.929 0)
@@ -3689,7 +3689,7 @@
   (symbol (lib_id "Device:C") (at 151.13 127 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005eea369a")
-    (property "Reference" "C10" (id 0) (at 154.051 125.8316 0)
+    (property "Reference" "C7" (id 0) (at 154.051 125.8316 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1u" (id 1) (at 154.051 128.143 0)
@@ -3706,7 +3706,7 @@
   (symbol (lib_id "Device:C") (at 166.37 238.76 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005daa5180")
-    (property "Reference" "C11" (id 0) (at 169.291 237.5916 0)
+    (property "Reference" "C8" (id 0) (at 169.291 237.5916 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1u" (id 1) (at 169.291 239.903 0)
@@ -3723,7 +3723,7 @@
   (symbol (lib_id "Device:C") (at 176.53 238.76 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005f45637d")
-    (property "Reference" "C12" (id 0) (at 179.451 237.5916 0)
+    (property "Reference" "C9" (id 0) (at 179.451 237.5916 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1u" (id 1) (at 179.451 239.903 0)
@@ -3740,7 +3740,7 @@
   (symbol (lib_id "Device:C") (at 186.69 238.76 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005f45680f")
-    (property "Reference" "C13" (id 0) (at 189.611 237.5916 0)
+    (property "Reference" "C10" (id 0) (at 189.611 237.5916 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1u" (id 1) (at 189.611 239.903 0)
@@ -3757,7 +3757,7 @@
   (symbol (lib_id "Device:C") (at 196.85 238.76 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005f456b51")
-    (property "Reference" "C14" (id 0) (at 199.771 237.5916 0)
+    (property "Reference" "C11" (id 0) (at 199.771 237.5916 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1u" (id 1) (at 199.771 239.903 0)
@@ -3774,7 +3774,7 @@
   (symbol (lib_id "Device:C") (at 204.47 52.07 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005da70c62")
-    (property "Reference" "C9" (id 0) (at 207.391 50.9016 0)
+    (property "Reference" "C12" (id 0) (at 207.391 50.9016 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10u" (id 1) (at 207.391 53.213 0)
@@ -3791,7 +3791,7 @@
   (symbol (lib_id "Device:C") (at 284.48 81.28 0) (unit 1)
     (in_bom yes)
     (uuid "798ba594-c90b-41ea-93ed-3b80e05c0ee3")
-    (property "Reference" "C?" (id 0) (at 287.4011 80.1306 0)
+    (property "Reference" "C13" (id 0) (at 287.4011 80.1306 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10n, 16V" (id 1) (at 287.401 82.429 0)
@@ -3811,7 +3811,7 @@
   (symbol (lib_id "Device:C") (at 299.72 81.28 0) (unit 1)
     (in_bom yes)
     (uuid "43d1a51f-75b3-4636-b993-bb61592bd833")
-    (property "Reference" "C?" (id 0) (at 302.6411 80.1306 0)
+    (property "Reference" "C14" (id 0) (at 302.6411 80.1306 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n, low ESR" (id 1) (at 302.641 82.429 0)
@@ -3831,7 +3831,7 @@
   (symbol (lib_id "Device:C") (at 304.8 114.3 0) (unit 1)
     (in_bom yes)
     (uuid "48ef0578-cc0b-4a75-8fc4-36c45b60d100")
-    (property "Reference" "C?" (id 0) (at 307.7211 113.1506 0)
+    (property "Reference" "C15" (id 0) (at 307.7211 113.1506 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10u" (id 1) (at 307.721 115.449 0)
@@ -3851,7 +3851,7 @@
   (symbol (lib_id "Device:C") (at 314.96 114.3 0) (unit 1)
     (in_bom yes)
     (uuid "def4a017-58dd-42f3-a27f-b1706f4c6c7b")
-    (property "Reference" "C?" (id 0) (at 317.8811 113.1506 0)
+    (property "Reference" "C16" (id 0) (at 317.8811 113.1506 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (id 1) (at 317.881 115.449 0)
@@ -3868,7 +3868,7 @@
   (symbol (lib_id "Device:C") (at 326.39 114.3 0) (unit 1)
     (in_bom yes)
     (uuid "9537ab01-b504-4c38-ae7b-a688750c92e6")
-    (property "Reference" "C?" (id 0) (at 329.3111 113.1506 0)
+    (property "Reference" "C17" (id 0) (at 329.3111 113.1506 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (id 1) (at 329.311 115.449 0)
@@ -3924,7 +3924,7 @@
   (symbol (lib_id "Regulator_Linear:MIC5205-2.5YM5") (at 40.64 134.62 0) (unit 1)
     (in_bom yes)
     (uuid "d53e83f6-2d9c-4e53-a5c3-3a6331c31b88")
-    (property "Reference" "U2" (id 0) (at 40.64 125.9648 0))
+    (property "Reference" "U1" (id 0) (at 40.64 125.9648 0))
     (property "Value" "MIC5205-2.5YM5" (id 1) (at 40.64 128.2635 0))
     (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (id 2) (at 40.64 126.365 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -3937,7 +3937,7 @@
   (symbol (lib_id "Battery_Management:MCP73831-2-OT") (at 96.52 127 0) (unit 1)
     (in_bom yes)
     (uuid "00000000-0000-0000-0000-00005ed75d89")
-    (property "Reference" "U1" (id 0) (at 86.36 118.11 0))
+    (property "Reference" "U2" (id 0) (at 86.36 118.11 0))
     (property "Value" "MCP73831-2-OT" (id 1) (at 85.09 120.65 0))
     (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (id 2) (at 97.79 133.35 0)
       (effects (font (size 1.27 1.27) italic) (justify left) hide)
@@ -3953,7 +3953,7 @@
   (symbol (lib_id "User_Module:DL-24N-2.4G") (at 236.22 52.07 0) (unit 1)
     (in_bom yes)
     (uuid "625b9bb0-7ea4-4718-b98c-5a9c4e19210d")
-    (property "Reference" "U?" (id 0) (at 245.8721 50.9206 0)
+    (property "Reference" "U4" (id 0) (at 245.8721 50.9206 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "DL-24N-2.4G" (id 1) (at 245.8721 53.2193 0)
@@ -3983,7 +3983,7 @@
   (symbol (lib_id "Sensor_Motion:LSM9DS1") (at 320.04 59.69 0) (unit 1)
     (in_bom yes)
     (uuid "9350aa11-3897-48c4-8461-7203c5160caf")
-    (property "Reference" "U?" (id 0) (at 335.28 78.74 0)
+    (property "Reference" "U5" (id 0) (at 335.28 78.74 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "LSM9DS1" (id 1) (at 335.28 81.28 0)
@@ -4000,7 +4000,7 @@
   (symbol (lib_id "MCU_ST_STM32F0:STM32F030R8Tx") (at 179.07 161.29 0) (unit 1)
     (in_bom yes)
     (uuid "6f6b2bfb-5b68-43ff-a8e6-1d372b174e45")
-    (property "Reference" "U4" (id 0) (at 191.77 205.74 0)
+    (property "Reference" "U3" (id 0) (at 191.77 205.74 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "STM32F030R8Tx" (id 1) (at 190.5 208.28 0))
@@ -4022,85 +4022,85 @@
     (path "/4fda9896-3b56-4e89-b484-6ad9c0d1ec69"
       (reference "#FLG03") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f04fcd4"
+    (path "/00000000-0000-0000-0000-00005e239471"
       (reference "#PWR01") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f08c4ae"
+    (path "/00000000-0000-0000-0000-00005f04fcd4"
       (reference "#PWR02") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e270979"
+    (path "/00000000-0000-0000-0000-00005f08c4ae"
       (reference "#PWR03") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75dae"
+    (path "/00000000-0000-0000-0000-00005e270979"
       (reference "#PWR04") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75dca"
+    (path "/00000000-0000-0000-0000-00005da66b94"
       (reference "#PWR05") (unit 1)
     )
-    (path "/80e73d48-461a-41a2-ba91-634be0fb5dab"
+    (path "/00000000-0000-0000-0000-00005ed75dca"
       (reference "#PWR06") (unit 1)
     )
-    (path "/22960c7d-7d17-4493-b542-26579e36f65f"
+    (path "/f8988ca4-9812-47b3-bff7-0d3e7c8fbe8c"
       (reference "#PWR07") (unit 1)
     )
-    (path "/f8a31ff5-42c2-47c8-88c6-e6dd9de8d357"
+    (path "/00000000-0000-0000-0000-00005ed75dd9"
       (reference "#PWR08") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75dd9"
+    (path "/00000000-0000-0000-0000-00005ed75de5"
       (reference "#PWR09") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75de5"
+    (path "/00000000-0000-0000-0000-00005da706eb"
       (reference "#PWR010") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005e270961"
       (reference "#PWR011") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75dbe"
+    (path "/00000000-0000-0000-0000-00005e270988"
       (reference "#PWR012") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75da7"
+    (path "/00000000-0000-0000-0000-00005e27098e"
       (reference "#PWR013") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005daa0979"
+    (path "/00000000-0000-0000-0000-00005ed75e03"
       (reference "#PWR014") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e270988"
+    (path "/00000000-0000-0000-0000-00005ed75dae"
       (reference "#PWR015") (unit 1)
     )
-    (path "/ac24b8a6-44f0-4268-8024-26c811b0aa36"
+    (path "/00000000-0000-0000-0000-00005ed75dbe"
       (reference "#PWR016") (unit 1)
     )
-    (path "/d44d7718-741d-45d8-af91-99e90d088e86"
+    (path "/00000000-0000-0000-0000-00005ed75da7"
       (reference "#PWR017") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e27098e"
+    (path "/80e73d48-461a-41a2-ba91-634be0fb5dab"
       (reference "#PWR018") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005f07f090"
+    (path "/00000000-0000-0000-0000-00005dad06ed"
       (reference "#PWR019") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75e03"
+    (path "/c8159ff4-4630-466c-b642-80860032c7cf"
       (reference "#PWR020") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005dad06ed"
+    (path "/00000000-0000-0000-0000-00005e29cfdb"
       (reference "#PWR021") (unit 1)
     )
-    (path "/c8159ff4-4630-466c-b642-80860032c7cf"
+    (path "/00000000-0000-0000-0000-00005f07f090"
       (reference "#PWR022") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e29cfdb"
+    (path "/22960c7d-7d17-4493-b542-26579e36f65f"
       (reference "#PWR023") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e239471"
+    (path "/f8a31ff5-42c2-47c8-88c6-e6dd9de8d357"
       (reference "#PWR024") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005da66b94"
+    (path "/00000000-0000-0000-0000-00005daa0979"
       (reference "#PWR025") (unit 1)
     )
-    (path "/f8988ca4-9812-47b3-bff7-0d3e7c8fbe8c"
+    (path "/ac24b8a6-44f0-4268-8024-26c811b0aa36"
       (reference "#PWR026") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005da706eb"
+    (path "/d44d7718-741d-45d8-af91-99e90d088e86"
       (reference "#PWR027") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da82aca"
@@ -4112,119 +4112,119 @@
     (path "/e64ea9d2-ebf8-431a-be12-d056f61f1685"
       (reference "#PWR030") (unit 1)
     )
-    (path "/7f0fcc85-88b4-471e-99e7-343c7925e6fe"
-      (reference "#PWR034") (unit 1)
-    )
-    (path "/03bc3a52-47d5-4713-b1bd-c9a8387cc555"
-      (reference "#PWR035") (unit 1)
-    )
     (path "/00000000-0000-0000-0000-00005eea291f"
-      (reference "#PWR036") (unit 1)
+      (reference "#PWR031") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da2beca"
-      (reference "#PWR037") (unit 1)
+      (reference "#PWR032") (unit 1)
     )
     (path "/d86c518c-945b-4d31-acbb-2249daea2b3e"
-      (reference "#PWR038") (unit 1)
+      (reference "#PWR033") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005daa60ce"
-      (reference "#PWR039") (unit 1)
+      (reference "#PWR034") (unit 1)
     )
     (path "/d7068d27-e06c-48dd-876a-90c00b27f7b1"
-      (reference "#PWR040") (unit 1)
+      (reference "#PWR035") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da29114"
-      (reference "#PWR041") (unit 1)
+      (reference "#PWR036") (unit 1)
+    )
+    (path "/7f0fcc85-88b4-471e-99e7-343c7925e6fe"
+      (reference "#PWR037") (unit 1)
+    )
+    (path "/03bc3a52-47d5-4713-b1bd-c9a8387cc555"
+      (reference "#PWR038") (unit 1)
     )
     (path "/3a69e54a-4107-4586-ab54-0040e93f3608"
-      (reference "#PWR042") (unit 1)
+      (reference "#PWR039") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005dafc602"
-      (reference "#PWR043") (unit 1)
-    )
-    (path "/ed7e11ed-6c1c-4d2d-ab25-a69e4a6d17b5"
-      (reference "#PWR053") (unit 1)
-    )
-    (path "/03815ab4-d07d-40a7-a6af-983919a4e904"
-      (reference "#PWR056") (unit 1)
-    )
-    (path "/6312b39b-cde1-4abe-b153-1b2dcfd55fbd"
-      (reference "#PWR059") (unit 1)
-    )
-    (path "/03ac74f9-28b4-48ce-9f09-655b79508f88"
-      (reference "#PWR?") (unit 1)
-    )
-    (path "/0de0c642-e25e-40a4-a71b-cf4436633a2f"
-      (reference "#PWR?") (unit 1)
+      (reference "#PWR040") (unit 1)
     )
     (path "/45d6196c-56de-4bb5-b2f4-dad9243b0a03"
-      (reference "#PWR?") (unit 1)
-    )
-    (path "/4ee6db0e-0b19-41df-b28e-9473ba6f4dc1"
-      (reference "#PWR?") (unit 1)
+      (reference "#PWR041") (unit 1)
     )
     (path "/54ad0498-571b-41c4-9190-508a3f787117"
-      (reference "#PWR?") (unit 1)
-    )
-    (path "/a038abff-d879-4f7a-9acf-3cbdb331b289"
-      (reference "#PWR?") (unit 1)
+      (reference "#PWR042") (unit 1)
     )
     (path "/b4a0fff8-f125-44a1-9ee2-f95485d68013"
-      (reference "#PWR?") (unit 1)
+      (reference "#PWR043") (unit 1)
+    )
+    (path "/03ac74f9-28b4-48ce-9f09-655b79508f88"
+      (reference "#PWR044") (unit 1)
+    )
+    (path "/ed7e11ed-6c1c-4d2d-ab25-a69e4a6d17b5"
+      (reference "#PWR045") (unit 1)
+    )
+    (path "/0de0c642-e25e-40a4-a71b-cf4436633a2f"
+      (reference "#PWR046") (unit 1)
+    )
+    (path "/a038abff-d879-4f7a-9acf-3cbdb331b289"
+      (reference "#PWR047") (unit 1)
+    )
+    (path "/4ee6db0e-0b19-41df-b28e-9473ba6f4dc1"
+      (reference "#PWR048") (unit 1)
+    )
+    (path "/03815ab4-d07d-40a7-a6af-983919a4e904"
+      (reference "#PWR049") (unit 1)
+    )
+    (path "/6312b39b-cde1-4abe-b153-1b2dcfd55fbd"
+      (reference "#PWR050") (unit 1)
     )
     (path "/f007148b-18d3-41a4-aeed-c0c326f194f2"
-      (reference "#PWR?") (unit 1)
-    )
-    (path "/3a05ad16-65f7-458c-bd5f-777f80a44ed8"
-      (reference "C1") (unit 1)
-    )
-    (path "/00000000-0000-0000-0000-00005ed75ddf"
-      (reference "C2") (unit 1)
-    )
-    (path "/ac122f3e-f12a-4bed-9183-84d99057cad8"
-      (reference "C3") (unit 1)
+      (reference "#PWR051") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da6a7e4"
-      (reference "C4") (unit 1)
+      (reference "C1") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da6b416"
-      (reference "C5") (unit 1)
+      (reference "C2") (unit 1)
+    )
+    (path "/00000000-0000-0000-0000-00005ed75ddf"
+      (reference "C3") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da6feb8"
+      (reference "C4") (unit 1)
+    )
+    (path "/3a05ad16-65f7-458c-bd5f-777f80a44ed8"
+      (reference "C5") (unit 1)
+    )
+    (path "/ac122f3e-f12a-4bed-9183-84d99057cad8"
       (reference "C6") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005da70c62"
-      (reference "C9") (unit 1)
-    )
     (path "/00000000-0000-0000-0000-00005eea369a"
-      (reference "C10") (unit 1)
+      (reference "C7") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005daa5180"
-      (reference "C11") (unit 1)
+      (reference "C8") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005f45637d"
-      (reference "C12") (unit 1)
+      (reference "C9") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005f45680f"
-      (reference "C13") (unit 1)
+      (reference "C10") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005f456b51"
-      (reference "C14") (unit 1)
+      (reference "C11") (unit 1)
     )
-    (path "/43d1a51f-75b3-4636-b993-bb61592bd833"
-      (reference "C?") (unit 1)
-    )
-    (path "/48ef0578-cc0b-4a75-8fc4-36c45b60d100"
-      (reference "C?") (unit 1)
+    (path "/00000000-0000-0000-0000-00005da70c62"
+      (reference "C12") (unit 1)
     )
     (path "/798ba594-c90b-41ea-93ed-3b80e05c0ee3"
-      (reference "C?") (unit 1)
+      (reference "C13") (unit 1)
     )
-    (path "/9537ab01-b504-4c38-ae7b-a688750c92e6"
-      (reference "C?") (unit 1)
+    (path "/43d1a51f-75b3-4636-b993-bb61592bd833"
+      (reference "C14") (unit 1)
+    )
+    (path "/48ef0578-cc0b-4a75-8fc4-36c45b60d100"
+      (reference "C15") (unit 1)
     )
     (path "/def4a017-58dd-42f3-a27f-b1706f4c6c7b"
-      (reference "C?") (unit 1)
+      (reference "C16") (unit 1)
+    )
+    (path "/9537ab01-b504-4c38-ae7b-a688750c92e6"
+      (reference "C17") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005ed75deb"
       (reference "D1") (unit 1)
@@ -4259,22 +4259,22 @@
     (path "/00000000-0000-0000-0000-00005ed75dd1"
       (reference "Q1") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75db4"
+    (path "/00000000-0000-0000-0000-00005e270967"
       (reference "R1") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005da9bcc0"
+    (path "/00000000-0000-0000-0000-00005e27096d"
       (reference "R2") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005da9c2b5"
+    (path "/00000000-0000-0000-0000-00005ed75dfc"
       (reference "R3") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e270967"
+    (path "/00000000-0000-0000-0000-00005ed75db4"
       (reference "R4") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005e27096d"
+    (path "/00000000-0000-0000-0000-00005da9bcc0"
       (reference "R5") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75dfc"
+    (path "/00000000-0000-0000-0000-00005da9c2b5"
       (reference "R6") (unit 1)
     )
     (path "/00000000-0000-0000-0000-00005da7d020"
@@ -4289,20 +4289,20 @@
     (path "/00000000-0000-0000-0000-00005dad06e4"
       (reference "SW1") (unit 1)
     )
-    (path "/00000000-0000-0000-0000-00005ed75d89"
+    (path "/d53e83f6-2d9c-4e53-a5c3-3a6331c31b88"
       (reference "U1") (unit 1)
     )
-    (path "/d53e83f6-2d9c-4e53-a5c3-3a6331c31b88"
+    (path "/00000000-0000-0000-0000-00005ed75d89"
       (reference "U2") (unit 1)
     )
     (path "/6f6b2bfb-5b68-43ff-a8e6-1d372b174e45"
-      (reference "U4") (unit 1)
+      (reference "U3") (unit 1)
     )
     (path "/625b9bb0-7ea4-4718-b98c-5a9c4e19210d"
-      (reference "U?") (unit 1)
+      (reference "U4") (unit 1)
     )
     (path "/9350aa11-3897-48c4-8461-7203c5160caf"
-      (reference "U?") (unit 1)
+      (reference "U5") (unit 1)
     )
   )
 )
