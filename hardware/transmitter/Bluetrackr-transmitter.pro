@@ -1,4 +1,4 @@
-update=09/06/2020 20:37:48
+update=10/06/2020 16:36:53
 version=1
 last_client=kicad
 [general]
@@ -12,12 +12,6 @@ NetIExt=net
 version=1
 LibDir=
 [eeschema/libraries]
-[LibeditFrame]
-version=1
-[ModEditFrame]
-version=1
-[sheetnames]
-1=a1427152-9c15-4bad-b315-fd4eab7a3545:
 [schematic_editor]
 version=1
 PageLayoutDescrFile=empty.kicad_wks
@@ -356,5 +350,11 @@ uViaDrill=0.35
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
+[ModEditFrame]
+version=1
+[LibeditFrame]
+version=1
 [SchematicFrame]
 version=1
+[sheetnames]
+1=53f20391-19d4-4f49-bbec-08d08e371665:
