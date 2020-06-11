@@ -84,7 +84,7 @@
     )
     (pad_size 1.524 1.524)
     (pad_drill 0.762)
-    (pad_to_mask_clearance 0.05)
+    (pad_to_mask_clearance 0)
     (aux_axis_origin 129.286 78.486)
     (grid_origin 127 76.2)
     (visible_elements 7FFFFFFF)
