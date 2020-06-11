@@ -1,4 +1,4 @@
-update=11/06/2020 03:16:19
+update=11/06/2020 03:30:26
 version=1
 last_client=kicad
 [general]
@@ -38,8 +38,10 @@ ERC_CheckBusDriverConflicts=1
 ERC_CheckBusEntryConflicts=1
 ERC_CheckBusToBusConflicts=1
 ERC_CheckBusToNetConflicts=1
+[ModEditFrame]
+version=1
 [sheetnames]
-1=a2251fa2-4b9e-4200-acac-a5f05521f339:
+1=0a883cf2-ff79-4cdc-a5a2-9f04783b3ec1:
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -356,5 +358,3 @@ uViaDrill=0.35
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
-[ModEditFrame]
-version=1
