@@ -1,4 +1,4 @@
-update=11/06/2020 22:25:17
+update=12/06/2020 16:07:26
 version=1
 last_client=kicad
 [general]
@@ -15,6 +15,8 @@ LibDir=
 [LibeditFrame]
 version=1
 [SchematicFrame]
+version=1
+[ModEditFrame]
 version=1
 [schematic_editor]
 version=1
@@ -39,9 +41,7 @@ ERC_CheckBusEntryConflicts=1
 ERC_CheckBusToBusConflicts=1
 ERC_CheckBusToNetConflicts=1
 [sheetnames]
-1=0a883cf2-ff79-4cdc-a5a2-9f04783b3ec1:
-[ModEditFrame]
-version=1
+1=25f4f1d4-0efe-4727-9ac2-95825354157b:
 [pcbnew]
 version=1
 PageLayoutDescrFile=
