@@ -5,6 +5,12 @@ target_sources(Bluetrackr-transmitter.elf PRIVATE
   main_loop.hh
   mpu.h
   nrf24_hal.h
-  stm32f3xx_hal_conf.h
-  stm32f3xx_it.h
+  stm32f1xx_hal_conf.h
+  stm32f1xx_it.h
+  usb_device.h
+  usbd_cdc_if.h
+  usbd_conf.h
+  usbd_desc.h
 )
+
+add_subdirectory(USB)
