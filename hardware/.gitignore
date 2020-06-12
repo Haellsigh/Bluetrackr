@@ -1,6 +1,7 @@
 # KiCad
 *.*-bak
 *.net
+fp-info-cache
 
 # KiCad outputs (gerbers, bom)
 out/
