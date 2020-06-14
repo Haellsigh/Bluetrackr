@@ -1,5 +1,4 @@
-#ifndef BLT_MAIN_LOOP_H_
-#define BLT_MAIN_LOOP_H_
+#pragma once
 
 #include "main.h"
 
@@ -7,10 +6,8 @@
 extern "C" {
 #endif
 
-void main_loop(UART_HandleTypeDef* huart);
+void main_loop();
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* BLT_MAIN_LOOP_H_ */

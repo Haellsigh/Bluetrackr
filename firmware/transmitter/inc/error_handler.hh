@@ -1,5 +1,4 @@
-#ifndef BLT_ERROR_HANDLER_H_
-#define BLT_ERROR_HANDLER_H_
+#pragma once
 
 #include <blt/gpio.hh>
 #include <blt/time.hh>
@@ -19,5 +18,3 @@ static void error_handler() {
 }
 
 }  // namespace blt
-
-#endif  // BLT_ERROR_HANDLER_H_

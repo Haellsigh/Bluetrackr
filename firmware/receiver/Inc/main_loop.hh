@@ -1,16 +1,13 @@
-#ifndef BLT_MAIN_LOOP_H_
-#define BLT_MAIN_LOOP_H_
+#pragma once
 
-#include "stm32f0xx_hal.h"
+#include "main.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void main_loop(SPI_HandleTypeDef* hspi);
+void main_loop();
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* BLT_MAIN_LOOP_H_ */
