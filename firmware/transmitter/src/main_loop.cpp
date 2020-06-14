@@ -4,17 +4,20 @@
 #include <blt/gpio.hh>
 #include <blt/time.hh>
 #include <error_handler.hh>
-
 //#include "mpu.h"
+
+#include <sdbg.hh>
 
 using namespace blt;
 using namespace gpio;
 
-void main_loop(SPI_HandleTypeDef* hspi) {
+void main_loop(UART_HandleTypeDef* huart) {
+  sdbg::init(huart);
+
   // Outputs
-  using led_status = gpio::pin_out<PB, p1>;
-  //using led_power  = gpio::pin_out<PA, p3>;
-  using leds       = gpio::pin_out<PB, p1>;
+  using led_status = gpio::pin_out<PB, p3>;
+  // using led_power  = gpio::pin_out<PA, p3>;
+  using leds = gpio::pin_out<PB, p3>;
 
   // Inputs
   using btn_pair = gpio::pin_in<PB, p8>;
@@ -22,16 +25,16 @@ void main_loop(SPI_HandleTypeDef* hspi) {
   delay::init();
   leds::clear();
 
-  /// Begin radio init
-  led_status::set();
-
-  delay::ms(50);
-
   while (true) {
     led_status::set();
-    delay::ms(100);
+    // delay::ms(100);
+    HAL_Delay(100);
     led_status::clear();
-    delay::ms(100);
+    HAL_Delay(100);
+
+    sdbg::log("test");
+
+    // delay::ms(100);
   }
 
   led_status::clear();
