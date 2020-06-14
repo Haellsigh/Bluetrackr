@@ -1,5 +1,4 @@
-#ifndef BLT_TIME_H_
-#define BLT_TIME_H_
+#pragma once
 
 #include <blt/hal_include.hh>
 
@@ -61,5 +60,3 @@ static inline void ms(uint32_t t) {
 namespace time {}
 
 }  // namespace blt
-
-#endif  // BLT_TIME_H_

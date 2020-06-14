@@ -1,5 +1,4 @@
-#ifndef BLT_BIT_HH_
-#define BLT_BIT_HH_
+#pragma once
 
 #include <cstdint>
 
@@ -101,5 +100,3 @@ static constexpr void clear(Tin& in, Tin n) {
 }
 
 }  // namespace blt::bit
-
-#endif  // BLT_BIT_HH_

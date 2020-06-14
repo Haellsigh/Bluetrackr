@@ -27,14 +27,9 @@ void main_loop(UART_HandleTypeDef* huart) {
 
   while (true) {
     led_status::set();
-    // delay::ms(100);
-    HAL_Delay(100);
+    delay::ms(500);
     led_status::clear();
-    HAL_Delay(100);
-
-    sdbg::log("test");
-
-    // delay::ms(100);
+    delay::ms(500);
   }
 
   led_status::clear();

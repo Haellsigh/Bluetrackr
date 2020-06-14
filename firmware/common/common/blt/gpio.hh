@@ -1,5 +1,4 @@
-#ifndef BLT_LIBS_PIN_H_
-#define BLT_LIBS_PIN_H_
+#pragma once
 
 #include <blt/hal_include.hh>
 #include <blt/time.hh>
@@ -7,9 +6,7 @@
 
 #include <initializer_list>
 
-namespace blt {
-
-namespace gpio {
+namespace blt::gpio {
 
 namespace {
 
@@ -73,7 +70,7 @@ static constexpr uint16_t pinAll = -1;
 
 template <GPIO_TypeDef* port(), uint16_t... Pins>
 class pin_out {
-  static constexpr uint16_t pins = utils::disjunction<Pins...>::value;
+  static constexpr uint16_t pins = utils::disjunction<Pins...>();
 
  public:
   /**
@@ -87,7 +84,7 @@ class pin_out {
   static inline constexpr void clear() { port()->BRR = pins; }
 
   /**
-   * \warning Invalid results of there is more than one pin.
+   * \warning Invalid results if there is more than one pin.
    * \note This is not an atomic function.
    */
   static inline constexpr bool state() { return (port()->ODR & pins) == 0; }
@@ -119,9 +116,7 @@ class pin_in {
   /**
    * \note This is not an atomic function.
    */
-  static constexpr bool read() {
-    return (port()->IDR & pin) != (uint32_t)GPIO_PIN_RESET;
-  }
+  static constexpr bool read() { return (port()->IDR & pin) != (uint32_t)GPIO_PIN_RESET; }
 };
 
 /*
@@ -177,8 +172,4 @@ class settle {
   }
 };
 
-}  // namespace gpio
-
-}  // namespace blt
-
-#endif  // BLT_PIN_H_
+}  // namespace blt::gpio
