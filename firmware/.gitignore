@@ -2,9 +2,6 @@
 .mxproject
 *.gpdsc
 
-# Build files
-build-*/
-
-# Qt Creator files
-.cmake/
-*.user
+# Platformio files
+.pio
+.vscode
