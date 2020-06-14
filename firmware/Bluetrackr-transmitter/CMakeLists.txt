@@ -13,10 +13,10 @@ add_subdirectory(Src)
 target_link_libraries(Bluetrackr-transmitter.elf PRIVATE Bluetrackr-common)
 
 target_link_libraries(Bluetrackr-transmitter.elf PRIVATE
-  HAL::STM32::F1::LL_USB
+  HAL::STM32::F1::PCDEx
   HAL::STM32::F1::LL_USB
   HAL::STM32::F1::SPI
-  HAL::STM32::F1::RCC
+  HAL::STM32::F1::RCCEx
   HAL::STM32::F1::GPIO
   HAL::STM32::F1::CORTEX
   CMSIS::STM32::F103C8
