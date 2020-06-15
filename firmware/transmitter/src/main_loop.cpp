@@ -2,27 +2,55 @@
 
 #include <blt/gpio.hh>
 #include <blt/time.hh>
+#include <blt/uart.hh>
 #include <error_handler.hh>
 
-using namespace blt;
-using namespace gpio;
+#include <nrf24_custom/nrf24.hh>
+#include <spi/spi.hh>
 
-void main_loop() {
-  // Outputs
-  using led_status = gpio::pin_out<PB, p3>;
-  // using led_power  = gpio::pin_out<PA, p3>;
-  using leds = gpio::pin_out<PB, p3>;
+SPI_HandleTypeDef* g_hspi = nullptr;
 
-  // Inputs
-  // using btn_pair = gpio::pin_in<PB, p8>;
+auto fhSpi() {
+  return g_hspi;
+}
 
-  delay::init();
+void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi) {
+  using namespace blt;
+  using namespace gpio;
+  using namespace time::literals;
+
+  using led_status = gpio::pin_out<PB, 3>;
+  using leds       = gpio::pin_out<PB, 3>;
+
+  using csn = gpio::pin_out<PA, 3>;
+  using ce  = gpio::pin_out<PA, 4>;
+
+  g_hspi = hspi;
+
+  time::init();
   leds::clear();
+
+  nrf24::device<spi::device<fhSpi>, csn, ce> nrf24;
+  uart::init(huart);
+
+  while (true) {
+    if (!nrf24.init()) {
+      error_handler();
+    }
+
+    time::delay(50_ms);
+
+    if (!nrf24.test()) {
+      error_handler();
+    }
+  }
 
   while (true) {
     led_status::set();
-    delay::ms(500);
+    time::delay(500_ms);
     led_status::clear();
-    delay::ms(500);
+    time::delay(500_ms);
   }
+
+  error_handler();
 }

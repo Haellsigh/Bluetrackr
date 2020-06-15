@@ -1,28 +1,17 @@
-#ifndef BLT_LIBS_SPI_H_
-#define BLT_LIBS_SPI_H_
+#pragma once
 
+#include <blt/hal_include.hh>
 #include <blt/utils.hh>
-#include <main.h>
 
+namespace blt::spi {
 
-namespace blt {
-
-namespace spi {
-
-/**
- * 'Automatically' generates functions to get the SPI Handles
- */
-namespace peripheral {
-#define SPI_HANDLE_FUNCTION(_NAME) \
-  constexpr SPI_HandleTypeDef* spi##_NAME() { return _NAME; }
-}  // namespace peripheral
-
+template <SPI_HandleTypeDef* fhSpi()>
 class device : public utils::noncopyable {
  public:
-  static uint8_t rw(SPI_HandleTypeDef* hspi, uint8_t data) {
+  static uint8_t rw(uint8_t data) {
     uint8_t result;
     // Default timeout is 2s
-    if (HAL_SPI_TransmitReceive(hspi, &data, &result, 1, 2000) != HAL_OK) {
+    if (HAL_SPI_TransmitReceive(fhSpi(), &data, &result, 1, 2000) != HAL_OK) {
       return 0;
     }
 
@@ -30,8 +19,4 @@ class device : public utils::noncopyable {
   }
 };
 
-}  // namespace spi
-
-}  // namespace blt
-
-#endif  // BLT_LIBS_SPI_H_
+}  // namespace blt::spi

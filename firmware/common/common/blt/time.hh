@@ -1,62 +1,25 @@
 #pragma once
 
-#include <blt/hal_include.hh>
+#include <cstdint>
 
-#include <ratio>
+namespace blt::time {
 
-namespace blt {
+struct Microseconds {
+  uint32_t us;
+};
 
-/**
- * \brief Provides various delay functionnalities.
- */
-namespace delay {
-/**
- * \brief Initializes the delay functions.
- */
-static void init() {
-#ifdef DWT
-  if (!(CoreDebug->DEMCR & CoreDebug_DEMCR_TRCENA_Msk)) {
-    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-    DWT->CYCCNT = 0;
-    DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-  }
-#else
-  // Nothing to initialize because the SysTick is initialized by the HAL.
-#endif
+namespace literals {
+
+constexpr Microseconds operator"" _us(uint64_t us) {
+  return Microseconds{us};
+}
+constexpr Microseconds operator"" _ms(uint64_t ms) {
+  return Microseconds{1000 * ms};
 }
 
-/**
- * \brief Delays for t microseconds.
- * \param t The delay in microseconds.
- */
-static void us(uint32_t t) {
-#ifdef DWT
-  uint32_t startTick  = DWT->CYCCNT;
-  uint32_t delayTicks = t * (SystemCoreClock / 1000000);
+}  // namespace literals
 
-  while (DWT->CYCCNT - startTick < delayTicks)
-    ;
-#else
-  SysTick->LOAD = t * (SystemCoreClock / 8000000);
-  SysTick->VAL  = 0;
-  SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;
-  // COUNTFLAG is a bit that is set to 1 when counter reaches 0.
-  // It's automatically cleared when read.
-  while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0)
-    ;
-  SysTick->CTRL = 0;
-#endif
-}
+void init();
+void delay(Microseconds t);
 
-/**
- * \brief Delays for t milliseconds.
- * \param t The delay in milliseconds.
- */
-static inline void ms(uint32_t t) {
-  us(t * 1000);
-}
-};  // namespace delay
-
-namespace time {}
-
-}  // namespace blt
+}  // namespace blt::time

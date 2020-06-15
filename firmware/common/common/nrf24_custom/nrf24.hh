@@ -87,7 +87,7 @@ enum Register : uint8_t {
 namespace RegisterFieldBit {
 /*!
  * \name RegisterFieldBit
- * \brief Describes the number of bits shifts to write to the field.
+ * \brief Describes the field position in the register.
  */
 enum RegisterFieldBit : uint8_t {
   kConfigMaskRxDataReady  = 6,       //!< kConfig
@@ -275,18 +275,16 @@ enum class PowerAmplifier : uint8_t {
 /**
  * \brief nRF24L01 driver class.
  *
- * \tparam spidevice The spi device driver.
- * \tparam csn       The chip select negative (csn) gpio pin.
- * \tparam ce        The chip enable gpio pin.
+ * \tparam spi The spi peripheral driver.
+ * \tparam csn The chip select negative (csn) gpio pin.
+ * \tparam ce  The chip enable gpio pin.
  */
-template <typename spidevice, typename csn, typename ce>
+template <typename spi, typename csn, typename ce>
 class device {
-  // Invert and setup a settling time of 100 µs
+  // cs is csn inverted, with a 100 us settling time
   using cs = gpio::settle<gpio::invert<csn>, 100>;
 
  public:
-  device(SPI_HandleTypeDef* hSpi) : m_hSpi(hSpi){};
-
   bool init();
   bool test();
 
@@ -361,8 +359,6 @@ class device {
                       bool           startTx = true);
 
  private:
-  SPI_HandleTypeDef* m_hSpi;
-
   bool m_pVariant = false;
 
   uint8_t m_addressWidth   = 5;

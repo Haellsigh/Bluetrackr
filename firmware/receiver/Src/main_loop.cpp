@@ -8,6 +8,10 @@ using namespace blt;
 using namespace gpio;
 
 void main_loop() {
+  time::init();
+
+  // time::delay(500_ms);
+
   // Outputs
   using led_red    = gpio::pin_out<PC, p6>;
   using led_orange = gpio::pin_out<PC, p8>;
@@ -18,7 +22,6 @@ void main_loop() {
   // Inputs
   using btn_pair = gpio::pin_in<PA, p0>;
 
-  delay::init();
   leds::clear();
 
   while (true) {

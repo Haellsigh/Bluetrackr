@@ -45,32 +45,11 @@ PORT_HANDLE_FUNCTION(F)
 PORT_HANDLE_FUNCTION(G)
 #endif
 
-/**
- * Generates functions to access pins
- */
-static constexpr uint16_t p0     = 1 << 0;
-static constexpr uint16_t p1     = 1 << 1;
-static constexpr uint16_t p2     = 1 << 2;
-static constexpr uint16_t p3     = 1 << 3;
-static constexpr uint16_t p4     = 1 << 4;
-static constexpr uint16_t p5     = 1 << 5;
-static constexpr uint16_t p6     = 1 << 6;
-static constexpr uint16_t p7     = 1 << 7;
-static constexpr uint16_t p8     = 1 << 8;
-static constexpr uint16_t p9     = 1 << 9;
-static constexpr uint16_t p10    = 1 << 10;
-static constexpr uint16_t p11    = 1 << 11;
-static constexpr uint16_t p12    = 1 << 12;
-static constexpr uint16_t p13    = 1 << 13;
-static constexpr uint16_t p14    = 1 << 14;
-static constexpr uint16_t p15    = 1 << 15;
-static constexpr uint16_t pinAll = -1;
-
 }  // namespace
 
 template <GPIO_TypeDef* port(), uint16_t... Pins>
 class pin_out {
-  static constexpr uint16_t pins = utils::disjunction<Pins...>();
+  static constexpr uint16_t pins = utils::disjunction_flag<Pins...>();
 
  public:
   /**
@@ -150,25 +129,27 @@ class invert {
  */
 template <typename pin, uint32_t us>
 class settle {
+  static constexpr time::Microseconds mTime{us};
+
  public:
   static constexpr inline void write(bool v) {
     pin::write(v);
-    delay::us(us);
+    time::delay(mTime);
   }
 
   static constexpr inline void set() {
     pin::set();
-    delay::us(us);
+    time::delay(mTime);
   }
 
   static constexpr inline void clear() {
     pin::clear();
-    delay::us(us);
+    time::delay(mTime);
   }
 
   static constexpr inline void toggle() {
     pin::toggle();
-    delay::us(us);
+    time::delay(mTime);
   }
 };
 

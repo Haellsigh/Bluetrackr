@@ -1,15 +1,8 @@
-/*!
- * \file
- * \brief nRF24L01+ library implementation
- */
-
+#include <algorithm>  // min/max
+#include <cstring>    // memcpy
 #include <nrf24_custom/nrf24.hh>
-#include <algorithm>  // For min/max
-#include <cstring>    // For memcpy
 
-namespace blt {
-
-namespace nrf24 {
+namespace blt::nrf24 {
 
 namespace Command {
 /*!
@@ -182,23 +175,23 @@ namespace RegisterFieldMask {
 static constexpr uint8_t kMaxChannel     = 125;
 static constexpr uint8_t kMaxPayloadSize = 32;
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t inline device<spidevice, csn, ce>::spirw(uint8_t data) {
-  return spidevice::rw(m_hSpi, data);
+template <typename spi, typename csn, typename ce>
+uint8_t inline device<spi, csn, ce>::spirw(uint8_t data) {
+  return spi::rw(data);
 }
 
-template <typename spidevice, typename csn, typename ce>
-constexpr inline void device<spidevice, csn, ce>::begin() {
+template <typename spi, typename csn, typename ce>
+constexpr inline void device<spi, csn, ce>::begin() {
   cs::set();
 }
 
-template <typename spidevice, typename csn, typename ce>
-constexpr inline void device<spidevice, csn, ce>::end() {
+template <typename spi, typename csn, typename ce>
+constexpr inline void device<spi, csn, ce>::end() {
   cs::clear();
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::spiTransfer(uint8_t cmd) {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::spiTransfer(uint8_t cmd) {
   uint8_t status;
   begin();
 
@@ -214,8 +207,8 @@ uint8_t device<spidevice, csn, ce>::spiTransfer(uint8_t cmd) {
  * \param reg The register to read.
  * \return The register value.
  */
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::readRegister(uint8_t reg) {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::readRegister(uint8_t reg) {
   uint8_t result;
   begin();
 
@@ -233,8 +226,8 @@ uint8_t device<spidevice, csn, ce>::readRegister(uint8_t reg) {
  * \param len The length of buf.
  * \return The status of the operation.
  */
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::readRegister(uint8_t reg, uint8_t* buf, uint8_t len) {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::readRegister(uint8_t reg, uint8_t* buf, uint8_t len) {
   uint8_t status;
   begin();
 
@@ -254,8 +247,8 @@ uint8_t device<spidevice, csn, ce>::readRegister(uint8_t reg, uint8_t* buf, uint
  * @param val
  * @return The status of the operation.
  */
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::writeRegister(uint8_t reg, uint8_t val) {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, uint8_t val) {
   uint8_t status;
   begin();
 
@@ -274,10 +267,10 @@ uint8_t device<spidevice, csn, ce>::writeRegister(uint8_t reg, uint8_t val) {
  * @param len
  * @return The status of the operation.
  */
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::writeRegister(uint8_t        reg,
-                                                  const uint8_t* buf,
-                                                  uint8_t        len) {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::writeRegister(uint8_t        reg,
+                                            const uint8_t* buf,
+                                            uint8_t        len) {
   uint8_t status;
   begin();
 
@@ -290,23 +283,23 @@ uint8_t device<spidevice, csn, ce>::writeRegister(uint8_t        reg,
   return status;
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::getStatus() {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::getStatus() {
   return spiTransfer(Command::kNop);
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::flushTx() {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::flushTx() {
   return spiTransfer(Command::kFlushTx);
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::flushRx() {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::flushRx() {
   return spiTransfer(Command::kFlushRx);
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::clearIRQFlags() {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::clearIRQFlags() {
   uint8_t reg;
 
   reg = readRegister(Register::kStatus);
@@ -314,23 +307,23 @@ void device<spidevice, csn, ce>::clearIRQFlags() {
   writeRegister(Register::kStatus, reg);
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setChannel(uint8_t channel) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setChannel(uint8_t channel) {
   writeRegister(Register::kRfChannel, std::min(channel, kMaxChannel));
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::getChannel() {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::getChannel() {
   return readRegister(Register::kRfChannel);
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::getAddressWidth() {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::getAddressWidth() {
   return readRegister(Register::kSetupAddressWidths) + 2u;
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setAddressWidth(uint8_t width) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setAddressWidth(uint8_t width) {
   if (width -= 2) {
     writeRegister(Register::kSetupAddressWidths, width % 4);
     m_addressWidth = (width % 4) + 2;
@@ -341,8 +334,8 @@ void device<spidevice, csn, ce>::setAddressWidth(uint8_t width) {
 }
 
 /*
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setAddress(uint8_t pipe, const uint8_t* addr) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setAddress(uint8_t pipe, const uint8_t* addr) {
   uint8_t addr_width;
 
   switch (pipe) {
@@ -366,8 +359,8 @@ void device<spidevice, csn, ce>::setAddress(uint8_t pipe, const uint8_t* addr) {
   }
 }*/
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::toggleFeatures() {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::toggleFeatures() {
   // From the nRF24L01 Rev2.0 datasheet, not present in nRF24L01+.
   // This does nothing on the nRF24L01+.
   begin();
@@ -376,8 +369,8 @@ void device<spidevice, csn, ce>::toggleFeatures() {
   end();
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::readPayload(uint8_t* buf, uint8_t len) {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::readPayload(uint8_t* buf, uint8_t len) {
   uint8_t status;
 
   len               = std::min(len, m_payloadSize);
@@ -397,10 +390,10 @@ uint8_t device<spidevice, csn, ce>::readPayload(uint8_t* buf, uint8_t len) {
   return status;
 }
 
-template <typename spidevice, typename csn, typename ce>
-uint8_t device<spidevice, csn, ce>::writePayload(const uint8_t* buf,
-                                                 uint8_t        len,
-                                                 const uint8_t  type) {
+template <typename spi, typename csn, typename ce>
+uint8_t device<spi, csn, ce>::writePayload(const uint8_t* buf,
+                                           uint8_t        len,
+                                           const uint8_t  type) {
   uint8_t status;
 
   len               = std::min(len, m_payloadSize);
@@ -421,11 +414,11 @@ uint8_t device<spidevice, csn, ce>::writePayload(const uint8_t* buf,
   return status;
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::startWriteFast(const uint8_t* buf,
-                                                uint8_t        len,
-                                                const bool     multicast,
-                                                bool           startTx) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::startWriteFast(const uint8_t* buf,
+                                          uint8_t        len,
+                                          const bool     multicast,
+                                          bool           startTx) {
   writePayload(buf, len,
                multicast ? Command::kWriteTxPayloadNoAck : Command::kWriteTxPayload);
   if (startTx)
@@ -434,15 +427,17 @@ void device<spidevice, csn, ce>::startWriteFast(const uint8_t* buf,
 
 /// Public functions
 
-template <typename spidevice, typename csn, typename ce>
-bool device<spidevice, csn, ce>::init() {
+template <typename spi, typename csn, typename ce>
+bool device<spi, csn, ce>::init() {
+  using namespace time::literals;
+
   uint8_t setup = 0;
   ce::clear();
   cs::clear();
-  delay::ms(100);
+  time::delay(100_ms);
 
   // Power up delay
-  delay::ms(5);
+  time::delay(5_ms);
 
   /// Arbitrary default values for the registers
   // Reset config & enable 16-bit CRC
@@ -488,9 +483,9 @@ bool device<spidevice, csn, ce>::init() {
   return (setup != 0x00) && (setup != 0xFF);
 }
 
-template <typename spidevice, typename csn, typename ce>
-bool device<spidevice, csn, ce>::test() {
-  uint8_t           rxbuf[5];
+template <typename spi, typename csn, typename ce>
+bool device<spi, csn, ce>::test() {
+    uint8_t           rxbuf[5];
   uint8_t           txbuf[5] = {'n', 'R', 'F', '2', '4'};
   constexpr uint8_t bufsize  = 5;
 
@@ -511,8 +506,8 @@ bool device<spidevice, csn, ce>::test() {
   return true;
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setAutoAck(bool enable) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setAutoAck(bool enable) {
   // Enable all registers
   if (enable)
     writeRegister(Register::kEnableAutoAck,
@@ -522,8 +517,8 @@ void device<spidevice, csn, ce>::setAutoAck(bool enable) {
     writeRegister(Register::kEnableAutoAck, Command::kNone);
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setAutoAck(bool enable, uint8_t pipe) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setAutoAck(bool enable, uint8_t pipe) {
   if (pipe <= Pipe::kTx) {
     uint8_t aa_state = readRegister(Register::kEnableAutoAck);
 
@@ -536,8 +531,8 @@ void device<spidevice, csn, ce>::setAutoAck(bool enable, uint8_t pipe) {
   }
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::enableAckPayload() {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::enableAckPayload() {
   // Enable ack payload (& dynamic payload)
   uint8_t feature = readRegister(Register::kFeature);
   feature |= RegisterFieldMask::kFeatureEnableAckPayload |
@@ -561,8 +556,8 @@ void device<spidevice, csn, ce>::enableAckPayload() {
   m_dynamicPayloads = true;
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setDynamicPayload(bool enable) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setDynamicPayload(bool enable) {
   // Enable dynamic payload
   if (enable) {
     // Enable dynamic payload feature
@@ -595,22 +590,22 @@ void device<spidevice, csn, ce>::setDynamicPayload(bool enable) {
  * @param ard
  * @param arc
  */
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setAutoRetransmit(AutoRetransmitDelay ard, uint8_t arc) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setAutoRetransmit(AutoRetransmitDelay ard, uint8_t arc) {
   writeRegister(Register::kSetupAutoRet,
                 (static_cast<uint8_t>(ard) << RegisterFieldBit::kSetupAutoRetArd) | arc);
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setPayloadSize(uint8_t size) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setPayloadSize(uint8_t size) {
   m_payloadSize = std::min(size, kMaxPayloadSize);
 }
 
 /*!
  * \brief Sets the power amplifier gain level.
  */
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::setPALevel(PowerAmplifier level) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::setPALevel(PowerAmplifier level) {
   // Get current RF configuration
   uint8_t setup = readRegister(Register::kRfSetup);
   // Clear bits 0-1-2
@@ -623,8 +618,8 @@ void device<spidevice, csn, ce>::setPALevel(PowerAmplifier level) {
   writeRegister(Register::kRfSetup, setup);
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address) {
   // Special case: cache the address for startListening().
   if (pipe == 0) {
     std::memcpy(m_P0RxAddress, &address, m_addressWidth);
@@ -646,8 +641,8 @@ void device<spidevice, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address)
   writeRegister(Register::kEnabledRxAddresses, reg);
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::openWritingPipe(uint64_t address) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::openWritingPipe(uint64_t address) {
   // The radio expects this value LSB first
   // STM32 are usually little endian which is compatible
 
@@ -659,8 +654,8 @@ void device<spidevice, csn, ce>::openWritingPipe(uint64_t address) {
   writeRegister(Register::kRxPayloadWidthP0, m_payloadSize);
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::openWritingPipe(const uint8_t* address) {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::openWritingPipe(const uint8_t* address) {
   // The radio expects this value LSB first
   // STM32 are usually little endian which is compatible
 
@@ -670,8 +665,8 @@ void device<spidevice, csn, ce>::openWritingPipe(const uint8_t* address) {
   writeRegister(Register::kRxPayloadWidthP0, m_payloadSize);
 }
 
-template <typename spidevice, typename csn, typename ce>
-bool device<spidevice, csn, ce>::setDataRate(uint8_t dataRate) {
+template <typename spi, typename csn, typename ce>
+bool device<spi, csn, ce>::setDataRate(uint8_t dataRate) {
   uint8_t reg;
 
   // Read the current setup register
@@ -687,8 +682,8 @@ bool device<spidevice, csn, ce>::setDataRate(uint8_t dataRate) {
   return readRegister(Register::kRfSetup) == reg;
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::startListening() {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::startListening() {
   namespace bits = RegisterFieldBit;
 
   uint8_t cfg = readRegister(Register::kConfig);
@@ -717,16 +712,17 @@ void device<spidevice, csn, ce>::startListening() {
   }
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::stopListening() {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::stopListening() {
+  using namespace time::literals;
   namespace bits = RegisterFieldBit;
 
   ce::clear();
-  // 450 us is the maximum delay. It can be lower on 1Mbps and 2Mbps datarates
-  delay::us(450);
+  // \todo: 450 us is the maximum delay. It can be lower on 1Mbps and 2Mbps datarates
+  time::delay(450_us);
 
   if (readRegister(Register::kFeature) & RegisterFieldMask::kFeatureEnableAckPayload) {
-    delay::us(450);
+    time::delay(450_us);
     flushTx();
   }
 
@@ -741,16 +737,16 @@ void device<spidevice, csn, ce>::stopListening() {
   writeRegister(Register::kEnabledRxAddresses, en_pipes);
 }
 
-template <typename spidevice, typename csn, typename ce>
-bool device<spidevice, csn, ce>::available() {
+template <typename spi, typename csn, typename ce>
+bool device<spi, csn, ce>::available() {
   if (!(readRegister(Register::kFifoStatus) & RegisterFieldMask::kFifoStatusRxEmpty)) {
     return true;
   }
   return false;
 }
 
-template <typename spidevice, typename csn, typename ce>
-bool device<spidevice, csn, ce>::available(uint8_t& pipe) {
+template <typename spi, typename csn, typename ce>
+bool device<spi, csn, ce>::available(uint8_t& pipe) {
   namespace mask = RegisterFieldMask;
   namespace bits = RegisterFieldBit;
 
@@ -762,8 +758,10 @@ bool device<spidevice, csn, ce>::available(uint8_t& pipe) {
   return false;
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::powerUp() {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::powerUp() {
+  using namespace time::literals;
+
   uint8_t cfg = readRegister(Register::kConfig);
 
   // If we're powered down
@@ -771,25 +769,25 @@ void device<spidevice, csn, ce>::powerUp() {
     // Power up
     writeRegister(Register::kConfig, cfg | RegisterFieldMask::kConfigPower);
     // Wait for the radio
-    delay::ms(5);
+    time::delay(5_ms);
   }
 }
 
-template <typename spidevice, typename csn, typename ce>
-void device<spidevice, csn, ce>::powerDown() {
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::powerDown() {
+  namespace b = RegisterFieldBit;
+
   ce::clear();
 
   uint8_t cfg = readRegister(Register::kConfig);
   // Clear the power up bit
-  bit::clear<RegisterFieldBit::kConfigPower>(cfg);
+  bit::clear<b::kConfigPower>(cfg);
 
   writeRegister(Register::kConfig, cfg);
 }
 
-template <typename spidevice, typename csn, typename ce>
-bool device<spidevice, csn, ce>::write(const uint8_t* buf,
-                                       uint8_t        len,
-                                       const bool     multicast) {
+template <typename spi, typename csn, typename ce>
+bool device<spi, csn, ce>::write(const uint8_t* buf, uint8_t len, const bool multicast) {
   namespace m = RegisterFieldMask;
   namespace b = RegisterFieldBit;
 
@@ -815,6 +813,4 @@ bool device<spidevice, csn, ce>::write(const uint8_t* buf,
   return true;
 }
 
-}  // namespace nrf24
-
-}  // namespace blt
+}  // namespace blt::nrf24
