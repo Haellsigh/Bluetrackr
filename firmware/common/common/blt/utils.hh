@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <type_traits>
 
 namespace blt::utils {
 
@@ -14,6 +15,14 @@ class noncopyable {
   noncopyable& operator=(const noncopyable&) = delete;
   // ~noncopyable() {} // This apparently uses the heap.
 };
+
+/**
+ * Converts an enum to it's underlying type (without expliciting the type).
+ */
+template <typename E>
+constexpr auto to_underlying(E e) noexcept {
+  return static_cast<std::underlying_type_t<E>>(e);
+}
 
 /**
  * \name Disjunction

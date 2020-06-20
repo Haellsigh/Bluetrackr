@@ -1,197 +1,197 @@
-#include <algorithm>  // min/max
-#include <cstring>    // memcpy
+/**
+ * \file nrf24_impl.hpp
+ */
 #include <nrf24_custom/nrf24.hh>
 
-namespace blt::nrf24 {
+#include <algorithm>  // min/max
+#include <array>
+#include <cstring>  // memcpy
 
-namespace Command {
-/*!
+namespace nrf24 {
+
+/**
  * \enum Command
- * \note The command word is sent from msbit to lsbit.
- * \note The data bytes are sent from lsbyte to msbyte.
- */
-/*!
- * \var kNone
- * \brief No command.
+ * \brief Available SPI commands
  *
- * \var kDisable
- * \brief Disable feature.
- * \todo Move kDisable to another enum.
+ * \note The command *bits* are sent from msbit to lsbit.
+ * \note The data *bytes* are sent from lsbyte to msbyte, then msbit to lsbit.
  *
- * \var kReadRegister
- * \brief Read command and status registers.
- * \note Last 5 bits are the register map address.
+ * \note The device ouputs the Status register on MISO while writing a command on MOSI.
  *
- * \var kWriteRegister
- * \brief Write command and status registers.
- * \note Last 5 bits are the register map address.
- * \note Executable in Power down or standby modes only.
+ * \var ReadRegister
+ * \brief Read a register
+ * \note Last 5 bits are the register address
  *
- * \var kReadRxPayload
- * \brief Read receive payload (1-32 bytes).
- * \note Payload is deleted from FIFO after it is read.
+ * \var WriteRegister
+ * \brief Write a register.
+ * \note Last 5 bits are the register address
+ * \note Executable in Power down or standby modes only
  *
- * \var kWriteTxPayload
- * \brief Write transmit payload (1-32 bytes).
+ * \var ReadRxPayload
+ * \brief Read receive payload (1-32 bytes)
+ * \note Payload is deleted from FIFO after it is read
  *
- * \var kFlushRx
- * \brief Flush receive FIFO, used in receive mode.
+ * \var WriteTxPayload
+ * \brief Write transmit payload (1-32 bytes)
+ *
+ * \var FlushRx
+ * \brief Flush receive FIFO, used in receive mode
  * \note Should not be executed during transmission of acknowledge, that is,
  *       acknowledge package will not be completed.
  *
- * \var kFlushTx
- * \brief Flush transmit FIFO, used in transmit mode.
+ * \var FlushTx
+ * \brief Flush transmit FIFO, used in transmit mode
  *
- * \var kReuseTxPayload
- * \brief Reuse last transmitted payload.
- * \note Used for a PTX device.
- * \note Transmit payload reuse is active until kWriteTxPayload or kFlushTx is
+ * \var ReuseTxPayload
+ * \brief Reuse last transmitted payload
+ * \note Used for a PTX device
+ * \note Transmit payload reuse is active until WriteTxPayload or FlushTx is
  * executed.
  * \note Transmit payload reuse must not be activated or deactivated during
  * package transmission.
  *
- * \var kNop
- * \brief No operation.
- * \brief Can be used to read the Register::kStatus register.
+ * \var Nop
+ * \brief No operation
+ * \note Can be used to read the Register::kStatus register
  */
-}  // namespace Command
 
-namespace CommandMask {
-/*!
- * \enum CommandMask
+/**
+ * \var ReadWriteCommandMask
+ * \brief Bit-mask for the ReadRegister and WriteRegister commands
  */
-/*!
- * \var kRegisterReadWrite
- * \brief Command mask to access the register read/write command data.
- */
-}  // namespace CommandMask
 
+/**
+ * \brief Register table of the device
+ */
 namespace Register {
-/*!
- * \enum Register
- * \brief Register addresses
- * \note The associated bits for each register is described in the RegisterBit
- *       enumeration.
- */
-/*!
- * \var kConfig
- * \brief Configuration register.
+/**
+ * \var Config
+ * \brief Configuration register
  *
- * \var kEnableAutoAck
- * \brief 'Auto Acknowledgment' setup enable on selected pipes.
- * \note Disable this feature to be compatible with nRF24L01.
+ * \var EnableAutoAck
+ * \brief 'Auto Acknowledgment' feature setup register
+ * \note Only available on p-variant.
+ *       Disable this feature to be compatible with nRF24L01.
  *
- * \var kEnabledRxAddresses
- * \brief Enabled RX pipes setup register.
+ * \var EnabledRxAddresses
+ * \brief Enabled RX pipes.
  *
- * \var kSetupAddressWidths
- * \brief Address widths (common for all pipes) setup register.
+ * \var SetupAddressWidths
+ * \brief Address widths setup register
+ * \note Address width is common for all pipes.
  *
- * \var kSetupAutoRet
- * \brief Automatic retransmission setup register.
+ * \var SetupAutoRet
+ * \brief Automatic retransmission setup register
  *
- * \var kRfChannel
- * \brief RF Channel setup register.
+ * \var RfChannel
+ * \brief RF Channel setup register
  *
- * \var kRfSetup
- * \brief RF setup register.
+ * \var RfSetup
+ * \brief RF setup register
  *
- * \var kStatus
- * \brief Status register.
+ * \var Status
+ * \brief Status register
  *
- * \var kObserveTx
- * \brief Transmit observe register.
+ * \var TxObserve
+ * \brief Transmit observe register
  *
- * \var kReceivedPowerDetector
+ * \var RxPowerDetector
  * \brief Received power detector register.
- * \note This register is called Carrier Detect on nRF24L01.
+ * \note This register is called CD (Carrier Detect) on non p-variant because they have
+ *       different thresholds.
  *
- * \var kRxAddressP0
+ * \var RxAddressP0
  * \brief Receive address pipe 0 register.
  *
- * \var kRxAddressP1
+ * \var RxAddressP1
  * \brief Receive address pipe 1 register.
  *
- * \var kRxAddressP2
+ * \var RxAddressP2
  * \brief Receive address pipe 2 register.
  *
- * \var kRxAddressP3
+ * \var RxAddressP3
  * \brief Receive address pipe 3 register.
  *
- * \var kRxAddressP4
+ * \var RxAddressP4
  * \brief Receive address pipe 4 register.
  *
- * \var kRxAddressP5
+ * \var RxAddressP5
  * \brief Receive address pipe 5 register.
  *
- * \var kTxAddress
+ * \var TxAddress
  * \brief Transmit address register.
  * \note Used for a PTX device only.
- * \note Set kRxAddressP0 equal to this address to handle automatic acknowledge
+ * \note Set RxAddressP0 equal to this address to handle automatic acknowledge
  * if this is a PTX device with Enhanced ShockBurst enabled.
  *
- * \var kRxPayloadWidthP0
+ * \var RxPayloadWidthP0
  * \brief Number of bytes of receive payload in pipe 0.
  *
- * \var kRxPayloadWidthP1
+ * \var RxPayloadWidthP1
  * \brief Number of bytes of receive payload in pipe 1.
  *
- * \var kRxPayloadWidthP2
+ * \var RxPayloadWidthP2
  * \brief Number of bytes of receive payload in pipe 2.
  *
- * \var kRxPayloadWidthP3
+ * \var RxPayloadWidthP3
  * \brief Number of bytes of receive payload in pipe 3.
  *
- * \var kRxPayloadWidthP4
+ * \var RxPayloadWidthP4
  * \brief Number of bytes of receive payload in pipe 4.
  *
- * \var kRxPayloadWidthP5
+ * \var RxPayloadWidthP5
  * \brief Number of bytes of receive payload in pipe 5.
  *
- * \var kFifoStatus
+ * \var FifoStatus
  * \brief FIFO status register.
  *
- * \var kDynamicPayload
+ * \var DynamicPayload
  * \brief Dynamic payload setup register.
  *
- * \var kFeature
+ * \var Feature
  * \brief Feature (dynamic payload, payload in ack, no ack on packet) register.
  * \note The 'no ack on packet' function is not implemented.
  */
 }  // namespace Register
 
-namespace RegisterFieldMask {
-/*!
- * \enum RegisterFieldMask
- * \brief Describes the bit mask of each bit of the registers.
+namespace RegisterField {
+/**
+ * \var MaskRxDataReady
+ * \brief
  *
- * I'm actually too lazy to document each bit one by one, for now.
- * Just go to the
- * [documentation](https://infocenter.nordicsemi.com/pdf/nRF24L01P_PS_v1.0.pdf)
- * on section 9.1. Register map table.
+ * \var PacketLossCount
+ * \brief Packet loss counter.
+ * \note Counts up to 15 then stops.
+ * \note Can be reset by writing to RfChannelFreq.
+ *
+ * \todo Finish this part of the documentation
  */
-}  // namespace RegisterFieldMask
+}
 
 static constexpr uint8_t kMaxChannel     = 125;
 static constexpr uint8_t kMaxPayloadSize = 32;
 
 template <typename spi, typename csn, typename ce>
-uint8_t inline device<spi, csn, ce>::spirw(uint8_t data) {
+uint8_t inline device<spi, csn, ce>::spirw(uint8_t data)
+{
   return spi::rw(data);
 }
 
 template <typename spi, typename csn, typename ce>
-constexpr inline void device<spi, csn, ce>::begin() {
+constexpr inline void device<spi, csn, ce>::begin()
+{
   cs::set();
 }
 
 template <typename spi, typename csn, typename ce>
-constexpr inline void device<spi, csn, ce>::end() {
+constexpr inline void device<spi, csn, ce>::end()
+{
   cs::clear();
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::spiTransfer(uint8_t cmd) {
+uint8_t device<spi, csn, ce>::spiTransfer(uint8_t cmd)
+{
   uint8_t status;
   begin();
 
@@ -208,12 +208,13 @@ uint8_t device<spi, csn, ce>::spiTransfer(uint8_t cmd) {
  * \return The register value.
  */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::readRegister(uint8_t reg) {
+uint8_t device<spi, csn, ce>::readRegister(uint8_t reg)
+{
   uint8_t result;
   begin();
 
   // Register read access
-  spirw(Command::kReadRegister | (CommandMask::kRegisterReadWrite & reg));
+  spirw(Command::kReadRegister | (kReadWriteCommandMask & reg));
   result = spirw(Command::kNop);
 
   end();
@@ -227,12 +228,13 @@ uint8_t device<spi, csn, ce>::readRegister(uint8_t reg) {
  * \return The status of the operation.
  */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::readRegister(uint8_t reg, uint8_t* buf, uint8_t len) {
+uint8_t device<spi, csn, ce>::readRegister(uint8_t reg, uint8_t* buf, uint8_t len)
+{
   uint8_t status;
   begin();
 
   // Register read access
-  status = spirw(Command::kReadRegister | (CommandMask::kRegisterReadWrite & reg));
+  status = spirw(Command::kReadRegister | (kReadWriteCommandMask & reg));
   while (len--) {
     *buf++ = spirw(Command::kNop);
   }
@@ -248,12 +250,13 @@ uint8_t device<spi, csn, ce>::readRegister(uint8_t reg, uint8_t* buf, uint8_t le
  * @return The status of the operation.
  */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, uint8_t val) {
+uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, uint8_t val)
+{
   uint8_t status;
   begin();
 
   // Register write access
-  status = spirw(Command::kWriteRegister | (CommandMask::kRegisterReadWrite & reg));
+  status = spirw(Command::kWriteRegister | (kReadWriteCommandMask & reg));
   spirw(val);
 
   end();
@@ -268,13 +271,12 @@ uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, uint8_t val) {
  * @return The status of the operation.
  */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::writeRegister(uint8_t        reg,
-                                            const uint8_t* buf,
-                                            uint8_t        len) {
+uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, const uint8_t* buf, uint8_t len)
+{
   uint8_t status;
   begin();
 
-  status = spirw(Command::kWriteRegister | (CommandMask::kRegisterReadWrite & reg));
+  status = spirw(Command::kWriteRegister | (kReadWriteCommandMask & reg));
   while (len--) {
     spirw(*buf++);
   }
@@ -284,22 +286,26 @@ uint8_t device<spi, csn, ce>::writeRegister(uint8_t        reg,
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::getStatus() {
+uint8_t device<spi, csn, ce>::getStatus()
+{
   return spiTransfer(Command::kNop);
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::flushTx() {
+uint8_t device<spi, csn, ce>::flushTx()
+{
   return spiTransfer(Command::kFlushTx);
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::flushRx() {
+uint8_t device<spi, csn, ce>::flushRx()
+{
   return spiTransfer(Command::kFlushRx);
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::clearIRQFlags() {
+void device<spi, csn, ce>::clearIRQFlags()
+{
   uint8_t reg;
 
   reg = readRegister(Register::kStatus);
@@ -308,28 +314,32 @@ void device<spi, csn, ce>::clearIRQFlags() {
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setChannel(uint8_t channel) {
+void device<spi, csn, ce>::setChannel(uint8_t channel)
+{
   writeRegister(Register::kRfChannel, std::min(channel, kMaxChannel));
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::getChannel() {
+uint8_t device<spi, csn, ce>::getChannel()
+{
   return readRegister(Register::kRfChannel);
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::getAddressWidth() {
+uint8_t device<spi, csn, ce>::getAddressWidth()
+{
   return readRegister(Register::kSetupAddressWidths) + 2u;
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setAddressWidth(uint8_t width) {
+void device<spi, csn, ce>::setAddressWidth(uint8_t width)
+{
   if (width -= 2) {
     writeRegister(Register::kSetupAddressWidths, width % 4);
-    m_addressWidth = (width % 4) + 2;
+    mAddressWidth = (width % 4) + 2;
   } else {
     writeRegister(Register::kSetupAddressWidths, Command::kNone);
-    m_addressWidth = 2;
+    mAddressWidth = 2;
   }
 }
 
@@ -360,7 +370,8 @@ void device<spi, csn, ce>::setAddress(uint8_t pipe, const uint8_t* addr) {
 }*/
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::toggleFeatures() {
+void device<spi, csn, ce>::toggleFeatures()
+{
   // From the nRF24L01 Rev2.0 datasheet, not present in nRF24L01+.
   // This does nothing on the nRF24L01+.
   begin();
@@ -370,11 +381,12 @@ void device<spi, csn, ce>::toggleFeatures() {
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::readPayload(uint8_t* buf, uint8_t len) {
+uint8_t device<spi, csn, ce>::readPayload(uint8_t* buf, uint8_t len)
+{
   uint8_t status;
 
-  len               = std::min(len, m_payloadSize);
-  uint8_t blank_len = m_dynamicPayloads ? 0 : m_payloadSize - len;
+  len               = std::min(len, mPayloadSize);
+  uint8_t blank_len = mDynamicPayload ? 0 : mPayloadSize - len;
 
   begin();
 
@@ -393,11 +405,12 @@ uint8_t device<spi, csn, ce>::readPayload(uint8_t* buf, uint8_t len) {
 template <typename spi, typename csn, typename ce>
 uint8_t device<spi, csn, ce>::writePayload(const uint8_t* buf,
                                            uint8_t        len,
-                                           const uint8_t  type) {
+                                           const uint8_t  type)
+{
   uint8_t status;
 
-  len               = std::min(len, m_payloadSize);
-  uint8_t blank_len = m_dynamicPayloads ? 0 : m_payloadSize - len;
+  len               = std::min(len, mPayloadSize);
+  uint8_t blank_len = mDynamicPayload ? 0 : mPayloadSize - len;
 
   begin();
 
@@ -418,7 +431,8 @@ template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::startWriteFast(const uint8_t* buf,
                                           uint8_t        len,
                                           const bool     multicast,
-                                          bool           startTx) {
+                                          bool           startTx)
+{
   writePayload(buf, len,
                multicast ? Command::kWriteTxPayloadNoAck : Command::kWriteTxPayload);
   if (startTx)
@@ -427,13 +441,19 @@ void device<spi, csn, ce>::startWriteFast(const uint8_t* buf,
 
 /// Public functions
 
+/**
+ * Initializes the radio with default parameters
+ */
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::init() {
+bool device<spi, csn, ce>::init()
+{
   using namespace time::literals;
 
   uint8_t setup = 0;
   ce::clear();
   cs::clear();
+
+  // Section 5.7: Power on Reset
   time::delay(100_ms);
 
   // Power up delay
@@ -448,7 +468,7 @@ bool device<spi, csn, ce>::init() {
 
   // This is a p variant if 250 kbps is supported
   if (setDataRate(DataRate::k250kbps)) {
-    m_pVariant = true;
+    mPVariant = true;
   }
 
   setup = readRegister(Register::kRfSetup);
@@ -460,7 +480,7 @@ bool device<spi, csn, ce>::init() {
   toggleFeatures();
   writeRegister(Register::kFeature, Command::kDisable);
   writeRegister(Register::kDynamicPayload, Command::kDisable);
-  m_dynamicPayloads = false;
+  mDynamicPayload = false;
 
   // Reset status (clears IRQ)
   clearIRQFlags();
@@ -484,16 +504,29 @@ bool device<spi, csn, ce>::init() {
 }
 
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::test() {
-    uint8_t           rxbuf[5];
-  uint8_t           txbuf[5] = {'n', 'R', 'F', '2', '4'};
-  constexpr uint8_t bufsize  = 5;
+bool device<spi, csn, ce>::test()
+{
+  constexpr uint8_t            bufsize = 5;
+  std::array<uint8_t, bufsize> rxbuf;
+  std::array<uint8_t, bufsize> txbuf = {'n', 'R', 'F', '2', '4'};
+
+  {
+    using Field = RegisterField;
+    using Value = RegisterFieldValue;
+
+    uint8_t config_register = 0b00000000;
+    auto    config          = Register::kConfig{config_register};
+
+    config.set<Field::kEnableCrc>(1);  // Sets the bit 'EnableCrc' to 1
+    config.set<Value::kCrc1byte, >();  // Sets the bit 'CrcEncodingScheme' to 0
+    // config_register
+  }
 
   // Write the test address to the TxAddr register
-  writeRegister(Register::kTxAddress, txbuf, bufsize);
+  writeRegister(Register::kTxAddress, txbuf.data(), bufsize);
 
   // Read it back
-  readRegister(Register::kTxAddress, rxbuf, bufsize);
+  readRegister(Register::kTxAddress, rxbuf.data(), bufsize);
 
   // Compare transmitted and received data
   for (uint8_t i = 0; i < bufsize; i++) {
@@ -507,32 +540,33 @@ bool device<spi, csn, ce>::test() {
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setAutoAck(bool enable) {
-  // Enable all registers
+void device<spi, csn, ce>::setAutoAck(bool enable)
+{
+  // Enable all rx pipes
   if (enable)
-    writeRegister(Register::kEnableAutoAck,
-                  bit::maskBits<Pipe::kRx0, Pipe::kRx1, Pipe::kRx2, Pipe::kRx3,
-                                Pipe::kRx4, Pipe::kRx5>());
+    writeRegister(Register::kEnableAutoAck, PipeFlag::kRxAll);
   else
-    writeRegister(Register::kEnableAutoAck, Command::kNone);
+    writeRegister(Register::kEnableAutoAck, PipeFlag::kNone);
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setAutoAck(bool enable, uint8_t pipe) {
+void device<spi, csn, ce>::setAutoAck(bool enable, uint8_t pipe)
+{
   if (pipe <= Pipe::kTx) {
     uint8_t aa_state = readRegister(Register::kEnableAutoAck);
 
     if (enable)
-      bit::set(aa_state, pipe);
+      bit::set<pipe>(aa_state);
     else
-      bit::clear(aa_state, pipe);
+      bit::clear<pipe>(aa_state);
 
     writeRegister(Register::kEnableAutoAck, aa_state);
   }
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::enableAckPayload() {
+void device<spi, csn, ce>::enableAckPayload()
+{
   // Enable ack payload (& dynamic payload)
   uint8_t feature = readRegister(Register::kFeature);
   feature |= RegisterFieldMask::kFeatureEnableAckPayload |
@@ -541,7 +575,8 @@ void device<spi, csn, ce>::enableAckPayload() {
 
   // Enable dynamic payload on all RX pipes
   uint8_t dynpd = readRegister(Register::kDynamicPayload);
-  dynpd |= PipeFlag::kRxAll;
+  bit::set<PipeFlag::kRxAll>(dynpd);
+  // dynpd |= PipeFlag::kRxAll;
   writeRegister(Register::kDynamicPayload, dynpd);
 
   /*
@@ -553,11 +588,12 @@ void device<spi, csn, ce>::enableAckPayload() {
   writeRegister(Register::kDynamicPayload, dynpd);
   */
 
-  m_dynamicPayloads = true;
+  mDynamicPayload = true;
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setDynamicPayload(bool enable) {
+void device<spi, csn, ce>::setDynamicPayload(bool enable)
+{
   // Enable dynamic payload
   if (enable) {
     // Enable dynamic payload feature
@@ -570,7 +606,7 @@ void device<spi, csn, ce>::setDynamicPayload(bool enable) {
     dynpd |= PipeFlag::kRxAll;
     writeRegister(Register::kDynamicPayload, dynpd);
 
-    m_dynamicPayloads = true;
+    mDynamicPayload = true;
   }
   // Disable dynamic payload
   else {
@@ -580,49 +616,59 @@ void device<spi, csn, ce>::setDynamicPayload(bool enable) {
     // Disable dynamic payload on all pipes
     writeRegister(Register::kDynamicPayload, Command::kNone);
 
-    m_dynamicPayloads = false;
+    mDynamicPayload = false;
   }
 }
 
 /**
  * \brief Sets the automatic retransmission parameters.
- * @param enabled
- * @param ard
- * @param arc
+ * @param ard The auto-retransmit delay.
+ * @param arc The auto-retransmit count.
  */
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setAutoRetransmit(AutoRetransmitDelay ard, uint8_t arc) {
-  writeRegister(Register::kSetupAutoRet,
-                (static_cast<uint8_t>(ard) << RegisterFieldBit::kSetupAutoRetArd) | arc);
+template <typename AutoRetransmitDelay, uint8_t AutoRetransmitCount>
+void device<spi, csn, ce>::setupAutoRetransmit()
+{
+  constexpr uint8_t reg   = 0;
+  auto              setup = SetupAutoRetransmission{reg};
+
+  setup.write<AutoRetransmitDelay>();
+  setup.field<Field::SetupAutoRetransmitCount>() = AutoRetransmitCount;
+
+  writeRegister(setup);
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setPayloadSize(uint8_t size) {
-  m_payloadSize = std::min(size, kMaxPayloadSize);
+void device<spi, csn, ce>::setPayloadSize(uint8_t size)
+{
+  mPayloadSize = std::min(size, kMaxPayloadSize);
 }
 
 /*!
  * \brief Sets the power amplifier gain level.
  */
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::setPALevel(PowerAmplifier level) {
+template <typename RfPower>
+void device<spi, csn, ce>::setRfPowerLevel()
+{
   // Get current RF configuration
   uint8_t setup = readRegister(Register::kRfSetup);
   // Clear bits 0-1-2
   setup &= ~bit::maskRange<0, 2>();
   // Write power level
   setup |= bit::shift<1>(static_cast<uint8_t>(level));
-  if (!m_pVariant)
+  if (!mPVariant)
     setup |= bit::maskBits<0>();  // Sets the LNA gain for non p-variants
 
   writeRegister(Register::kRfSetup, setup);
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address) {
+void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address)
+{
   // Special case: cache the address for startListening().
   if (pipe == 0) {
-    std::memcpy(m_P0RxAddress, &address, m_addressWidth);
+    std::memcpy(mP0RxAddress, &address, mAddressWidth);
     return;
   }
   // Write the address width (1 for pipe 2-5 or m_addressWidth for pipe 0-1).
@@ -631,10 +677,10 @@ void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address) {
                   reinterpret_cast<const uint8_t*>(&address), 1);
   } else {
     writeRegister(Register::kRxAddressP0 + pipe,
-                  reinterpret_cast<const uint8_t*>(&address), m_addressWidth);
+                  reinterpret_cast<const uint8_t*>(&address), mAddressWidth);
   }
   // Set the payload size for the pipe
-  writeRegister(Register::kRxPayloadWidthP0 + pipe, m_payloadSize);
+  writeRegister(Register::kRxPayloadWidthP0 + pipe, mPayloadSize);
   // Enable the address for receiving
   uint8_t reg = readRegister(Register::kEnabledRxAddresses);
   bit::set(reg, static_cast<uint8_t>(Pipe::kRx0 + pipe));
@@ -642,31 +688,34 @@ void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address) {
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::openWritingPipe(uint64_t address) {
+void device<spi, csn, ce>::openWritingPipe(uint64_t address)
+{
   // The radio expects this value LSB first
   // STM32 are usually little endian which is compatible
 
   writeRegister(Register::kRxAddressP0, reinterpret_cast<uint8_t*>(&address),
-                m_addressWidth);
+                mAddressWidth);
   writeRegister(Register::kTxAddress, reinterpret_cast<uint8_t*>(&address),
-                m_addressWidth);
+                mAddressWidth);
 
-  writeRegister(Register::kRxPayloadWidthP0, m_payloadSize);
+  writeRegister(Register::kRxPayloadWidthP0, mPayloadSize);
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::openWritingPipe(const uint8_t* address) {
+void device<spi, csn, ce>::openWritingPipe(const uint8_t* address)
+{
   // The radio expects this value LSB first
   // STM32 are usually little endian which is compatible
 
-  writeRegister(Register::kRxAddressP0, address, m_addressWidth);
-  writeRegister(Register::kTxAddress, address, m_addressWidth);
+  writeRegister(Register::kRxAddressP0, address, mAddressWidth);
+  writeRegister(Register::kTxAddress, address, mAddressWidth);
 
-  writeRegister(Register::kRxPayloadWidthP0, m_payloadSize);
+  writeRegister(Register::kRxPayloadWidthP0, mPayloadSize);
 }
 
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::setDataRate(uint8_t dataRate) {
+bool device<spi, csn, ce>::setDataRate(uint8_t dataRate)
+{
   uint8_t reg;
 
   // Read the current setup register
@@ -683,7 +732,8 @@ bool device<spi, csn, ce>::setDataRate(uint8_t dataRate) {
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::startListening() {
+void device<spi, csn, ce>::startListening()
+{
   namespace bits = RegisterFieldBit;
 
   uint8_t cfg = readRegister(Register::kConfig);
@@ -697,9 +747,9 @@ void device<spi, csn, ce>::startListening() {
 
   ce::set();
 
-  if (m_P0RxAddress[0] > 0) {
+  if (mP0RxAddress[0] > 0) {
     // Restore pipe 0 address if needed
-    writeRegister(Register::kRxAddressP0, m_P0RxAddress, m_addressWidth);
+    writeRegister(Register::kRxAddressP0, mP0RxAddress, mAddressWidth);
   } else {
     // Close pipe 0
     uint8_t en_pipes = readRegister(Register::kEnabledRxAddresses);
@@ -713,7 +763,8 @@ void device<spi, csn, ce>::startListening() {
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::stopListening() {
+void device<spi, csn, ce>::stopListening()
+{
   using namespace time::literals;
   namespace bits = RegisterFieldBit;
 
@@ -738,7 +789,8 @@ void device<spi, csn, ce>::stopListening() {
 }
 
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::available() {
+bool device<spi, csn, ce>::available()
+{
   if (!(readRegister(Register::kFifoStatus) & RegisterFieldMask::kFifoStatusRxEmpty)) {
     return true;
   }
@@ -746,7 +798,8 @@ bool device<spi, csn, ce>::available() {
 }
 
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::available(uint8_t& pipe) {
+bool device<spi, csn, ce>::available(uint8_t& pipe)
+{
   namespace mask = RegisterFieldMask;
   namespace bits = RegisterFieldBit;
 
@@ -759,7 +812,8 @@ bool device<spi, csn, ce>::available(uint8_t& pipe) {
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::powerUp() {
+void device<spi, csn, ce>::powerUp()
+{
   using namespace time::literals;
 
   uint8_t cfg = readRegister(Register::kConfig);
@@ -774,7 +828,8 @@ void device<spi, csn, ce>::powerUp() {
 }
 
 template <typename spi, typename csn, typename ce>
-void device<spi, csn, ce>::powerDown() {
+void device<spi, csn, ce>::powerDown()
+{
   namespace b = RegisterFieldBit;
 
   ce::clear();
@@ -787,7 +842,8 @@ void device<spi, csn, ce>::powerDown() {
 }
 
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::write(const uint8_t* buf, uint8_t len, const bool multicast) {
+bool device<spi, csn, ce>::write(const uint8_t* buf, uint8_t len, const bool multicast)
+{
   namespace m = RegisterFieldMask;
   namespace b = RegisterFieldBit;
 
@@ -813,4 +869,4 @@ bool device<spi, csn, ce>::write(const uint8_t* buf, uint8_t len, const bool mul
   return true;
 }
 
-}  // namespace blt::nrf24
+}  // namespace nrf24

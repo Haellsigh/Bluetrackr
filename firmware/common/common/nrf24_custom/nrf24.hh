@@ -1,32 +1,19 @@
-/*!
- * \file
- * \brief nRF24L01+ library header
+/**
+ * \file nrf24.hh
  */
-
-#ifndef BLT_LIBS_NRF24_H_
-#define BLT_LIBS_NRF24_H_
+#pragma once
 
 #include <cstdint>
 
 #include <blt/bit.hh>
 #include <blt/gpio.hh>
-
-namespace blt {
+#include <blt/memory.hh>
 
 namespace nrf24 {
 
-#define nRF24_TEST_ADDR "nRF24"
-
-namespace Command {
-/*!
- * \name Command
- * \brief SPI commands.
- */
-enum Command : uint8_t {
-  kNone                = 0b00000000,
-  kDisable             = 0b00000000,
-  kReadRegister        = 0b00000000,
-  kWriteRegister       = 0b00100000,
+enum class Command : uint8_t {
+  kReadRegister        = 0b000 << 5,
+  kWriteRegister       = 0b001 << 5,
   kReadRxPayload       = 0b01100001,
   kWriteTxPayload      = 0b10100000,
   kWriteTxPayloadNoAck = 0b10110000,
@@ -34,243 +21,241 @@ enum Command : uint8_t {
   kFlushTx             = 0b11100001,
   kReuseTxPayload      = 0b11100011,
   kNop                 = 0b11111111
-  // kLockUnlock     = 0x50, // What is this, what is it used for?
 };
-}  // namespace Command
 
-static constexpr uint8_t kReadWriteMask = 0b00011111;
-
-namespace CommandMask {
-/*!
- * \name CommandMask
- * \brief SPI commands masks.
- */
-enum CommandMask : uint8_t {
-  kRegisterReadWrite = 0b00011111,  //!< kRegisterReadWrite
-};
-}  // namespace CommandMask
+inline constexpr uint8_t kReadWriteCommandMask = 0b00011111;
 
 namespace Register {
-/*!
- * \name Register
- */
-enum Register : uint8_t {
-  kConfig                = 0x00,
-  kEnableAutoAck         = 0x01,
-  kEnabledRxAddresses    = 0x02,
-  kSetupAddressWidths    = 0x03,
-  kSetupAutoRet          = 0x04,
-  kRfChannel             = 0x05,
-  kRfSetup               = 0x06,
-  kStatus                = 0x07,
-  kObserveTx             = 0x08,
-  kReceivedPowerDetector = 0x09,
-  kRxAddressP0           = 0x0A,
-  kRxAddressP1           = 0x0B,
-  kRxAddressP2           = 0x0C,
-  kRxAddressP3           = 0x0D,
-  kRxAddressP4           = 0x0E,
-  kRxAddressP5           = 0x0F,
-  kTxAddress             = 0x10,
-  kRxPayloadWidthP0      = 0x11,
-  kRxPayloadWidthP1      = 0x12,
-  kRxPayloadWidthP2      = 0x13,
-  kRxPayloadWidthP3      = 0x14,
-  kRxPayloadWidthP4      = 0x15,
-  kRxPayloadWidthP5      = 0x16,
-  kFifoStatus            = 0x17,
-  kDynamicPayload        = 0x1C,
-  kFeature               = 0x1D
-};
+using namespace blt;
+using Config                  = memory::Register<0x00>;
+using EnableAutoAck           = memory::Register<0x01>;
+using EnabledRxAddresses      = memory::Register<0x02>;
+using SetupAddressWidths      = memory::Register<0x03>;
+using SetupAutoRetransmission = memory::Register<0x04>;
+using RfChannel               = memory::Register<0x05>;
+using RfSetup                 = memory::Register<0x06>;
+using Status                  = memory::Register<0x07>;
+using TxObserve               = memory::Register<0x08>;
+using RxPowerDetector         = memory::Register<0x09>;
+using RxAddressP0             = memory::Register<0x0A>;
+using RxAddressP1             = memory::Register<0x0B>;
+using RxAddressP2             = memory::Register<0x0C>;
+using RxAddressP3             = memory::Register<0x0D>;
+using RxAddressP4             = memory::Register<0x0E>;
+using RxAddressP5             = memory::Register<0x0F>;
+using TxAddress               = memory::Register<0x10>;
+using RxPayloadWidthP0        = memory::Register<0x11>;
+using RxPayloadWidthP1        = memory::Register<0x12>;
+using RxPayloadWidthP2        = memory::Register<0x13>;
+using RxPayloadWidthP3        = memory::Register<0x14>;
+using RxPayloadWidthP4        = memory::Register<0x15>;
+using RxPayloadWidthP5        = memory::Register<0x16>;
+using FifoStatus              = memory::Register<0x17>;
+using DynamicPayload          = memory::Register<0x1C>;
+using Feature                 = memory::Register<0x1D>;
 }  // namespace Register
 
-namespace RegisterFieldBit {
-/*!
- * \name RegisterFieldBit
- * \brief Describes the field position in the register.
- */
-enum RegisterFieldBit : uint8_t {
-  kConfigMaskRxDataReady  = 6,       //!< kConfig
-  kConfigMaskTxDataSent   = 5,       //!< kConfig
-  kConfigMaskMaxRet       = 4,       //!< kConfig
-  kConfigEnableCrc        = 3,       //!< kConfig
-  kConfigCrcScheme        = 2,       //!< kConfig
-  kConfigPower            = 1,       //!< kConfig
-  kConfigPrimary          = 0,       //!< kConfig
-  kSetupAddressWidths     = 0,       //!< kSetupAddressWidths
-  kSetupAutoRetArd        = 4,       //!< kSetupAutoRet
-  kSetupAutoRetArc        = 0,       //!< kSetupAutoRet
-  kRfChannel              = 0,       //!< kRfChannel
-  kRfSetupContWave        = 7,       //!< kRfSetup, Testing only.
-  kRfSetupRfDatarateLow   = 5,       //!< kRfSetup
-  kRfSetupPllLock         = 4,       //!< kRfSetup, Testing only.
-  kRfSetupRfDatarateHigh  = 3,       //!< kRfSetup
-  kRfSetupRfPower         = 1,       //!< kRfSetup
-  kStatusRxDataReady      = 6,       //!< kStatus
-  kStatusTxDataSent       = 5,       //!< kStatus
-  kStatusMaxRetransmits   = 4,       //!< kStatus
-  kStatusRxPayloadPipeN   = 1,       //!< kStatus
-  kStatusTxFull           = 0,       //!< kStatus
-  kObserveTxPacketLossCnt = 4,       //!< kObserveTx
-                                     //!< Overflows at 15. Reset by writing to
-                                     //!< kRfChannel.
-  kObserveTxAutoRetransmitCnt  = 0,  //!< kObserveTx, Reset by a new packet.
-  kReceivedPowerDetector       = 0,  //!< kReceivedPowerDetector
-  kRxPayloadWidth              = 0,  //!< kRxPayloadWidthP0 to P5
-  kFifoStatusTxReuse           = 6,  //!< kFifoStatus
-  kFifoStatusTxFull            = 5,  //!< kFifoStatus
-  kFifoStatusTxEmpty           = 4,  //!< kFifoStatus
-  kFifoStatusRxFull            = 1,  //!< kFifoStatus
-  kFifoStatusRxEmpty           = 0,  //!< kFifoStatus
-  kFeatureEnableDynamicPayload = 2,  //!< kFeature
-  kFeatureEnableAckPayload     = 1,  //!< kFeature
-  kFeatureEnableDynamicAck     = 0   //!< kFeature
-};
-}  // namespace RegisterFieldBit
+namespace Field {
+using namespace blt::memory;
+using namespace blt::memory::access_policy;
+// Config
+using MaskRxDataReady   = Register::Config::Field<bits<6>>;
+using MaskTxDataSent    = Register::Config::Field<bits<5>>;
+using MaskMaxRetransmit = Register::Config::Field<bits<4>>;
+using EnableCrc         = Register::Config::Field<bits<3>>;
+using CrcEncoding       = Register::Config::Field<bits<2>>;
+using PowerUp           = Register::Config::Field<bits<1>>;
+using Primary           = Register::Config::Field<bits<0>>;
+// EnableAutoAck
+using AutoAckP5    = Register::EnableAutoAck::Field<bits<5>>;
+using AutoAckP4    = Register::EnableAutoAck::Field<bits<4>>;
+using AutoAckP3    = Register::EnableAutoAck::Field<bits<3>>;
+using AutoAckP2    = Register::EnableAutoAck::Field<bits<2>>;
+using AutoAckP1    = Register::EnableAutoAck::Field<bits<1>>;
+using AutoAckP0    = Register::EnableAutoAck::Field<bits<0>>;
+using AutoAckPipes = Register::EnableAutoAck::Field<range<0, 5>>;
+// EnabledRxAddresses
+using RxP5    = Register::EnabledRxAddresses::Field<bits<5>>;
+using RxP4    = Register::EnabledRxAddresses::Field<bits<4>>;
+using RxP3    = Register::EnabledRxAddresses::Field<bits<3>>;
+using RxP2    = Register::EnabledRxAddresses::Field<bits<2>>;
+using RxP1    = Register::EnabledRxAddresses::Field<bits<1>>;
+using RxP0    = Register::EnabledRxAddresses::Field<bits<0>>;
+using RxPipes = Register::EnabledRxAddresses::Field<range<0, 5>>;
+// SetupAddressWidths
+using AddressWidths = Register::SetupAddressWidths::Field<range<0, 1>>;
+// SetupAutoRet
+using SetupAutoRetransmitDelay = Register::SetupAutoRetransmission::Field<range<4, 7>>;
+using SetupAutoRetransmitCount = Register::SetupAutoRetransmission::Field<range<0, 3>>;
+// RfChannel
+using RfChannelFreq = Register::RfChannel::Field<range<0, 6>>;
+// RfSetup
+using ContinuousWave = Register::RfSetup::Field<bits<7>>;
+using PLLLock        = Register::RfSetup::Field<bits<4>>;
+using RfDatarate     = Register::RfSetup::Field<bits<5, 3>>;
+using RfPower        = Register::RfSetup::Field<range<1, 2>>;
+// Status
+using RxFifoDataReady   = Register::Status::Field<bits<6>>;
+using TxFifoDataSent    = Register::Status::Field<bits<5>>;
+using MaxRetransmit     = Register::Status::Field<bits<4>>;
+using RxFifoPayloadPipe = Register::Status::Field<range<1, 3>, read_only>;
+using TxFull            = Register::Status::Field<bits<0>, read_only>;
+// TxObserve
+using PacketLossCount     = Register::TxObserve::Field<range<4, 7>, read_only>;
+using AutoRetransmitCount = Register::TxObserve::Field<range<0, 3>, read_only>;
+// RxPowerDetector
+using RxPowerDetected = Register::RxPowerDetector::Field<bits<0>, read_only>;
+// RxAddressP0 \todo 39 bits
+// RxAddressP1 \todo 39 bits
+// RxAddressP2 \todo 7 bits
+// RxAddressP3 \todo 7 bits
+// RxAddressP4 \todo 7 bits
+// RxAddressP5 \todo 7 bits
+// TxAddress   \todo 39 bits
+// RxPayloadWidthP0
+using RxPayloadWidthP0 = Register::RxPayloadWidthP0::Field<range<0, 5>>;
+// RxPayloadWidthP1
+using RxPayloadWidthP1 = Register::RxPayloadWidthP1::Field<range<0, 5>>;
+// RxPayloadWidthP2
+using RxPayloadWidthP2 = Register::RxPayloadWidthP2::Field<range<0, 5>>;
+// RxPayloadWidthP3
+using RxPayloadWidthP3 = Register::RxPayloadWidthP3::Field<range<0, 5>>;
+// RxPayloadWidthP4
+using RxPayloadWidthP4 = Register::RxPayloadWidthP4::Field<range<0, 5>>;
+// RxPayloadWidthP5
+using RxPayloadWidthP5 = Register::RxPayloadWidthP5::Field<range<0, 5>>;
+// FifoStatus
+using UsingTxReuse = Register::FifoStatus::Field<bits<6>, read_only>;
+using TxFifoFull   = Register::FifoStatus::Field<bits<5>, read_only>;
+using TxFifoEmpty  = Register::FifoStatus::Field<bits<4>, read_only>;
+using RxFifoFull   = Register::FifoStatus::Field<bits<1>, read_only>;
+using RxFifoEmpty  = Register::FifoStatus::Field<bits<0>, read_only>;
+// DynamicPayload
+using DynamicPayloadP5 = Register::DynamicPayload::Field<bits<5>>;
+using DynamicPayloadP4 = Register::DynamicPayload::Field<bits<4>>;
+using DynamicPayloadP3 = Register::DynamicPayload::Field<bits<3>>;
+using DynamicPayloadP2 = Register::DynamicPayload::Field<bits<2>>;
+using DynamicPayloadP1 = Register::DynamicPayload::Field<bits<1>>;
+using DynamicPayloadP0 = Register::DynamicPayload::Field<bits<0>>;
+// Feature
+using DynamicPayloadEnabled = Register::Feature::Field<bits<2>>;
+using AckPayloadEnabled     = Register::Feature::Field<bits<1>>;
+using DynamicAckEnabled     = Register::Feature::Field<bits<0>>;
+}  // namespace Field
 
-namespace RegisterFieldMask {
-using namespace blt::bit;
-/*!
- * \name RegisterFieldMask
- */
-enum RegisterFieldMask : uint8_t {
-  kConfigMaskRxDataReady  = maskBits<6>(),           //!< kConfig
-  kConfigMaskTxDataSent   = maskBits<5>(),           //!< kConfig
-  kConfigMaskMaxRet       = maskBits<4>(),           //!< kConfig
-  kConfigEnableCrc        = maskBits<3>(),           //!< kConfig
-  kConfigCrcScheme        = maskBits<2>(),           //!< kConfig
-  kConfigPower            = maskBits<1>(),           //!< kConfig
-  kConfigPrimary          = maskBits<0>(),           //!< kConfig
-  kSetupAddressWidths     = maskRange<1, 0>(),       //!< kSetupAddressWidths
-  kSetupAutoRetArd        = maskRange<7, 4>(),       //!< kSetupAutoRet
-  kSetupAutoRetArc        = maskRange<3, 0>(),       //!< kSetupAutoRet
-  kRfChannel              = maskRange<6, 0>(),       //!< kRfChannel
-  kRfSetupRfContWave      = maskBits<7>(),           //!< kRfSetup, Testing only.
-  kRfSetupRfDatarateLow   = maskBits<5>(),           //!< kRfSetup
-  kRfSetupRfPllLock       = maskBits<4>(),           //!< kRfSetup, Testing only.
-  kRfSetupRfDatarateHigh  = maskBits<3>(),           //!< kRfSetup
-  kRfSetupRfPower         = maskRange<2, 1>(),       //!< kRfSetup
-  kStatusRxDataReady      = maskBits<6>(),           //!< kStatus
-  kStatusTxDataSent       = maskBits<5>(),           //!< kStatus
-  kStatusMaxRetransmits   = maskBits<4>(),           //!< kStatus
-  kStatusRxPayloadPipeN   = maskRange<1, 3>(),       //!< kStatus
-  kStatusTxFull           = maskBits<0>(),           //!< kStatus
-  kObserveTxPacketLossCnt = maskRange<7, 4>(),       //!< Overflows at 15.
-                                                     //!< Reset by writing to
-                                                     //!< kRfChannel.
-  kObserveTxAutoRetransmitCnt  = maskRange<3, 0>(),  //!< Reset by a new packet.
-  kReceivedPowerDetector       = maskBits<0>(),      //!< kReceivedPowerDetector
-  kRxPayloadWidth              = maskRange<5, 0>(),  //!< kRxPayloadWidthP0 to P5
-  kFifoStatusTxReuse           = maskBits<6>(),      //!< kFifoStatus
-  kFifoStatusTxFull            = maskBits<5>(),      //!< kFifoStatus
-  kFifoStatusTxEmpty           = maskBits<4>(),      //!< kFifoStatus
-  kFifoStatusRxFull            = maskBits<1>(),      //!< kFifoStatus
-  kFifoStatusRxEmpty           = maskBits<0>(),      //!< kFifoStatus
-  kFeatureEnableDynamicPayload = maskBits<2>(),      //!< kFeature
-  kFeatureEnableAckPayload     = maskBits<1>(),      //!< kFeature
-  kFeatureEnableDynamicAck     = maskBits<0>()       //!< kFeature
-};
-}  // namespace RegisterFieldMask
-
-namespace RegisterMask {
-using namespace blt::bit;
-/*!
- * \name RegisterMask
- * \brief Register
- */
-enum RegisterMask : uint8_t {
-  kRegister        = 0x1F,  //!< kRegister
-  kCrc             = 0x0C,  //!< kCrc
-  kStatusIRQ       = 0x70,  //!< kStatusIRQ
-  kRfPower         = 0x06,  //!< kRfPower
-  kRxPayloadNumber = 0x0E,  //!< kRxPayloadNumber
-  kDatarate        = maskBits<RegisterFieldBit::kRfSetupRfDatarateLow,
-                       RegisterFieldBit::kRfSetupRfDatarateHigh>(),  //!< kDatarate
-};
-}  // namespace RegisterMask
-
-namespace RegisterValue {
-/*!
- * \name RegisterValue
- * \brief Predefined values for the register (whole register of field).
- */
-enum RegisterValue : uint8_t {
-  kStatusIRQClear = RegisterFieldMask::kStatusRxDataReady |
-                    RegisterFieldMask::kStatusTxDataSent |
-                    RegisterFieldMask::kStatusMaxRetransmits
-};
-}  // namespace RegisterValue
-
-// Enumeration of RX pipe addresses and TX address
-namespace Pipe {
-enum Pipe : uint8_t {
-  kRx0 = 0x00,
-  kRx1 = 0x01,
-  kRx2 = 0x02,
-  kRx3 = 0x03,
-  kRx4 = 0x04,
-  kRx5 = 0x05,
-  kTx  = 0x06,
-};
-}
-
-// Enumeration of pipe flags
-namespace PipeFlag {
-enum PipeFlag : uint8_t {
-  kRx0   = bit::maskBits<Pipe::kRx0>(),
-  kRx1   = bit::maskBits<Pipe::kRx1>(),
-  kRx2   = bit::maskBits<Pipe::kRx2>(),
-  kRx3   = bit::maskBits<Pipe::kRx3>(),
-  kRx4   = bit::maskBits<Pipe::kRx4>(),
-  kRx5   = bit::maskBits<Pipe::kRx5>(),
-  kTx    = bit::maskBits<Pipe::kTx>(),
-  kRxAll = bit::maskRange<Pipe::kRx0, Pipe::kRx5>()
-};
-}
-
-// Addresses of the address registers
-/*
-static const uint8_t kPipeAddress[7] = {Register ::kRxAddressP0, Register ::kRxAddressP1,
-                                        Register ::kRxAddressP2, Register ::kRxAddressP3,
-                                        Register ::kRxAddressP4, Register ::kRxAddressP5,
-                                        Register ::kTxAddress};*/
-
-enum class AutoRetransmitDelay : uint8_t {
-  kNone   = 0x00,
-  k250us  = 0x00,
-  k500us  = 0x01,
-  k750us  = 0x02,
-  k1000us = 0x03,
-  k1250us = 0x04,
-  k1500us = 0x05,
-  k1750us = 0x06,
-  k2000us = 0x07,
-  k2250us = 0x08,
-  k2500us = 0x09,
-  k2750us = 0x0A,
-  k3000us = 0x0B,
-  k3250us = 0x0C,
-  k3500us = 0x0D,
-  k3750us = 0x0E,
-  k4000us = 0x0F
-};
-
-namespace DataRate {
-using namespace blt::bit;
-enum DataRate : uint8_t {
-  k250kbps = maskBits<5>(),
-  k1Mbps   = 0x00,
-  k2Mbps   = maskBits<3>()
-};
-}  // namespace DataRate
-
-enum class PowerAmplifier : uint8_t {
-  kMinus_18_dB = 0b00,
-  kMinus_12_dB = 0b01,
-  kMinus_6_dB  = 0b10,
-  kZero_dB     = 0b11,
-  kMinimum     = kMinus_18_dB
-};
+namespace Value {
+// MaskRxDataReady
+using EnableIntRxDataReady  = Field::MaskRxDataReady::value<0>;
+using DisableIntRxDataReady = Field::MaskRxDataReady::value<1>;
+// MaskTxDataSent
+using EnableIntTxDataSent  = Field::MaskTxDataSent::value<0>;
+using DisableIntTxDataSent = Field::MaskTxDataSent::value<1>;
+// MaskMaxRetransmit
+using EnableIntMaxRetransmit  = Field::MaskMaxRetransmit::value<0>;
+using DisableIntMaxRetransmit = Field::MaskMaxRetransmit::value<1>;
+// CrcEncoding
+using Crc1byte  = Field::CrcEncoding::value<0>;
+using Crc2bytes = Field::CrcEncoding::value<1>;
+// Power
+using PowerUp   = Field::PowerUp::value<1>;
+using PowerDown = Field::PowerUp::value<0>;
+// Primary
+using PrimaryRx = Field::Primary::value<1>;
+using PrimaryTx = Field::Primary::value<0>;
+// AutoAckP5
+// AutoAckP4
+// AutoAckP3
+// AutoAckP2
+// AutoAckP1
+// AutoAckP0
+// AutoAckPipes
+// RxP5
+// RxP4
+// RxP3
+// RxP2
+// RxP1
+// RxP0
+// RxPipes
+// AddressWidths
+using AddressWidth3byte = Field::AddressWidths::value<0, 0>;
+using AddressWidth3byte = Field::AddressWidths::value<1, 0>;
+using AddressWidth3byte = Field::AddressWidths::value<1, 1>;
+// SetupAutoRetransmitDelay
+using AutoRetransmitDelay250us  = Field::SetupAutoRetransmitDelay::value<0>;
+using AutoRetransmitDelay500us  = Field::SetupAutoRetransmitDelay::value<1>;
+using AutoRetransmitDelay750us  = Field::SetupAutoRetransmitDelay::value<2>;
+using AutoRetransmitDelay1000us = Field::SetupAutoRetransmitDelay::value<3>;
+using AutoRetransmitDelay1250us = Field::SetupAutoRetransmitDelay::value<4>;
+using AutoRetransmitDelay1500us = Field::SetupAutoRetransmitDelay::value<5>;
+using AutoRetransmitDelay1750us = Field::SetupAutoRetransmitDelay::value<6>;
+using AutoRetransmitDelay2000us = Field::SetupAutoRetransmitDelay::value<7>;
+using AutoRetransmitDelay2250us = Field::SetupAutoRetransmitDelay::value<8>;
+using AutoRetransmitDelay2500us = Field::SetupAutoRetransmitDelay::value<9>;
+using AutoRetransmitDelay3000us = Field::SetupAutoRetransmitDelay::value<10>;
+using AutoRetransmitDelay3250us = Field::SetupAutoRetransmitDelay::value<11>;
+using AutoRetransmitDelay2750us = Field::SetupAutoRetransmitDelay::value<12>;
+using AutoRetransmitDelay3500us = Field::SetupAutoRetransmitDelay::value<13>;
+using AutoRetransmitDelay3750us = Field::SetupAutoRetransmitDelay::value<14>;
+using AutoRetransmitDelay4000us = Field::SetupAutoRetransmitDelay::value<15>;
+// SetupAutoRetransmitCount
+using AutoRetransmitCountDisabled = Field::SetupAutoRetransmitCount::value<0>;
+// RfChannelFreq
+// ContinuousWave
+using EnableContinuousWave  = Field::ContinuousWave::value<1>;
+using DisableContinuousWave = Field::ContinuousWave::value<0>;
+// PLLLock
+using EnablePLLLock  = Field::ContinuousWave::value<1>;
+using DisablePLLLock = Field::ContinuousWave::value<0>;
+// RfDatarate
+using RfDatarate250kbps = Field::RfDatarate::value<1, 0>;
+using RfDatarate1Mbps   = Field::RfDatarate::value<0, 0>;
+using RfDatarate2Mbps   = Field::RfDatarate::value<0, 1>;
+// RfPower
+using RfPowerMinus18dBm = Field::RfPower::value<0b00>;
+using RfPowerMinimum    = RfPowerMinus18dBm;
+using RfPowerMinus12dBm = Field::RfPower::value<0b01>;
+using RfPowerMinus16dBm = Field::RfPower::value<0b10>;
+using RfPower0dBm       = Field::RfPower::value<0b11>;
+// RxFifoDataReady
+using ClearRxDataReady = Field::RxFifoDataReady::value<1>;
+// TxFifoDataSent
+using ClearTxDataSent = Field::TxFifoDataSent::value<1>;
+// MaxRetransmit
+using ClearMaxRetransmit = Field::MaxRetransmit::value<1>;
+// RxFifoPayloadPipe
+using RxFifoEmpty = Field::RxFifoPayloadPipe::value<6>;
+using RxFifoP0    = Field::RxFifoPayloadPipe::value<0>;
+using RxFifoP1    = Field::RxFifoPayloadPipe::value<1>;
+using RxFifoP2    = Field::RxFifoPayloadPipe::value<2>;
+using RxFifoP3    = Field::RxFifoPayloadPipe::value<3>;
+using RxFifoP4    = Field::RxFifoPayloadPipe::value<4>;
+using RxFifoP5    = Field::RxFifoPayloadPipe::value<5>;
+// TxFull
+using TxFifoFull = Field::TxFull::value<1>;
+// PacketLossCount
+// AutoRetransmitCount
+// ReceivedPowerDetected
+// RxPayloadWidthP0
+// RxPayloadWidthP1
+// RxPayloadWidthP2
+// RxPayloadWidthP3
+// RxPayloadWidthP4
+// RxPayloadWidthP5
+// UsingTxReuse
+// TxFifoFull
+// TxFifoEmpty
+// RxFifoFull
+// RxFifoEmpty
+// DynamicPayloadP5
+// DynamicPayloadP4
+// DynamicPayloadP3
+// DynamicPayloadP2
+// DynamicPayloadP1
+// DynamicPayloadP0
+// DynamicPayloadEnabled
+// AckPayloadEnabled
+// DynamicAckEnabled
+}  // namespace Value
 
 /**
  * \brief nRF24L01 driver class.
@@ -279,10 +264,15 @@ enum class PowerAmplifier : uint8_t {
  * \tparam csn The chip select negative (csn) gpio pin.
  * \tparam ce  The chip enable gpio pin.
  */
+/*requires requires
+{
+  spi::rw(0);
+}*/
 template <typename spi, typename csn, typename ce>
-class device {
+class device : public blt::utils::noncopyable {
   // cs is csn inverted, with a 100 us settling time
-  using cs = gpio::settle<gpio::invert<csn>, 100>;
+  // using cs = gpio::settle<gpio::invert<csn>, 100>;
+  using cs = blt::gpio::invert<csn>;
 
  public:
   bool init();
@@ -292,10 +282,13 @@ class device {
   void setAutoAck(bool enable, uint8_t pipe);
   bool setDataRate(uint8_t dataRate);
   void setDynamicPayload(bool enable = true);
-  void setAutoRetransmit(AutoRetransmitDelay ard = AutoRetransmitDelay::kNone,
-                         uint8_t             arc = 0);
+
+  template <typename AutoRetransmitDelay = Value::AutoRetransmitDelay250us,
+            uint8_t AutoRetransmitCount  = 0>
+  void setupAutoRetransmit();
   void setPayloadSize(uint8_t size);
-  void setPALevel(PowerAmplifier level);
+  template <typename RfPower>
+  void setRfPowerLevel();
 
   void enableAckPayload();
 
@@ -359,19 +352,15 @@ class device {
                       bool           startTx = true);
 
  private:
-  bool m_pVariant = false;
+  bool mPVariant = false;
 
-  uint8_t m_addressWidth   = 5;
-  uint8_t m_P0RxAddress[5] = {0};
+  uint8_t mAddressWidth   = 5;
+  uint8_t mP0RxAddress[5] = {0};
 
-  uint8_t m_payloadSize     = 32;
-  bool    m_dynamicPayloads = false;
+  uint8_t mPayloadSize    = 32;
+  bool    mDynamicPayload = false;
 };
 
 }  // namespace nrf24
 
-}  // namespace blt
-
 #include <nrf24_custom/nrf24_impl.hpp>
-
-#endif  // BLT_LIBS_NRF24_H_

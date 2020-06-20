@@ -1,102 +1,95 @@
 #pragma once
 
+#include <algorithm>
 #include <cstdint>
 
 namespace blt::bit {
 
 /**
- * \brief Returns a bit mask for the bit(s).
- * Thank god for C++17.
+ * \brief Creates a bit mask from bits.
  */
-template <uint8_t... bits>
-static constexpr uint8_t maskBits() {
-  return ((1 << bits) | ... | 0);
-}
+template <uint8_t... positions>
+requires((std::max({positions...}) < 8) && (sizeof...(positions) < 8)) struct mask {
+  static constexpr uint8_t value = ((1 << positions) | ...);
+  static constexpr uint8_t start = std::min({positions...});
+};
 
 /**
- * \brief Returns a bit mask for the bits in range [l, h].
+ * \brief Creates a bit mask from the range [begin, end] or [end, begin].
  */
-template <uint8_t first, uint8_t last>
-static constexpr uint8_t maskRange() {
-  if constexpr (first > last)
-    return (((1 << last) - 1) ^ ((1 << (first + 1)) - 1));
-  else
-    return (((1 << first) - 1) ^ ((1 << (last + 1)) - 1));
+template <uint8_t begin, uint8_t end>
+requires(begin <= end) struct mask_range {
+  static constexpr uint8_t value = (((1 << begin) - 1) ^ ((1 << (end + 1)) - 1));
+  static constexpr uint8_t start = begin;
+};
+
+/**
+ * \brief Joins two or more bit masks.
+ * \{
+ */
+template <typename...>
+struct join;
+
+template <uint8_t... positionsA, uint8_t... positionsB>
+struct join<mask<positionsA...>, mask<positionsB...>> {
+  static constexpr uint8_t value = mask<positionsA..., positionsB...>::value;
+};
+/// \}
+
+template <typename mask_t>
+inline constexpr void invert(uint8_t& output)
+{
+  output ^= mask_t::value;
 }
 
-/*!
- * \brief Shifts in by n bits.
- */
-template <uint8_t n, typename Tout>
-static constexpr Tout shift(Tout in = 1) {
-  return in << n;
+inline constexpr void invert(uint8_t& output)
+{
+  output = ~output;
 }
 
-/*!
- * \brief Shifts in by n bits.
- * \note Runtime version.
- */
-template <typename Tin, typename Tout>
-static constexpr Tout shift(Tin in, Tin n) {
-  return static_cast<Tout>(in) << n;
+template <typename mask_t>
+inline constexpr uint8_t get(uint8_t& output)
+{
+  return (output & mask_t::value) >> mask_t::start;
 }
 
-/*!
- * \brief Sets the bits from the input in.
- */
-template <uint8_t... bits>
-static constexpr void set(uint8_t& in) {
-  in |= maskBits<bits...>();
+template <typename mask_t>
+inline constexpr void set(uint8_t& output)
+{
+  output |= mask_t::value;
 }
 
-/*!
- * \brief Sets the bit n from the input in.
- */
-template <uint8_t n, typename Tin>
-static constexpr void set(Tin& in) {
-  in |= shift<n, Tin>(1);
+template <typename mask_t>
+inline constexpr void set(uint8_t& output, uint8_t value)
+{
+  output |= (value & mask_t::value);
 }
 
-/*!
- * \brief Gets the bits from the input in.
- */
-template <uint8_t... bits>
-static constexpr uint8_t get(uint8_t& in) {
-  return in & maskBits<bits...>();
+template <typename mask_t>
+inline constexpr void clear(uint8_t& output)
+{
+  output &= ~mask_t::value;
 }
 
-/*!
- * \brief Gets the bit n from the input in.
- */
-template <uint8_t n, typename Tin>
-static constexpr uint8_t get(Tin& in) {
-  return in & maskBits<n>();
+template <typename mask_t>
+inline constexpr void setclear(uint8_t& output, uint8_t input)
+{
+  clear<mask_t>(output);
+  set<mask_t>(output, input << mask_t::start);
 }
 
-/*!
- * \brief Sets the bit n from the input in.
- * \note Runtime version.
- */
-template <typename Tin>
-static constexpr void set(Tin& in, Tin n) {
-  in |= shift<Tin, Tin>(1, n);
-}
+template <uint8_t... positions>
+inline constexpr void setclear(uint8_t& output,
+                               uint8_t  input,
+                               uint8_t  begin,
+                               uint8_t  index)
+{
+  constexpr std::array<uint8_t, sizeof...(positions)> pos = {{positions...}};
 
-/*!
- * \brief Clears the bit n from the input in.
- */
-template <uint8_t n, typename Tin>
-static constexpr void clear(Tin& in) {
-  in &= ~shift<n, Tin>(1);
-}
-
-/*!
- * \brief Clears the bit n from the input in.
- * \note Runtime version.
- */
-template <typename Tin>
-static constexpr void clear(Tin& in, Tin n) {
-  in &= ~shift<Tin, Tin>(1, n);
+  const uint8_t position = pos[index] + begin;
+  const uint8_t shift    = (1 << position);
+  output &= ~shift;
+  output |= ((input << position) & shift);
 }
 
 }  // namespace blt::bit

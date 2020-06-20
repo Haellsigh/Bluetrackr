@@ -10,11 +10,13 @@
 
 SPI_HandleTypeDef* g_hspi = nullptr;
 
-auto fhSpi() {
+constexpr auto fhSpi()
+{
   return g_hspi;
 }
 
-void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi) {
+void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi)
+{
   using namespace blt;
   using namespace gpio;
   using namespace time::literals;
@@ -30,19 +32,15 @@ void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi) {
   time::init();
   leds::clear();
 
-  nrf24::device<spi::device<fhSpi>, csn, ce> nrf24;
+  nrf24::device<spi::device<fhSpi>, csn, ce> radio;
   uart::init(huart);
 
-  while (true) {
-    if (!nrf24.init()) {
-      error_handler();
-    }
+  if (!radio.init()) {
+    error_handler();
+  }
 
-    time::delay(50_ms);
-
-    if (!nrf24.test()) {
-      error_handler();
-    }
+  if (!radio.test()) {
+    error_handler();
   }
 
   while (true) {
