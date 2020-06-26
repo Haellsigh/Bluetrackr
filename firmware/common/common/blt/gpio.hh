@@ -47,31 +47,32 @@ PORT_HANDLE_FUNCTION(G)
 
 }  // namespace
 
-template <GPIO_TypeDef* port(), uint16_t... Pins>
+template <GPIO_TypeDef* port(), uint16_t... pins>
 class pin_out {
-  static constexpr uint16_t pins = utils::disjunction_flag<Pins...>();
+  static constexpr uint16_t pins_flag = utils::disjunction_flag<pins...>();
 
  public:
   /**
    * Atomically sets the pins high.
    */
-  static inline constexpr void set() { port()->BSRR = pins; }
+  static inline constexpr void set() { port()->BSRR = pins_flag; }
 
   /**
    * Atomically clears the pins.
    */
-  static inline constexpr void clear() { port()->BRR = pins; }
+  static inline constexpr void clear() { port()->BRR = pins_flag; }
 
   /**
    * \warning Invalid results if there is more than one pin.
    * \note This is not an atomic function.
    */
-  static inline constexpr bool state() { return (port()->ODR & pins) == 0; }
+  static inline constexpr bool state() { return (port()->ODR & pins_flag) == 0; }
 
   /**
    * \note This is an atomic function
    */
-  static constexpr void write(bool v) {
+  static constexpr void write(bool v)
+  {
     if (v) {
       set();
     } else {
@@ -82,11 +83,7 @@ class pin_out {
   /**
    * \note This is not an atomic function.
    */
-  static constexpr void toggle() {
-    for (auto&& pin : {Pins...}) {
-      port()->ODR ^= pin;
-    }
-  }
+  static constexpr void toggle() { ((port()->ODR ^= 1 << pins), ...); }
 };
 
 template <GPIO_TypeDef* port(), uint16_t pin>
@@ -132,22 +129,26 @@ class settle {
   static constexpr time::Microseconds mTime{us};
 
  public:
-  static constexpr inline void write(bool v) {
+  static constexpr inline void write(bool v)
+  {
     pin::write(v);
     time::delay(mTime);
   }
 
-  static constexpr inline void set() {
+  static constexpr inline void set()
+  {
     pin::set();
     time::delay(mTime);
   }
 
-  static constexpr inline void clear() {
+  static constexpr inline void clear()
+  {
     pin::clear();
     time::delay(mTime);
   }
 
-  static constexpr inline void toggle() {
+  static constexpr inline void toggle()
+  {
     pin::toggle();
     time::delay(mTime);
   }

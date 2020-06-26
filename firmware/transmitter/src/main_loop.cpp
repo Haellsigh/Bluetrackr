@@ -44,9 +44,9 @@ void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi)
   }
 
   while (true) {
-    led_status::set();
+    led_status::toggle();
     time::delay(500_ms);
-    led_status::clear();
+    led_status::toggle();
     time::delay(500_ms);
   }
 

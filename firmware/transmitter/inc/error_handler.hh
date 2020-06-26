@@ -3,16 +3,17 @@
 #include <blt/gpio.hh>
 #include <blt/time.hh>
 
-static void error_handler() {
+static void error_handler()
+{
   using namespace blt;
   using namespace gpio;
+  using namespace time::literals;
 
   time::init();
   using led_status = gpio::pin_out<PB, 3>;
 
   while (true) {
-    using namespace time::literals;
-    time::delay(50_ms);
     led_status::toggle();
+    time::delay(50_ms);
   }
 }

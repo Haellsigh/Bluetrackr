@@ -1,4 +1,4 @@
-#include "time.hh"
+#include <blt/time.hh>
 
 #include <blt/hal_include.hh>
 
@@ -8,25 +8,15 @@
 namespace blt::time {
 
 /**
- * Literals for durations
- */
-namespace literals {
-
-constexpr Microseconds operator"" us(uint64_t us) {
-  return Microseconds{us};
-}
-constexpr Microseconds operator"" ms(uint64_t ms) {
-  return Microseconds{1000 * ms};
-}
-
-}  // namespace literals
-
-/**
  * Initializes the time functions.
  */
-void init() {
+void init()
+{
 #ifdef DWT
   if (!(CoreDebug->DEMCR & CoreDebug_DEMCR_TRCENA_Msk)) {
+#if F7
+    DWT->LAR = 0xC5ACCE55;
+#endif
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
     DWT->CYCCNT = 0;
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
@@ -39,10 +29,11 @@ void init() {
 /**
  * Pauses execution for a certain amount of time
  */
-void delay(Microseconds t) {
+void delay(const Microseconds& t)
+{
 #ifdef DWT
-  uint32_t startTick  = DWT->CYCCNT;
-  uint32_t delayTicks = t.us * (SystemCoreClock / 1000000);
+  const uint32_t startTick  = DWT->CYCCNT;
+  const uint32_t delayTicks = t.us * (SystemCoreClock / 1000000);
 
   while (DWT->CYCCNT - startTick < delayTicks)
     ;
