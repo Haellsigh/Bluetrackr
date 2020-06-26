@@ -12,6 +12,7 @@
 namespace nrf24 {
 
 enum class Command : uint8_t {
+  kNone                = 0b00000000,
   kReadRegister        = 0b000 << 5,
   kWriteRegister       = 0b001 << 5,
   kReadRxPayload       = 0b01100001,
@@ -94,6 +95,7 @@ using ContinuousWave = Register::RfSetup::Field<bits<7>>;
 using PLLLock        = Register::RfSetup::Field<bits<4>>;
 using RfDatarate     = Register::RfSetup::Field<bits<5, 3>>;
 using RfPower        = Register::RfSetup::Field<range<1, 2>>;
+using RfLnaGain      = Register::RfSetup::Field<bits<0>>;
 // Status
 using RxFifoDataReady   = Register::Status::Field<bits<6>>;
 using TxFifoDataSent    = Register::Status::Field<bits<5>>;
@@ -131,12 +133,13 @@ using TxFifoEmpty  = Register::FifoStatus::Field<bits<4>, read_only>;
 using RxFifoFull   = Register::FifoStatus::Field<bits<1>, read_only>;
 using RxFifoEmpty  = Register::FifoStatus::Field<bits<0>, read_only>;
 // DynamicPayload
-using DynamicPayloadP5 = Register::DynamicPayload::Field<bits<5>>;
-using DynamicPayloadP4 = Register::DynamicPayload::Field<bits<4>>;
-using DynamicPayloadP3 = Register::DynamicPayload::Field<bits<3>>;
-using DynamicPayloadP2 = Register::DynamicPayload::Field<bits<2>>;
-using DynamicPayloadP1 = Register::DynamicPayload::Field<bits<1>>;
-using DynamicPayloadP0 = Register::DynamicPayload::Field<bits<0>>;
+using DynamicPayloadP5    = Register::DynamicPayload::Field<bits<5>>;
+using DynamicPayloadP4    = Register::DynamicPayload::Field<bits<4>>;
+using DynamicPayloadP3    = Register::DynamicPayload::Field<bits<3>>;
+using DynamicPayloadP2    = Register::DynamicPayload::Field<bits<2>>;
+using DynamicPayloadP1    = Register::DynamicPayload::Field<bits<1>>;
+using DynamicPayloadP0    = Register::DynamicPayload::Field<bits<0>>;
+using DynamicPayloadPipes = Register::DynamicPayload::Field<range<0, 5>>;
 // Feature
 using DynamicPayloadEnabled = Register::Feature::Field<bits<2>>;
 using AckPayloadEnabled     = Register::Feature::Field<bits<1>>;
@@ -169,6 +172,8 @@ using PrimaryTx = Field::Primary::value<0>;
 // AutoAckP1
 // AutoAckP0
 // AutoAckPipes
+using EnableAutoAckAllPipes  = Field::AutoAckPipes::value<0b111111>;
+using DisableAutoAckAllPipes = Field::AutoAckPipes::value<0b111111>;
 // RxP5
 // RxP4
 // RxP3
@@ -177,9 +182,9 @@ using PrimaryTx = Field::Primary::value<0>;
 // RxP0
 // RxPipes
 // AddressWidths
-using AddressWidth3byte = Field::AddressWidths::value<0, 0>;
-using AddressWidth3byte = Field::AddressWidths::value<1, 0>;
-using AddressWidth3byte = Field::AddressWidths::value<1, 1>;
+using AddressWidth3byte = Field::AddressWidths::value<0, 1>;
+using AddressWidth4byte = Field::AddressWidths::value<1, 0>;
+using AddressWidth5byte = Field::AddressWidths::value<1, 1>;
 // SetupAutoRetransmitDelay
 using AutoRetransmitDelay250us  = Field::SetupAutoRetransmitDelay::value<0>;
 using AutoRetransmitDelay500us  = Field::SetupAutoRetransmitDelay::value<1>;
@@ -252,6 +257,8 @@ using TxFifoFull = Field::TxFull::value<1>;
 // DynamicPayloadP2
 // DynamicPayloadP1
 // DynamicPayloadP0
+// DynamicPayloadPipes
+using EnableDynamicPayloadAllPipes = Field::DynamicPayloadPipes::value<0b111111>;
 // DynamicPayloadEnabled
 // AckPayloadEnabled
 // DynamicAckEnabled
@@ -280,7 +287,8 @@ class device : public blt::utils::noncopyable {
 
   void setAutoAck(bool enable = true);
   void setAutoAck(bool enable, uint8_t pipe);
-  bool setDataRate(uint8_t dataRate);
+  template <typename DataRate = Value::RfDatarate1Mbps>
+  bool setDataRate();
   void setDynamicPayload(bool enable = true);
 
   template <typename AutoRetransmitDelay = Value::AutoRetransmitDelay250us,
@@ -312,23 +320,31 @@ class device : public blt::utils::noncopyable {
    * Helper function to write then read data from the spi device.
    */
   uint8_t inline spirw(uint8_t data);
-  uint8_t spiTransfer(uint8_t cmd);
+  uint8_t spiCommand(Command cmd);
 
   static constexpr inline void begin();
   static constexpr inline void end();
 
   /// Register read access
-  uint8_t readRegister(uint8_t reg);
-  uint8_t readRegister(uint8_t reg, uint8_t* buf, uint8_t len);
+  template <typename register_t>
+  register_t readRegister();
+  template <typename register_t>
+  Register::Status readRegister(uint8_t* buf, uint8_t len);
 
   /// Register write access
-  uint8_t writeRegister(uint8_t reg, uint8_t val);
-  uint8_t writeRegister(uint8_t reg, const uint8_t* buf, uint8_t len);
+  template <typename register_t>
+  inline Register::Status writeRegister(register_t reg);
+  template <typename register_t>
+  inline Register::Status writeRegisterOffset(register_t reg, uint8_t address_offset);
+  template <typename register_t>
+  Register::Status writeRegister(const uint8_t* buf,
+                                 uint8_t        len,
+                                 uint8_t        address_offset = 0);
 
-  uint8_t getStatus();
-
-  uint8_t flushTx();
-  uint8_t flushRx();
+  // Spi commands
+  Register::Status getStatus();
+  uint8_t          flushTx();
+  uint8_t          flushRx();
 
   void clearIRQFlags();
 
@@ -363,4 +379,4 @@ class device : public blt::utils::noncopyable {
 
 }  // namespace nrf24
 
-#include <nrf24_custom/nrf24_impl.hpp>
+#include "nrf24_impl.hpp"

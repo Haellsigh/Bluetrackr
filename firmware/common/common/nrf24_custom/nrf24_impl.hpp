@@ -1,6 +1,7 @@
 /**
  * \file nrf24_impl.hpp
  */
+#include <blt/utils.hh>
 #include <nrf24_custom/nrf24.hh>
 
 #include <algorithm>  // min/max
@@ -190,13 +191,13 @@ constexpr inline void device<spi, csn, ce>::end()
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::spiTransfer(uint8_t cmd)
+uint8_t device<spi, csn, ce>::spiCommand(Command cmd)
 {
   uint8_t status;
   begin();
 
   // Execute command
-  status = spirw(cmd);
+  status = spirw(static_cast<uint8_t>(cmd));
 
   end();
   return status;
@@ -208,17 +209,19 @@ uint8_t device<spi, csn, ce>::spiTransfer(uint8_t cmd)
  * \return The register value.
  */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::readRegister(uint8_t reg)
+template <typename register_t>
+register_t device<spi, csn, ce>::readRegister()
 {
-  uint8_t result;
   begin();
 
   // Register read access
-  spirw(Command::kReadRegister | (kReadWriteCommandMask & reg));
-  result = spirw(Command::kNop);
+  /*const uint8/_t status = */ spirw(
+      static_cast<uint8_t>(Command::kReadRegister) |
+      (kReadWriteCommandMask & register_t::register_address));
+  const uint8_t reg = spirw(static_cast<uint8_t>(Command::kNop));
 
   end();
-  return result;
+  return register_t{reg};
 }
 
 /**
@@ -228,39 +231,51 @@ uint8_t device<spi, csn, ce>::readRegister(uint8_t reg)
  * \return The status of the operation.
  */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::readRegister(uint8_t reg, uint8_t* buf, uint8_t len)
+template <typename register_t>
+Register::Status device<spi, csn, ce>::readRegister(uint8_t* buf, uint8_t len)
 {
-  uint8_t status;
   begin();
 
   // Register read access
-  status = spirw(Command::kReadRegister | (kReadWriteCommandMask & reg));
+  const uint8_t status = spirw(static_cast<uint8_t>(Command::kReadRegister) |
+                               (kReadWriteCommandMask & register_t::register_address));
   while (len--) {
-    *buf++ = spirw(Command::kNop);
+    *buf++ = spirw(static_cast<uint8_t>(Command::kNop));
   }
 
   end();
-  return status;
+  return Register::Status{status};
 }
 
-/**
- *
- * @param reg
- * @param val
- * @return The status of the operation.
- */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, uint8_t val)
+template <typename register_t>
+Register::Status device<spi, csn, ce>::writeRegister(register_t reg)
 {
-  uint8_t status;
   begin();
 
-  // Register write access
-  status = spirw(Command::kWriteRegister | (kReadWriteCommandMask & reg));
-  spirw(val);
+  const uint8_t status =
+      spirw(static_cast<uint8_t>(Command::kWriteRegister) | register_t::register_address);
+
+  spirw(reg.value());
 
   end();
-  return status;
+  return Register::Status{status};
+}
+
+template <typename spi, typename csn, typename ce>
+template <typename register_t>
+Register::Status device<spi, csn, ce>::writeRegisterOffset(register_t reg,
+                                                           uint8_t    address_offset)
+{
+  begin();
+
+  const uint8_t status = spirw(static_cast<uint8_t>(Command::kWriteRegister) |
+                               (register_t::register_address + address_offset));
+
+  spirw(reg.value());
+
+  end();
+  return Register::Status{status};
 }
 
 /**
@@ -271,76 +286,91 @@ uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, uint8_t val)
  * @return The status of the operation.
  */
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::writeRegister(uint8_t reg, const uint8_t* buf, uint8_t len)
+template <typename register_t>
+Register::Status device<spi, csn, ce>::writeRegister(const uint8_t* buf,
+                                                     uint8_t        len,
+                                                     uint8_t        address_offset)
 {
-  uint8_t status;
   begin();
 
-  status = spirw(Command::kWriteRegister | (kReadWriteCommandMask & reg));
+  const uint8_t status = spirw(static_cast<uint8_t>(Command::kWriteRegister) |
+                               (register_t::register_address + address_offset));
   while (len--) {
     spirw(*buf++);
   }
 
   end();
-  return status;
+  return Register::Status{status};
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::getStatus()
+Register::Status device<spi, csn, ce>::getStatus()
 {
-  return spiTransfer(Command::kNop);
+  return Register::Status{spiCommand(Command::kNop)};
 }
 
 template <typename spi, typename csn, typename ce>
 uint8_t device<spi, csn, ce>::flushTx()
 {
-  return spiTransfer(Command::kFlushTx);
+  return spiCommand(Command::kFlushTx);
 }
 
 template <typename spi, typename csn, typename ce>
 uint8_t device<spi, csn, ce>::flushRx()
 {
-  return spiTransfer(Command::kFlushRx);
+  return spiCommand(Command::kFlushRx);
 }
 
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::clearIRQFlags()
 {
-  uint8_t reg;
+  using namespace Value;
+  Register::Status status = readRegister<Register::Status>();
 
-  reg = readRegister(Register::kStatus);
-  reg |= RegisterValue::kStatusIRQClear;
-  writeRegister(Register::kStatus, reg);
+  status.write<ClearRxDataReady>();
+  status.write<ClearTxDataSent>();
+  status.write<ClearMaxRetransmit>();
+
+  writeRegister(status);
 }
 
+/**
+ * \brief Sets the radio channel, between 0 and 125 included.
+ */
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::setChannel(uint8_t channel)
 {
-  writeRegister(Register::kRfChannel, std::min(channel, kMaxChannel));
+  using namespace Field;
+  Register::RfChannel rfchannel;
+
+  rfchannel.field<RfChannelFreq>() = std::min(channel, kMaxChannel);
+
+  writeRegister(rfchannel);
 }
 
 template <typename spi, typename csn, typename ce>
 uint8_t device<spi, csn, ce>::getChannel()
 {
-  return readRegister(Register::kRfChannel);
+  Register::RfChannel rfchannel = readRegister<Register::RfChannel>();
+  return rfchannel.field<Field::RfChannelFreq>();
 }
 
 template <typename spi, typename csn, typename ce>
 uint8_t device<spi, csn, ce>::getAddressWidth()
 {
-  return readRegister(Register::kSetupAddressWidths) + 2u;
+  using namespace blt::utils::literals;
+  Register::SetupAddressWidths aw = readRegister();
+  return static_cast<uint8_t>(aw.field<Field::AddressWidths>()) + 2_u8;
 }
 
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::setAddressWidth(uint8_t width)
 {
-  if (width -= 2) {
-    writeRegister(Register::kSetupAddressWidths, width % 4);
-    mAddressWidth = (width % 4) + 2;
-  } else {
-    writeRegister(Register::kSetupAddressWidths, Command::kNone);
-    mAddressWidth = 2;
-  }
+  width = std::clamp<uint8_t>(width, 3, 5);
+  Register::SetupAddressWidths aw;
+  aw.field<Field::AddressWidths>() = width - 2;
+
+  writeRegister(aw);
 }
 
 /*
@@ -447,7 +477,8 @@ void device<spi, csn, ce>::startWriteFast(const uint8_t* buf,
 template <typename spi, typename csn, typename ce>
 bool device<spi, csn, ce>::init()
 {
-  using namespace time::literals;
+  using namespace blt;
+  using namespace blt::time::literals;
 
   uint8_t setup = 0;
   ce::clear();
@@ -461,25 +492,27 @@ bool device<spi, csn, ce>::init()
 
   /// Arbitrary default values for the registers
   // Reset config & enable 16-bit CRC
-  writeRegister(Register::kConfig, 0x0C);
+  auto config                      = Register::Config{};
+  config.field<Field::EnableCrc>() = true;
+  config.write<Value::Crc2bytes>();
+  writeRegister(config);
 
   // The minimum viable delay after testing on all speeds
-  setAutoRetransmit(AutoRetransmitDelay::k1500us, 15);
+  setupAutoRetransmit<Value::AutoRetransmitDelay1500us, 15>();
 
   // This is a p variant if 250 kbps is supported
-  if (setDataRate(DataRate::k250kbps)) {
+  if (setDataRate<Value::RfDatarate250kbps>()) {
     mPVariant = true;
   }
 
-  setup = readRegister(Register::kRfSetup);
+  auto rfsetup = readRegister<Register::RfSetup>();
 
   // Slowest common supported speed on both non-p and p variants
-  setDataRate(DataRate::k1Mbps);
+  setDataRate<Value::RfDatarate1Mbps>();
 
   // Disable dynamic payloads
   toggleFeatures();
-  writeRegister(Register::kFeature, Command::kDisable);
-  writeRegister(Register::kDynamicPayload, Command::kDisable);
+  setDynamicPayload(false);
   mDynamicPayload = false;
 
   // Reset status (clears IRQ)
@@ -497,10 +530,11 @@ bool device<spi, csn, ce>::init()
 
   // Enable PTX & keep CE low so the radio will remain in standby I mode
   // 22µa consumption
-  writeRegister(Register::kConfig,
-                readRegister(Register::kConfig) & ~RegisterFieldMask::kConfigPrimary);
+  config = readRegister<Register::Config>();
+  config.write<Value::PrimaryTx>();
+  writeRegister(config);
 
-  return (setup != 0x00) && (setup != 0xFF);
+  return (rfsetup.value() != 0x00) && (rfsetup.value() != 0xFF);
 }
 
 template <typename spi, typename csn, typename ce>
@@ -510,23 +544,11 @@ bool device<spi, csn, ce>::test()
   std::array<uint8_t, bufsize> rxbuf;
   std::array<uint8_t, bufsize> txbuf = {'n', 'R', 'F', '2', '4'};
 
-  {
-    using Field = RegisterField;
-    using Value = RegisterFieldValue;
-
-    uint8_t config_register = 0b00000000;
-    auto    config          = Register::kConfig{config_register};
-
-    config.set<Field::kEnableCrc>(1);  // Sets the bit 'EnableCrc' to 1
-    config.set<Value::kCrc1byte, >();  // Sets the bit 'CrcEncodingScheme' to 0
-    // config_register
-  }
-
   // Write the test address to the TxAddr register
-  writeRegister(Register::kTxAddress, txbuf.data(), bufsize);
+  writeRegister<Register::TxAddress>(txbuf.data(), bufsize);
 
   // Read it back
-  readRegister(Register::kTxAddress, rxbuf.data(), bufsize);
+  readRegister<Register::TxAddress>(rxbuf.data(), bufsize);
 
   // Compare transmitted and received data
   for (uint8_t i = 0; i < bufsize; i++) {
@@ -542,25 +564,27 @@ bool device<spi, csn, ce>::test()
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::setAutoAck(bool enable)
 {
-  // Enable all rx pipes
-  if (enable)
-    writeRegister(Register::kEnableAutoAck, PipeFlag::kRxAll);
-  else
-    writeRegister(Register::kEnableAutoAck, PipeFlag::kNone);
+  Register::EnableAutoAck en_aa;
+  if (enable) {
+    en_aa.write<Value::EnableAutoAckAllPipes>();
+  } else {
+    en_aa.write<Value::DisableAutoAckAllPipes>();
+  }
+  writeRegister(en_aa);
 }
 
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::setAutoAck(bool enable, uint8_t pipe)
 {
-  if (pipe <= Pipe::kTx) {
-    uint8_t aa_state = readRegister(Register::kEnableAutoAck);
+  if (pipe <= 5) {
+    Register::EnableAutoAck en_aa = readRegister();
 
     if (enable)
-      bit::set<pipe>(aa_state);
+      en_aa.setValue(en_aa.value() | (1U << pipe));
     else
-      bit::clear<pipe>(aa_state);
+      en_aa.setValue(en_aa.value() & ~(1U << pipe));
 
-    writeRegister(Register::kEnableAutoAck, aa_state);
+    writeRegister(en_aa);
   }
 }
 
@@ -568,16 +592,15 @@ template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::enableAckPayload()
 {
   // Enable ack payload (& dynamic payload)
-  uint8_t feature = readRegister(Register::kFeature);
-  feature |= RegisterFieldMask::kFeatureEnableAckPayload |
-             RegisterFieldMask::kFeatureEnableDynamicPayload;
-  writeRegister(Register::kFeature, feature);
+  Register::Feature feature                     = readRegister();
+  feature.field<Field::AckPayloadEnabled>()     = true;
+  feature.field<Field::DynamicPayloadEnabled>() = true;
+  writeRegister(feature);
 
   // Enable dynamic payload on all RX pipes
-  uint8_t dynpd = readRegister(Register::kDynamicPayload);
-  bit::set<PipeFlag::kRxAll>(dynpd);
-  // dynpd |= PipeFlag::kRxAll;
-  writeRegister(Register::kDynamicPayload, dynpd);
+  Register::DynamicPayload dynpd = readRegister();
+  dynpd.write<Value::EnableDynamicPayloadAllPipes>();
+  writeRegister(dynpd);
 
   /*
   // Original code, this is weird because it says 'dynpd on only certain pipes is
@@ -597,24 +620,24 @@ void device<spi, csn, ce>::setDynamicPayload(bool enable)
   // Enable dynamic payload
   if (enable) {
     // Enable dynamic payload feature
-    uint8_t feature = readRegister(Register::kFeature);
-    feature |= RegisterFieldMask::kFeatureEnableDynamicPayload;
-    writeRegister(Register::kFeature, feature);
+    Register::Feature feature                     = readRegister<Register::Feature>();
+    feature.field<Field::DynamicPayloadEnabled>() = true;
+    writeRegister(feature);
 
     // Enable dynamic payload on all RX pipes
-    uint8_t dynpd = readRegister(Register::kDynamicPayload);
-    dynpd |= PipeFlag::kRxAll;
-    writeRegister(Register::kDynamicPayload, dynpd);
+    Register::DynamicPayload dynpd = readRegister<Register::DynamicPayload>();
+    dynpd.write<Value::EnableDynamicPayloadAllPipes>();
+    writeRegister(dynpd);
 
     mDynamicPayload = true;
   }
   // Disable dynamic payload
   else {
     // Disable dynamic payload feature
-    writeRegister(Register::kFeature, Command::kNone);
+    writeRegister(Register::Feature{});
 
     // Disable dynamic payload on all pipes
-    writeRegister(Register::kDynamicPayload, Command::kNone);
+    writeRegister(Register::DynamicPayload{});
 
     mDynamicPayload = false;
   }
@@ -629,8 +652,7 @@ template <typename spi, typename csn, typename ce>
 template <typename AutoRetransmitDelay, uint8_t AutoRetransmitCount>
 void device<spi, csn, ce>::setupAutoRetransmit()
 {
-  constexpr uint8_t reg   = 0;
-  auto              setup = SetupAutoRetransmission{reg};
+  Register::SetupAutoRetransmission setup;
 
   setup.write<AutoRetransmitDelay>();
   setup.field<Field::SetupAutoRetransmitCount>() = AutoRetransmitCount;
@@ -642,6 +664,7 @@ template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::setPayloadSize(uint8_t size)
 {
   mPayloadSize = std::min(size, kMaxPayloadSize);
+  // Payload size is set when opening a pipe
 }
 
 /*!
@@ -652,15 +675,13 @@ template <typename RfPower>
 void device<spi, csn, ce>::setRfPowerLevel()
 {
   // Get current RF configuration
-  uint8_t setup = readRegister(Register::kRfSetup);
-  // Clear bits 0-1-2
-  setup &= ~bit::maskRange<0, 2>();
+  Register::RfSetup rfsetup = readRegister<Register::RfSetup>();
   // Write power level
-  setup |= bit::shift<1>(static_cast<uint8_t>(level));
+  rfsetup.write<RfPower>();
   if (!mPVariant)
-    setup |= bit::maskBits<0>();  // Sets the LNA gain for non p-variants
+    rfsetup.field<Field::RfLnaGain>() = true;  // Sets the LNA gain for non p-variants
 
-  writeRegister(Register::kRfSetup, setup);
+  writeRegister(rfsetup);
 }
 
 template <typename spi, typename csn, typename ce>
@@ -672,19 +693,14 @@ void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address)
     return;
   }
   // Write the address width (1 for pipe 2-5 or m_addressWidth for pipe 0-1).
-  if (pipe >= 2) {
-    writeRegister(Register::kRxAddressP0 + pipe,
-                  reinterpret_cast<const uint8_t*>(&address), 1);
-  } else {
-    writeRegister(Register::kRxAddressP0 + pipe,
-                  reinterpret_cast<const uint8_t*>(&address), mAddressWidth);
-  }
+  writeRegister<Register::RxAddressP0>(reinterpret_cast<const uint8_t*>(&address),
+                                       pipe >= 2 ? 1 : mAddressWidth, pipe);
   // Set the payload size for the pipe
-  writeRegister(Register::kRxPayloadWidthP0 + pipe, mPayloadSize);
+  writeRegisterOffset<Register::RxPayloadWidthP0>(mPayloadSize, pipe);
   // Enable the address for receiving
-  uint8_t reg = readRegister(Register::kEnabledRxAddresses);
-  bit::set(reg, static_cast<uint8_t>(Pipe::kRx0 + pipe));
-  writeRegister(Register::kEnabledRxAddresses, reg);
+  Register::EnabledRxAddresses en_rx = readRegister();
+  en_rx.setValue(en_rx.value() | (1 << pipe));
+  writeRegister(en_rx);
 }
 
 template <typename spi, typename csn, typename ce>
@@ -692,13 +708,7 @@ void device<spi, csn, ce>::openWritingPipe(uint64_t address)
 {
   // The radio expects this value LSB first
   // STM32 are usually little endian which is compatible
-
-  writeRegister(Register::kRxAddressP0, reinterpret_cast<uint8_t*>(&address),
-                mAddressWidth);
-  writeRegister(Register::kTxAddress, reinterpret_cast<uint8_t*>(&address),
-                mAddressWidth);
-
-  writeRegister(Register::kRxPayloadWidthP0, mPayloadSize);
+  openWritingPipe(reinterpret_cast<uint8_t*>(&address));
 }
 
 template <typename spi, typename csn, typename ce>
@@ -706,123 +716,117 @@ void device<spi, csn, ce>::openWritingPipe(const uint8_t* address)
 {
   // The radio expects this value LSB first
   // STM32 are usually little endian which is compatible
+  writeRegister<Register::RxAddressP0>(address, mAddressWidth);
+  writeRegister<Register::TxAddress>(address, mAddressWidth);
 
-  writeRegister(Register::kRxAddressP0, address, mAddressWidth);
-  writeRegister(Register::kTxAddress, address, mAddressWidth);
-
-  writeRegister(Register::kRxPayloadWidthP0, mPayloadSize);
+  Register::RxPayloadWidthP0 rxpayload;
+  rxpayload.field<Field::RxPayloadWidthP0>() = mPayloadSize;
+  writeRegister(rxpayload);
 }
 
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::setDataRate(uint8_t dataRate)
+template <typename DataRate>
+bool device<spi, csn, ce>::setDataRate()
 {
   uint8_t reg;
 
-  // Read the current setup register
-  reg = readRegister(Register::kRfSetup);
-  // Clears the datarate bits
-  reg &= ~RegisterMask::kDatarate;
-  // Write the datarate to those bits
-  reg |= static_cast<uint8_t>(dataRate);
-
-  writeRegister(Register::kRfSetup, reg);
+  Register::RfSetup rfsetup = readRegister<Register::RfSetup>();
+  rfsetup.write<DataRate>();
+  writeRegister(rfsetup);
 
   // Verify our register was saved.
-  return readRegister(Register::kRfSetup) == reg;
+  auto set_rfsetup = readRegister<Register::RfSetup>();
+  return set_rfsetup.value() == rfsetup.value();
 }
 
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::startListening()
 {
-  namespace bits = RegisterFieldBit;
+  Register::Config config        = readRegister<Register::Config>();
+  config.field<Field::Primary>() = true;
+  writeRegister(config);
 
-  uint8_t cfg = readRegister(Register::kConfig);
-  bit::set<bits::kConfigPrimary>(cfg);
-  writeRegister(Register::kConfig, cfg);
-
-  uint8_t status = 0;
-  bit::set<bits::kStatusRxDataReady, bits::kStatusTxDataSent,
-           bits::kStatusMaxRetransmits>(status);
-  writeRegister(Register::kStatus, status);
+  Register::Status status;
+  status.field<Field::RxFifoDataReady>() = true;
+  status.field<Field::TxFifoDataSent>()  = true;
+  status.field<Field::MaxRetransmit>()   = true;
+  writeRegister(status);
 
   ce::set();
 
   if (mP0RxAddress[0] > 0) {
     // Restore pipe 0 address if needed
-    writeRegister(Register::kRxAddressP0, mP0RxAddress, mAddressWidth);
+    writeRegister<Register::RxAddressP0>(mP0RxAddress, mAddressWidth);
   } else {
     // Close pipe 0
-    uint8_t en_pipes = readRegister(Register::kEnabledRxAddresses);
-    bit::clear<Pipe::kRx0>(en_pipes);
-    writeRegister(Register::kEnabledRxAddresses, en_pipes);
+    Register::EnabledRxAddresses en_rx_pipes =
+        readRegister<Register::EnabledRxAddresses>();
+    en_rx_pipes.field<Field::RxP0>() = 0;
+    writeRegister(en_rx_pipes);
   }
 
-  if (readRegister(Register::kFeature) & RegisterFieldMask::kFeatureEnableAckPayload) {
+  if (Register::Feature feature = readRegister<Register::Feature>();
+      feature.field<Field::AckPayloadEnabled>()) {
     flushTx();
   }
-}
+}  // namespace nrf24
 
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::stopListening()
 {
-  using namespace time::literals;
-  namespace bits = RegisterFieldBit;
+  using namespace blt;
+  using namespace blt::time::literals;
 
   ce::clear();
   // \todo: 450 us is the maximum delay. It can be lower on 1Mbps and 2Mbps datarates
   time::delay(450_us);
 
-  if (readRegister(Register::kFeature) & RegisterFieldMask::kFeatureEnableAckPayload) {
+  if (Register::Feature feature = readRegister();
+      feature.field<Field::AckPayloadEnabled>()) {
     time::delay(450_us);
     flushTx();
   }
 
   // Reset primary
-  uint8_t cfg = readRegister(Register::kConfig);
-  bit::clear<bits::kConfigPrimary>(cfg);
-  writeRegister(Register::kConfig, cfg);
+  Register::Config config        = readRegister();
+  config.field<Field::Primary>() = 0;
+  writeRegister(config);
 
   // Re-enable pipe 0
-  uint8_t en_pipes = readRegister(Register::kEnabledRxAddresses);
-  bit::set<Pipe::kRx0>(en_pipes);
-  writeRegister(Register::kEnabledRxAddresses, en_pipes);
+  Register::EnableAutoAck en_rx_pipes   = readRegister();
+  en_rx_pipes.field<Field::AutoAckP0>() = true;
+  writeRegister(en_rx_pipes);
 }
 
 template <typename spi, typename csn, typename ce>
 bool device<spi, csn, ce>::available()
 {
-  if (!(readRegister(Register::kFifoStatus) & RegisterFieldMask::kFifoStatusRxEmpty)) {
-    return true;
-  }
-  return false;
+  Register::FifoStatus fifoStatus = readRegister();
+  return !fifoStatus.field<Field::RxFifoEmpty>();
 }
 
 template <typename spi, typename csn, typename ce>
 bool device<spi, csn, ce>::available(uint8_t& pipe)
 {
-  namespace mask = RegisterFieldMask;
-  namespace bits = RegisterFieldBit;
+  Register::Status status       = getStatus();
+  uint8_t          rx_fifo_pipe = status.field<Field::RxFifoPayloadPipe>();
 
-  if (available()) {
-    uint8_t status = getStatus();
-    pipe = (status & mask::kStatusRxPayloadPipeN) >> bits::kStatusRxPayloadPipeN;
-    return true;
-  }
-  return false;
+  return rx_fifo_pipe == pipe;
 }
 
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::powerUp()
 {
-  using namespace time::literals;
+  using namespace blt;
+  using namespace blt::time::literals;
 
-  uint8_t cfg = readRegister(Register::kConfig);
+  Register::Config config = readRegister<Register::Config>();
 
-  // If we're powered down
-  if (!(cfg & RegisterFieldMask::kConfigPower)) {
-    // Power up
-    writeRegister(Register::kConfig, cfg | RegisterFieldMask::kConfigPower);
-    // Wait for the radio
+  // If power is down
+  if (!config.field<Field::PowerUp>()) {
+    config.field<Field::PowerUp>() = true;
+    writeRegister(config);
+    // Wait for power up
     time::delay(5_ms);
   }
 }
@@ -830,43 +834,39 @@ void device<spi, csn, ce>::powerUp()
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::powerDown()
 {
-  namespace b = RegisterFieldBit;
-
   ce::clear();
 
-  uint8_t cfg = readRegister(Register::kConfig);
-  // Clear the power up bit
-  bit::clear<b::kConfigPower>(cfg);
-
-  writeRegister(Register::kConfig, cfg);
+  Register::Config config        = readRegister();
+  config.field<Field::PowerUp>() = false;
+  writeRegister(config);
 }
 
 template <typename spi, typename csn, typename ce>
 bool device<spi, csn, ce>::write(const uint8_t* buf, uint8_t len, const bool multicast)
 {
-  namespace m = RegisterFieldMask;
-  namespace b = RegisterFieldBit;
-
   startWriteFast(buf, len, multicast);
 
   // Wait until finished or error
-  while (!(getStatus() & (m::kConfigMaskTxDataSent | m::kConfigMaskMaxRet))) {
+  Register::Status status = getStatus();
+  while (status.field<Field::TxFifoDataSent>() | status.field<Field::MaxRetransmit>()) {
+    status = getStatus();
     // \todo Handle a timeout here
   }
 
   ce::clear();
 
-  uint8_t status =
-      writeRegister(Register::kStatus, m::kConfigMaskMaxRet | m::kConfigMaskTxDataSent |
-                                           m::kConfigMaskRxDataReady);
+  status.field<Field::RxFifoDataReady>() = 1;
+  status.field<Field::TxFifoDataSent>()  = 1;
+  status.field<Field::MaxRetransmit>()   = 1;
+  status                                 = writeRegister(status);
 
   // Maximum retries exceeded
-  if (status & m::kConfigMaskMaxRet) {
+  if (status.field<Field::MaxRetransmit>()) {
     flushTx();
     return false;
   }
 
   return true;
-}
+}  // namespace nrf24
 
 }  // namespace nrf24

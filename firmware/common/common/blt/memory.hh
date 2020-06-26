@@ -170,14 +170,9 @@ struct ValueProxy<FieldT<PatternT<positions...>, AccessPolicyT>> {
 
   // Read
 
-  explicit constexpr operator uint8_t() const requires can_read<AccessPolicyT>
-  {
-    return get();
-  }
-  explicit constexpr operator bool() const requires can_read<AccessPolicyT>
-  {
-    return get();
-  }
+  constexpr operator int() const requires can_read<AccessPolicyT> { return get(); }
+  constexpr operator uint8_t() const requires can_read<AccessPolicyT> { return get(); }
+  constexpr operator bool() const requires can_read<AccessPolicyT> { return get(); }
 
  protected:
   inline constexpr void set(uint8_t input) requires can_write<AccessPolicyT>&& write_valid
@@ -211,29 +206,34 @@ concept CompatibleField = std::is_same_v<typename FieldT::register_type, registe
 
 template <uint8_t address>
 struct Register {
-  using register_type = Register<address>;
-  Register(uint8_t& value) : value(value) {}
+  using register_type                       = Register<address>;
+  static constexpr uint8_t register_address = address;
+
+  Register(const uint8_t& value = 0) : mValue(value) {}
 
   // Read/write implemented with ValueProxy
   template <CompatibleField<register_type> FieldT>
   constexpr auto field()
   {
-    return ValueProxy<FieldT>{value};
+    return ValueProxy<FieldT>{mValue};
   }
 
   // Write implemented from value type
   template <typename ValueT>
   constexpr void write() requires std::is_base_of_v<detail::value, ValueT>
   {
-    ValueT::apply(value);
+    ValueT::apply(mValue);
   }
 
   // Write implemented with ValueProxy
   template <typename FieldT>
   constexpr void write(uint8_t input)
   {
-    ValueProxy<FieldT>{value} = input;
+    ValueProxy<FieldT>{mValue} = input;
   }
+
+  constexpr uint8_t value() const { return mValue; }
+  constexpr void    setValue(uint8_t value) { mValue = value; }
 
   // Field type
   template <typename PatternT, typename AccessPolicyT = access_policy::read_write>
@@ -245,7 +245,7 @@ struct Register {
   };
 
  protected:
-  uint8_t& value;
+  uint8_t mValue;
 };
 
 }  // namespace blt::memory

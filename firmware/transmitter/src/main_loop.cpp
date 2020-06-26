@@ -10,7 +10,7 @@
 
 SPI_HandleTypeDef* g_hspi = nullptr;
 
-constexpr auto fhSpi()
+auto fhSpi()
 {
   return g_hspi;
 }
