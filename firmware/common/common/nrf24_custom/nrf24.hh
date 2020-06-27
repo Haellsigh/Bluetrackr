@@ -66,7 +66,7 @@ using MaskMaxRetransmit = Register::Config::Field<bits<4>>;
 using EnableCrc         = Register::Config::Field<bits<3>>;
 using CrcEncoding       = Register::Config::Field<bits<2>>;
 using PowerUp           = Register::Config::Field<bits<1>>;
-using Primary           = Register::Config::Field<bits<0>>;
+using PrimaryRx         = Register::Config::Field<bits<0>>;
 // EnableAutoAck
 using AutoAckP5    = Register::EnableAutoAck::Field<bits<5>>;
 using AutoAckP4    = Register::EnableAutoAck::Field<bits<4>>;
@@ -163,8 +163,8 @@ using Crc2bytes = Field::CrcEncoding::value<1>;
 using PowerUp   = Field::PowerUp::value<1>;
 using PowerDown = Field::PowerUp::value<0>;
 // Primary
-using PrimaryRx = Field::Primary::value<1>;
-using PrimaryTx = Field::Primary::value<0>;
+using PrimaryRx = Field::PrimaryRx::value<1>;
+using PrimaryTx = Field::PrimaryRx::value<0>;
 // AutoAckP5
 // AutoAckP4
 // AutoAckP3
@@ -173,7 +173,7 @@ using PrimaryTx = Field::Primary::value<0>;
 // AutoAckP0
 // AutoAckPipes
 using EnableAutoAckAllPipes  = Field::AutoAckPipes::value<0b111111>;
-using DisableAutoAckAllPipes = Field::AutoAckPipes::value<0b111111>;
+using DisableAutoAckAllPipes = Field::AutoAckPipes::value<0b000000>;
 // RxP5
 // RxP4
 // RxP3
@@ -293,14 +293,21 @@ class device : public blt::utils::noncopyable {
 
   template <typename AutoRetransmitDelay = Value::AutoRetransmitDelay250us,
             uint8_t AutoRetransmitCount  = 0>
-  void setupAutoRetransmit();
+  requires(AutoRetransmitCount <= 15) void setupAutoRetransmit();
   void setPayloadSize(uint8_t size);
   template <typename RfPower>
   void setRfPowerLevel();
+  void setChannel(uint8_t channel);
+  void setAddressWidth(uint8_t width);
+  void clearIRQFlags();
+
+  uint8_t getChannel();
+  uint8_t getAddressWidth();
 
   void enableAckPayload();
 
   void openReadingPipe(uint8_t pipe, uint64_t address);
+  void openReadingPipe(uint8_t pipe, const uint8_t* address);
   void openWritingPipe(uint64_t address);
   void openWritingPipe(const uint8_t* address);
 
@@ -313,7 +320,9 @@ class device : public blt::utils::noncopyable {
   void powerUp();
   void powerDown();
 
-  bool write(const uint8_t* buf, uint8_t len, const bool multicast);
+  bool write(const uint8_t* buf, uint8_t len, const bool multicast = false);
+  bool writeFast(const uint8_t* buf, uint8_t len, const bool multicast = false);
+  void read(uint8_t* buf, uint8_t len);
 
  private:
   /**
@@ -346,21 +355,13 @@ class device : public blt::utils::noncopyable {
   uint8_t          flushTx();
   uint8_t          flushRx();
 
-  void clearIRQFlags();
-
-  void    setChannel(uint8_t channel);
-  uint8_t getChannel();
-
-  uint8_t getAddressWidth();
-  void    setAddressWidth(uint8_t width);
-
   // void setAddress(uint8_t pipe, const uint8_t* addr);
 
   void toggleFeatures();
 
   /// Commands
   uint8_t readPayload(uint8_t* buf, uint8_t len);
-  uint8_t writePayload(const uint8_t* buf, uint8_t len, const uint8_t type);
+  uint8_t writePayload(const uint8_t* buf, uint8_t len, const Command type);
 
   void startWriteFast(const uint8_t* buf,
                       uint8_t        len,
@@ -370,8 +371,8 @@ class device : public blt::utils::noncopyable {
  private:
   bool mPVariant = false;
 
-  uint8_t mAddressWidth   = 5;
-  uint8_t mP0RxAddress[5] = {0};
+  uint8_t                mAddressWidth = 5;
+  std::array<uint8_t, 5> mP0RxAddress  = {0, 0, 0, 0, 0};
 
   uint8_t mPayloadSize    = 32;
   bool    mDynamicPayload = false;

@@ -88,11 +88,16 @@ class pin_out {
 
 template <GPIO_TypeDef* port(), uint16_t pin>
 class pin_in {
+  static constexpr uint16_t pin_flag = utils::disjunction_flag<pin>();
+
  public:
   /**
    * \note This is not an atomic function.
    */
-  static constexpr bool read() { return (port()->IDR & pin) != (uint32_t)GPIO_PIN_RESET; }
+  static constexpr bool read()
+  {
+    return (port()->IDR & pin_flag) != (uint32_t)GPIO_PIN_RESET;
+  }
 };
 
 /*

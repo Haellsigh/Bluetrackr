@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-void main_loop();
+void main_loop(SPI_HandleTypeDef* hspi);
 
 #ifdef __cplusplus
 }

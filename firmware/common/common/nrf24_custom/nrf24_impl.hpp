@@ -366,9 +366,9 @@ uint8_t device<spi, csn, ce>::getAddressWidth()
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::setAddressWidth(uint8_t width)
 {
-  width = std::clamp<uint8_t>(width, 3, 5);
+  mAddressWidth = std::clamp<uint8_t>(width, 3, 5);
   Register::SetupAddressWidths aw;
-  aw.field<Field::AddressWidths>() = width - 2;
+  aw.field<Field::AddressWidths>() = mAddressWidth - 2;
 
   writeRegister(aw);
 }
@@ -420,12 +420,12 @@ uint8_t device<spi, csn, ce>::readPayload(uint8_t* buf, uint8_t len)
 
   begin();
 
-  status = spirw(Command::kReadRxPayload);
+  status = spirw(static_cast<uint8_t>(Command::kReadRxPayload));
   while (len--) {
-    *buf++ = spirw(Command::kNop);
+    *buf++ = spirw(static_cast<uint8_t>(Command::kNop));
   }
   while (blank_len--) {
-    spirw(Command::kNop);
+    spirw(static_cast<uint8_t>(Command::kNop));
   }
 
   end();
@@ -435,7 +435,7 @@ uint8_t device<spi, csn, ce>::readPayload(uint8_t* buf, uint8_t len)
 template <typename spi, typename csn, typename ce>
 uint8_t device<spi, csn, ce>::writePayload(const uint8_t* buf,
                                            uint8_t        len,
-                                           const uint8_t  type)
+                                           const Command  type)
 {
   uint8_t status;
 
@@ -444,12 +444,13 @@ uint8_t device<spi, csn, ce>::writePayload(const uint8_t* buf,
 
   begin();
 
-  status = spirw(type);
+  status = spirw(static_cast<uint8_t>(type));
   while (len--) {
     spirw(*buf++);
   }
+  // if len < payload_size, pad with zeros
   while (blank_len--) {
-    spirw(Command::kNone);
+    spirw(static_cast<uint8_t>(Command::kNone));
   }
 
   end();
@@ -465,8 +466,9 @@ void device<spi, csn, ce>::startWriteFast(const uint8_t* buf,
 {
   writePayload(buf, len,
                multicast ? Command::kWriteTxPayloadNoAck : Command::kWriteTxPayload);
-  if (startTx)
+  if (startTx) {
     ce::set();
+  }
 }
 
 /// Public functions
@@ -480,7 +482,6 @@ bool device<spi, csn, ce>::init()
   using namespace blt;
   using namespace blt::time::literals;
 
-  uint8_t setup = 0;
   ce::clear();
   cs::clear();
 
@@ -492,7 +493,7 @@ bool device<spi, csn, ce>::init()
 
   /// Arbitrary default values for the registers
   // Reset config & enable 16-bit CRC
-  auto config                      = Register::Config{};
+  Register::Config config;
   config.field<Field::EnableCrc>() = true;
   config.write<Value::Crc2bytes>();
   writeRegister(config);
@@ -645,12 +646,12 @@ void device<spi, csn, ce>::setDynamicPayload(bool enable)
 
 /**
  * \brief Sets the automatic retransmission parameters.
- * @param ard The auto-retransmit delay.
- * @param arc The auto-retransmit count.
+ * \param AutoRetransmitDelay nrf24::Value type for the auto retransmit delay
+ * \param AutoRetransmitCount Maximum of auto retransmits
  */
 template <typename spi, typename csn, typename ce>
 template <typename AutoRetransmitDelay, uint8_t AutoRetransmitCount>
-void device<spi, csn, ce>::setupAutoRetransmit()
+requires(AutoRetransmitCount <= 15) void device<spi, csn, ce>::setupAutoRetransmit()
 {
   Register::SetupAutoRetransmission setup;
 
@@ -687,18 +688,28 @@ void device<spi, csn, ce>::setRfPowerLevel()
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address)
 {
-  // Special case: cache the address for startListening().
+  openReadingPipe(pipe, reinterpret_cast<uint8_t*>(&address));
+}
+
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, const uint8_t* address)
+{
+  // If this is pipe 0, cache the address. This is needed because openWritingPipe() will
+  // overwrite the pipe 0 address, so startListening() will have to restore it.
   if (pipe == 0) {
-    std::memcpy(mP0RxAddress, &address, mAddressWidth);
+    std::memcpy(mP0RxAddress.data(), &address, mAddressWidth);
+  }
+
+  if (pipe > 5) {
     return;
   }
-  // Write the address width (1 for pipe 2-5 or m_addressWidth for pipe 0-1).
-  writeRegister<Register::RxAddressP0>(reinterpret_cast<const uint8_t*>(&address),
-                                       pipe >= 2 ? 1 : mAddressWidth, pipe);
+
+  // Write the address, width = 1 for pipe 2-5 or m_addressWidth for pipe 0-1.
+  writeRegister<Register::RxAddressP0>(address, pipe >= 2 ? 1 : mAddressWidth, pipe);
   // Set the payload size for the pipe
   writeRegisterOffset<Register::RxPayloadWidthP0>(mPayloadSize, pipe);
   // Enable the address for receiving
-  Register::EnabledRxAddresses en_rx = readRegister();
+  Register::EnabledRxAddresses en_rx = readRegister<Register::EnabledRxAddresses>();
   en_rx.setValue(en_rx.value() | (1 << pipe));
   writeRegister(en_rx);
 }
@@ -706,8 +717,6 @@ void device<spi, csn, ce>::openReadingPipe(uint8_t pipe, uint64_t address)
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::openWritingPipe(uint64_t address)
 {
-  // The radio expects this value LSB first
-  // STM32 are usually little endian which is compatible
   openWritingPipe(reinterpret_cast<uint8_t*>(&address));
 }
 
@@ -728,8 +737,6 @@ template <typename spi, typename csn, typename ce>
 template <typename DataRate>
 bool device<spi, csn, ce>::setDataRate()
 {
-  uint8_t reg;
-
   Register::RfSetup rfsetup = readRegister<Register::RfSetup>();
   rfsetup.write<DataRate>();
   writeRegister(rfsetup);
@@ -742,10 +749,13 @@ bool device<spi, csn, ce>::setDataRate()
 template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::startListening()
 {
+  // Power up and set Primaxy receive
   Register::Config config        = readRegister<Register::Config>();
-  config.field<Field::Primary>() = true;
+  config.field<Field::PowerUp>() = true;
+  config.write<Value::PrimaryRx>();
   writeRegister(config);
 
+  // Clear interrupts
   Register::Status status;
   status.field<Field::RxFifoDataReady>() = true;
   status.field<Field::TxFifoDataSent>()  = true;
@@ -754,9 +764,9 @@ void device<spi, csn, ce>::startListening()
 
   ce::set();
 
-  if (mP0RxAddress[0] > 0) {
+  if (mP0RxAddress[0] > 0 || mP0RxAddress[1] > 0) {
     // Restore pipe 0 address if needed
-    writeRegister<Register::RxAddressP0>(mP0RxAddress, mAddressWidth);
+    writeRegister<Register::RxAddressP0>(mP0RxAddress.data(), mAddressWidth);
   } else {
     // Close pipe 0
     Register::EnabledRxAddresses en_rx_pipes =
@@ -781,27 +791,27 @@ void device<spi, csn, ce>::stopListening()
   // \todo: 450 us is the maximum delay. It can be lower on 1Mbps and 2Mbps datarates
   time::delay(450_us);
 
-  if (Register::Feature feature = readRegister();
+  if (Register::Feature feature = readRegister<Register::Feature>();
       feature.field<Field::AckPayloadEnabled>()) {
     time::delay(450_us);
     flushTx();
   }
 
   // Reset primary
-  Register::Config config        = readRegister();
-  config.field<Field::Primary>() = 0;
+  Register::Config config = readRegister<Register::Config>();
+  config.write<Value::PrimaryTx>();
   writeRegister(config);
 
   // Re-enable pipe 0
-  Register::EnableAutoAck en_rx_pipes   = readRegister();
-  en_rx_pipes.field<Field::AutoAckP0>() = true;
+  Register::EnabledRxAddresses en_rx_pipes = readRegister<Register::EnabledRxAddresses>();
+  en_rx_pipes.field<Field::RxP0>()         = true;
   writeRegister(en_rx_pipes);
 }
 
 template <typename spi, typename csn, typename ce>
 bool device<spi, csn, ce>::available()
 {
-  Register::FifoStatus fifoStatus = readRegister();
+  Register::FifoStatus fifoStatus = readRegister<Register::FifoStatus>();
   return !fifoStatus.field<Field::RxFifoEmpty>();
 }
 
@@ -867,6 +877,44 @@ bool device<spi, csn, ce>::write(const uint8_t* buf, uint8_t len, const bool mul
   }
 
   return true;
-}  // namespace nrf24
+}
+
+/**
+ * \brief Continuous writing, verifying if the *previous* payload was sent.
+ *
+ * \param buf The data buffer.
+ * \param len The length of the data buffer.
+ * \param multicast true to send with noack or false to send with ack.
+ * \returns true if the payload is probably sent. Check the return value of the next call.
+ * OR false if the *previous* payload failed, and current payload wasn't sent.
+ */
+template <typename spi, typename csn, typename ce>
+bool device<spi, csn, ce>::writeFast(const uint8_t* buf,
+                                     uint8_t        len,
+                                     const bool     multicast)
+{
+  Register::Status status = getStatus();
+  // Block until Tx is successful or failed
+  while (status.field<Field::TxFull>()) {
+    // Tx failed, return false
+    if (status.field<Field::MaxRetransmit>()) {
+      status.write<Value::ClearMaxRetransmit>();
+      writeRegister(status);
+      return false;
+    }
+    // \todo: Handle timeout here
+  }
+
+  startWriteFast(buf, len, multicast);
+
+  return true;
+}
+
+template <typename spi, typename csn, typename ce>
+void device<spi, csn, ce>::read(uint8_t* buf, uint8_t len)
+{
+  readPayload(buf, len);
+  clearIRQFlags();
+}
 
 }  // namespace nrf24
