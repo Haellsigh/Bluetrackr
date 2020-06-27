@@ -15,7 +15,7 @@ auto               fhSpi()
 }
 
 const uint8_t nrf24_addresses[][6] = {"1Node", "2Node"};
-uint8_t       tx_buffer[32]        = "test!";
+uint8_t       tx_buffer[]          = "some data from transmitter!!!!\n";
 
 void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi)
 {

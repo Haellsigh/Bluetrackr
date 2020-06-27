@@ -1,6 +1,7 @@
 #include "main_loop.hh"
 
 #include "error_handler.hh"
+#include "usbd_cdc_if.h"
 
 #include <blt/gpio.hh>
 #include <blt/time.hh>
@@ -70,6 +71,7 @@ void main_loop(SPI_HandleTypeDef* hspi)
       led_blue::clear();
       led_orange::set();
       radio.read(rx_buffer, 32);
+      CDC_Transmit_FS(rx_buffer, 32);
     }
     led_orange::clear();
   }
