@@ -21,7 +21,8 @@ constexpr Microseconds operator"" _ms(uint64_t ms)
 
 }  // namespace literals
 
-void init();
-void delay(const Microseconds& t);
+void         init();
+void         delay(const Microseconds& t);
+Microseconds now();
 
 }  // namespace blt::time

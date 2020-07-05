@@ -49,4 +49,14 @@ void delay(const Microseconds& t)
 #endif
 }
 
+Microseconds now()
+{
+#ifdef DWT
+  return {(static_cast<uint64_t>(DWT->CYCCNT) * 1000000) / SystemCoreClock};
+#else
+#warning "blt::time::now() is not yet implemented"
+  return {0};
+#endif
+}
+
 }  // namespace blt::time

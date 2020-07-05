@@ -61,14 +61,13 @@ void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi)
 
   radio.powerUp();
 
-  led_status::clear();
-  time::delay(500_ms);
-  led_status::set();
+  // std::size_t index = 0;
 
   while (true) {
     led_status::toggle();
-    // time::delay(500_ms);
+    // snprintf(reinterpret_cast<char*>(tx_buffer), 32, "%zu\n", index++);
     radio.writeFast(tx_buffer, 32);
+    // time::delay(50_ms);
   }
 
   error_handler();

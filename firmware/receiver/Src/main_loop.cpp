@@ -16,6 +16,7 @@ auto               fhSpi()
 
 const uint8_t nrf24_addresses[][6] = {"1Node", "2Node"};
 uint8_t       rx_buffer[32];
+char          tx_buffer[32] = {0};
 
 void main_loop(SPI_HandleTypeDef* hspi)
 {
@@ -65,14 +66,22 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
   led_green::clear();
 
+  float total = 0;
+
   while (true) {
     led_blue::set();
     while (radio.available()) {
       led_blue::clear();
       led_orange::set();
       radio.read(rx_buffer, 32);
-      CDC_Transmit_FS(rx_buffer, 32);
+      total += 32;
     }
+
+    if (HAL_GetTick() % 100 == 0) {
+      snprintf(tx_buffer, 32, "%f\r\n", total / (HAL_GetTick() / 1000.f));
+      CDC_Transmit_FS(reinterpret_cast<uint8_t*>(tx_buffer), 32);
+    }
+
     led_orange::clear();
   }
 
