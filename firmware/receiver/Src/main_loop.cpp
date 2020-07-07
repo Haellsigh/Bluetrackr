@@ -4,6 +4,8 @@
 #include "usb_device.h"
 #include "usbd_hid.h"
 
+#include <cmath>
+
 #include <blt/gpio.hh>
 #include <blt/time.hh>
 #include <nrf24_custom/nrf24.hh>
@@ -70,21 +72,20 @@ void main_loop(SPI_HandleTypeDef* hspi)
   float total = 0;
 
   struct mouseHID_t {
-    uint8_t buttons;
-    int8_t  x;
-    int8_t  y;
-    int8_t  wheel;
+    int16_t x;
+    int16_t y;
+    int16_t z;
   };
   struct mouseHID_t mouseHID;
-  mouseHID.buttons = 0;
-  mouseHID.x       = 10;
-  mouseHID.y       = 0;
-  mouseHID.wheel   = 0;
+  int16_t           value = 0;
 
   while (true) {
-    mouseHID.x = 10;
-    /*USBD_HID_SendReport(&hUsbDeviceFS, reinterpret_cast<uint8_t*>(&mouseHID),
-                        sizeof(struct mouseHID_t));*/
+    value++;
+    mouseHID.x = (value - 5000) % 18000;
+    mouseHID.y = (value) % 18000;
+    mouseHID.z = (value + 5000) % 18000;
+    USBD_HID_SendReport(&hUsbDeviceFS, reinterpret_cast<uint8_t*>(&mouseHID),
+                        sizeof(struct mouseHID_t));
 
     led_blue::set();
     while (radio.available()) {

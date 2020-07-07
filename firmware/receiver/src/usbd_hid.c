@@ -47,6 +47,8 @@ EndBSPDependencies */
 #include "usbd_hid.h"
 #include "usbd_ctlreq.h"
 
+#include "hid_def.h"
+
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
  * @{
  */
@@ -146,19 +148,19 @@ __ALIGN_BEGIN static uint8_t USBD_HID_CfgFSDesc[USB_HID_CONFIG_DESC_SIZ] __ALIGN
     0x00,                     // iInterface: Index of String Descriptor Describing this interface
 
     /***************************** Descriptor of joystick HID *****************************/
-    0x09,                                 // bLength: Size of descriptor in bytes (9 bytes)
-    HID_DESCRIPTOR_TYPE,                  // bDescriptorType: HID = 0x21
-    0x11, 0x01,                           // bcdHID: HID class specification release number 0x0111
-    0x00,                                 // bCountryCode: Hardware target country
-    0x01,                                 // bNumDescriptors: Number of descriptors
-    HID_REPORT_DESC,                      // bDescriptorType: Descriptor type
-    HID_JOYSTICK_REPORT_DESC_SIZE, 0x00,  // wDescriptorLength: Descriptor length
+    0x09,                 // bLength: Size of descriptor in bytes (9 bytes)
+    HID_DESCRIPTOR_TYPE,  // bDescriptorType: HID = 0x21
+    0x11, 0x01,           // bcdHID: HID class specification release number 0x0111
+    0x00,                 // bCountryCode: Hardware target country
+    0x01,                 // bNumDescriptors: Number of descriptors
+    HID_REPORT_DESC,      // bDescriptorType: Descriptor type
+    HID_HEADTRACKER_REPORT_DESC_SIZE, 0x00,  // wDescriptorLength: Descriptor length
 
     /***************************** Descriptor of joystick endpoint *****************************/
     0x07,                    // bLength: Size of descriptor in bytes (7 bytes)
     USB_DESC_TYPE_ENDPOINT,  // bDescriptorType: Endpoint Descriptor (0x05)
     HID_EPIN_ADDR,           // bEndpointAddress: Endpoint Address
-    0b00000011,              // bmAttributes: Interrupt endpoint
+    0x03,                    // bmAttributes: Interrupt endpoint
     HID_EPIN_SIZE, 0x00,     // wMaxPacketSize: Maximum packet size (4 bytes)
     HID_FS_BINTERVAL,        // bInterval: Polling interval
 };
@@ -186,19 +188,19 @@ __ALIGN_BEGIN static uint8_t USBD_HID_CfgHSDesc[USB_HID_CONFIG_DESC_SIZ] __ALIGN
     0x00,                     // iInterface: Index of String Descriptor Describing this interface
 
     /***************************** Descriptor of joystick HID *****************************/
-    0x09,                                 // bLength: Size of descriptor in bytes (9 bytes)
-    HID_DESCRIPTOR_TYPE,                  // bDescriptorType: HID = 0x21
-    0x11, 0x01,                           // bcdHID: HID class specification release number 0x0111
-    0x00,                                 // bCountryCode: Hardware target country
-    0x01,                                 // bNumDescriptors: Number of descriptors
-    HID_REPORT_DESC,                      // bDescriptorType: Descriptor type
-    HID_JOYSTICK_REPORT_DESC_SIZE, 0x00,  // wDescriptorLength: Descriptor length
+    0x09,                 // bLength: Size of descriptor in bytes (9 bytes)
+    HID_DESCRIPTOR_TYPE,  // bDescriptorType: HID = 0x21
+    0x11, 0x01,           // bcdHID: HID class specification release number 0x0111
+    0x00,                 // bCountryCode: Hardware target country
+    0x01,                 // bNumDescriptors: Number of descriptors
+    HID_REPORT_DESC,      // bDescriptorType: Descriptor type
+    HID_HEADTRACKER_REPORT_DESC_SIZE, 0x00,  // wDescriptorLength: Descriptor length
 
     /***************************** Descriptor of joystick endpoint *****************************/
     0x07,                    // bLength: Size of descriptor in bytes (7 bytes)
     USB_DESC_TYPE_ENDPOINT,  // bDescriptorType: Endpoint Descriptor (0x05)
     HID_EPIN_ADDR,           // bEndpointAddress: Endpoint Address
-    0b00000011,              // bmAttributes: Interrupt endpoint
+    0x03,                    // bmAttributes: Interrupt endpoint
     HID_EPIN_SIZE, 0x00,     // wMaxPacketSize: Maximum packet size (4 bytes)
     HID_HS_BINTERVAL,        // bInterval: Polling interval
 };
@@ -226,19 +228,19 @@ __ALIGN_BEGIN static uint8_t USBD_HID_OtherSpeedCfgDesc[USB_HID_CONFIG_DESC_SIZ]
     0x00,                     // iInterface: Index of String Descriptor Describing this interface
 
     /***************************** Descriptor of joystick HID *****************************/
-    0x09,                                 // bLength: Size of descriptor in bytes (9 bytes)
-    HID_DESCRIPTOR_TYPE,                  // bDescriptorType: HID = 0x21
-    0x11, 0x01,                           // bcdHID: HID class specification release number 0x0111
-    0x00,                                 // bCountryCode: Hardware target country
-    0x01,                                 // bNumDescriptors: Number of descriptors
-    HID_REPORT_DESC,                      // bDescriptorType: Descriptor type
-    HID_JOYSTICK_REPORT_DESC_SIZE, 0x00,  // wDescriptorLength: Descriptor length
+    0x09,                 // bLength: Size of descriptor in bytes (9 bytes)
+    HID_DESCRIPTOR_TYPE,  // bDescriptorType: HID = 0x21
+    0x11, 0x01,           // bcdHID: HID class specification release number 0x0111
+    0x00,                 // bCountryCode: Hardware target country
+    0x01,                 // bNumDescriptors: Number of descriptors
+    HID_REPORT_DESC,      // bDescriptorType: Descriptor type
+    HID_HEADTRACKER_REPORT_DESC_SIZE, 0x00,  // wDescriptorLength: Descriptor length
 
     /***************************** Descriptor of joystick endpoint *****************************/
     0x07,                    // bLength: Size of descriptor in bytes (7 bytes)
     USB_DESC_TYPE_ENDPOINT,  // bDescriptorType: Endpoint Descriptor (0x05)
     HID_EPIN_ADDR,           // bEndpointAddress: Endpoint Address
-    0b00000011,              // bmAttributes: Interrupt endpoint
+    0x03,                    // bmAttributes: Interrupt endpoint
     HID_EPIN_SIZE, 0x00,     // wMaxPacketSize: Maximum packet size (4 bytes)
     HID_HS_BINTERVAL,        // bInterval: Polling interval
 };
@@ -252,7 +254,7 @@ __ALIGN_BEGIN static uint8_t USBD_HID_Desc[USB_HID_DESC_SIZ] __ALIGN_END = {
     0x00,             // bCountryCode: Hardware target country
     0x01,             // bNumDescriptors: Number of descriptors
     HID_REPORT_DESC,  // bDescriptorType: Descriptor type
-    HID_JOYSTICK_REPORT_DESC_SIZE,
+    HID_HEADTRACKER_REPORT_DESC_SIZE,
     0x00,  // wDescriptorLength: Descriptor length
 };
 
@@ -272,54 +274,25 @@ __ALIGN_BEGIN static uint8_t USBD_HID_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_
 };
 
 // clang-format off
-__ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_JOYSTICK_REPORT_DESC_SIZE]  __ALIGN_END =
+__ALIGN_BEGIN static uint8_t HID_HeadTracker_ReportDesc[HID_HEADTRACKER_REPORT_DESC_SIZE]  __ALIGN_END =
 {
-  0x05,   0x01,
-  0x09,   0x02,
-  0xA1,   0x01,
-  0x09,   0x01,
-
-  0xA1,   0x00,
-  0x05,   0x09,
-  0x19,   0x01,
-  0x29,   0x03,
-
-  0x15,   0x00,
-  0x25,   0x01,
-  0x95,   0x03,
-  0x75,   0x01,
-
-  0x81,   0x02,
-  0x95,   0x01,
-  0x75,   0x05,
-  0x81,   0x01,
-
-  0x05,   0x01,
-  0x09,   0x30,
-  0x09,   0x31,
-  0x09,   0x38,
-
-  0x15,   0x81,
-  0x25,   0x7F,
-  0x75,   0x08,
-  0x95,   0x03,
-
-  0x81,   0x06,
-  0xC0,   0x09,
-  0x3c,   0x05,
-  0xff,   0x09,
-
-  0x01,   0x15,
-  0x00,   0x25,
-  0x01,   0x75,
-  0x01,   0x95,
-
-  0x02,   0xb1,
-  0x22,   0x75,
-  0x06,   0x95,
-  0x01,   0xb1,
-
-  0x01,   0xc0
+  HID_USAGE_PAGE (GENERIC_DESKTOP), // HID_USAGE_PAGE (VIRTUAL_REALITY),
+  HID_USAGE (JOYSTICK), // HID_USAGE (HEAD_TRACKER),
+  HID_COLLECTION (APPLICATION),
+    HID_USAGE_PAGE (GENERIC_DESKTOP),
+    HID_USAGE (HEAD_TRACKER),
+    HID_COLLECTION (PHYSICAL),
+      HID_USAGE_PAGE (GENERIC_DESKTOP),
+      HID_USAGE (RX),
+      HID_USAGE (RY),
+      HID_USAGE (RZ),
+      HID_LOGICAL_MINIMUM (2, -18000),
+      HID_LOGICAL_MAXIMUM (2, 18000),
+      HID_REPORT_SIZE (16),
+      HID_REPORT_COUNT (3),
+      HID_INPUT (DATA, VARIABLE, ABSOLUTE),
+    HID_END_COLLECTION (PHYSICAL),
+  HID_END_COLLECTION (APPLICATION),
 };
 // clang-format on
 
@@ -430,8 +403,8 @@ static uint8_t USBD_HID_Setup(USBD_HandleTypeDef* pdev, USBD_SetupReqTypedef* re
 
         case USB_REQ_GET_DESCRIPTOR:
           if (req->wValue >> 8 == HID_REPORT_DESC) {
-            len  = MIN(HID_MOUSE_REPORT_DESC_SIZE, req->wLength);
-            pbuf = HID_MOUSE_ReportDesc;
+            len  = MIN(HID_HEADTRACKER_REPORT_DESC_SIZE, req->wLength);
+            pbuf = HID_HeadTracker_ReportDesc;
           } else if (req->wValue >> 8 == HID_DESCRIPTOR_TYPE) {
             pbuf = USBD_HID_Desc;
             len  = MIN(USB_HID_DESC_SIZ, req->wLength);
