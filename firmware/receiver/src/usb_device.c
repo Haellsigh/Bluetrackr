@@ -24,8 +24,7 @@
 #include "usb_device.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
-#include "usbd_cdc.h"
-#include "usbd_cdc_if.h"
+#include "usbd_hid.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -55,7 +54,23 @@ USBD_HandleTypeDef hUsbDeviceFS;
  * -- Insert your external function declaration here --
  */
 /* USER CODE BEGIN 1 */
+void MX_USB_DEVICE_Disconnect()
+{
+  PCD_HandleTypeDef* hpcd = (PCD_HandleTypeDef*)hUsbDeviceFS.pData;
 
+  if (hpcd != NULL) {
+    HAL_PCD_DevDisconnect(hpcd);
+  }
+}
+
+void MX_USB_DEVICE_Connect()
+{
+  PCD_HandleTypeDef* hpcd = (PCD_HandleTypeDef*)hUsbDeviceFS.pData;
+
+  if (hpcd != NULL) {
+    HAL_PCD_DevConnect(hpcd);
+  }
+}
 /* USER CODE END 1 */
 
 /**
@@ -73,11 +88,7 @@ void MX_USB_DEVICE_Init(void)
   {
     Error_Handler();
   }
-  if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
-  {
-    Error_Handler();
-  }
-  if (USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS) != USBD_OK)
+  if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_HID) != USBD_OK)
   {
     Error_Handler();
   }

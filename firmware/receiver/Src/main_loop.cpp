@@ -1,7 +1,8 @@
 #include "main_loop.hh"
 
 #include "error_handler.hh"
-#include "usbd_cdc_if.h"
+#include "usb_device.h"
+#include "usbd_hid.h"
 
 #include <blt/gpio.hh>
 #include <blt/time.hh>
@@ -68,7 +69,23 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
   float total = 0;
 
+  struct mouseHID_t {
+    uint8_t buttons;
+    int8_t  x;
+    int8_t  y;
+    int8_t  wheel;
+  };
+  struct mouseHID_t mouseHID;
+  mouseHID.buttons = 0;
+  mouseHID.x       = 10;
+  mouseHID.y       = 0;
+  mouseHID.wheel   = 0;
+
   while (true) {
+    mouseHID.x = 10;
+    /*USBD_HID_SendReport(&hUsbDeviceFS, reinterpret_cast<uint8_t*>(&mouseHID),
+                        sizeof(struct mouseHID_t));*/
+
     led_blue::set();
     while (radio.available()) {
       led_blue::clear();
@@ -79,7 +96,7 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
     if (HAL_GetTick() % 100 == 0) {
       snprintf(tx_buffer, 32, "%f\r\n", total / (HAL_GetTick() / 1000.f));
-      CDC_Transmit_FS(reinterpret_cast<uint8_t*>(tx_buffer), 32);
+      // CDC_Transmit_FS(reinterpret_cast<uint8_t*>(tx_buffer), 32);
     }
 
     led_orange::clear();

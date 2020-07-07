@@ -64,7 +64,7 @@
  * -- Insert your variables declaration here --
  */
 /* USER CODE BEGIN VARIABLES */
-
+extern USBD_HandleTypeDef hUsbDeviceFS;
 /* USER CODE END VARIABLES */
 /**
   * @}
@@ -82,7 +82,8 @@ void MX_USB_DEVICE_Init(void);
  * -- Insert functions declaration here --
  */
 /* USER CODE BEGIN FD */
-
+void MX_USB_DEVICE_Disconnect();
+void MX_USB_DEVICE_Connect();
 /* USER CODE END FD */
 /**
   * @}

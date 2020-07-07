@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    system_stm32f3xx.c
+  * @file    system_stm32f0xx.c
   * @author  MCD Application Team
-  * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File.
+  * @brief   CMSIS Cortex-M0 Device Peripheral Access Layer System Source File.
   *
   * 1. This file provides two functions and one global variable to be called from
   *    user application:
   *      - SystemInit(): This function is called at startup just after reset and 
   *                      before branch to main program. This call is made inside
-  *                      the "startup_stm32f3xx.s" file.
+  *                      the "startup_stm32f0xx.s" file.
   *
   *      - SystemCoreClock variable: Contains the core clock (HCLK), it can be used
   *                                  by the user application to setup the SysTick
@@ -19,12 +19,12 @@
   *                                 during program execution.
   *
   * 2. After each device reset the HSI (8 MHz) is used as system clock source.
-  *    Then SystemInit() function is called, in "startup_stm32f3xx.s" file, to
+  *    Then SystemInit() function is called, in "startup_stm32f0xx.s" file, to
   *    configure the system clock before to branch to main program.
   *
   * 3. This file configures the system clock as follows:
   *=============================================================================
-  *                         Supported STM32F3xx device
+  *                         Supported STM32F0xx device
   *-----------------------------------------------------------------------------
   *        System Clock source                    | HSI
   *-----------------------------------------------------------------------------
@@ -34,11 +34,7 @@
   *-----------------------------------------------------------------------------
   *        AHB Prescaler                          | 1
   *-----------------------------------------------------------------------------
-  *        APB2 Prescaler                         | 1
-  *-----------------------------------------------------------------------------
   *        APB1 Prescaler                         | 1
-  *-----------------------------------------------------------------------------
-  *        USB Clock                              | DISABLE
   *-----------------------------------------------------------------------------
   *=============================================================================
   ******************************************************************************
@@ -59,21 +55,21 @@
   * @{
   */
 
-/** @addtogroup stm32f3xx_system
+/** @addtogroup stm32f0xx_system
   * @{
   */
 
-/** @addtogroup STM32F3xx_System_Private_Includes
+/** @addtogroup STM32F0xx_System_Private_Includes
   * @{
   */
 
-#include "stm32f3xx.h"
+#include "stm32f0xx.h"
 
 /**
   * @}
   */
 
-/** @addtogroup STM32F3xx_System_Private_TypesDefinitions
+/** @addtogroup STM32F0xx_System_Private_TypesDefinitions
   * @{
   */
 
@@ -81,7 +77,7 @@
   * @}
   */
 
-/** @addtogroup STM32F3xx_System_Private_Defines
+/** @addtogroup STM32F0xx_System_Private_Defines
   * @{
   */
 #if !defined  (HSE_VALUE) 
@@ -94,16 +90,15 @@
                                                 This value can be provided and adapted by the user application. */
 #endif /* HSI_VALUE */
 
-/*!< Uncomment the following line if you need to relocate your vector Table in
-     Internal SRAM. */
-/* #define VECT_TAB_SRAM */
-#define VECT_TAB_OFFSET  0x0 /*!< Vector Table base offset field.
-                                  This value must be a multiple of 0x200. */
+#if !defined (HSI48_VALUE)
+#define HSI48_VALUE    ((uint32_t)48000000) /*!< Default value of the HSI48 Internal oscillator in Hz.
+                                                 This value can be provided and adapted by the user application. */
+#endif /* HSI48_VALUE */
 /**
   * @}
   */
 
-/** @addtogroup STM32F3xx_System_Private_Macros
+/** @addtogroup STM32F0xx_System_Private_Macros
   * @{
   */
 
@@ -111,7 +106,7 @@
   * @}
   */
 
-/** @addtogroup STM32F3xx_System_Private_Variables
+/** @addtogroup STM32F0xx_System_Private_Variables
   * @{
   */
   /* This variable is updated in three ways:
@@ -131,7 +126,7 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
   * @}
   */
 
-/** @addtogroup STM32F3xx_System_Private_FunctionPrototypes
+/** @addtogroup STM32F0xx_System_Private_FunctionPrototypes
   * @{
   */
 
@@ -139,27 +134,23 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
   * @}
   */
 
-/** @addtogroup STM32F3xx_System_Private_Functions
+/** @addtogroup STM32F0xx_System_Private_Functions
   * @{
   */
 
 /**
-  * @brief  Setup the microcontroller system
+  * @brief  Setup the microcontroller system.
   * @param  None
   * @retval None
   */
 void SystemInit(void)
 {
-/* FPU settings --------------------------------------------------------------*/
-#if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
-  SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
-#endif
-
-#ifdef VECT_TAB_SRAM
-  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
-#else
-  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
-#endif
+  /* NOTE :SystemInit(): This function is called at startup just after reset and 
+                         before branch to main program. This call is made inside
+                         the "startup_stm32f0xx.s" file.
+                         User can setups the default system clock (System clock source, PLL Multiplier
+                         and Divider factors, AHB/APBx prescalers and Flash settings).
+   */
 }
 
 /**
@@ -183,11 +174,11 @@ void SystemInit(void)
   *           - If SYSCLK source is PLL, SystemCoreClock will contain the HSE_VALUE(**)
   *             or HSI_VALUE(*) multiplied/divided by the PLL factors.
   *
-  *         (*) HSI_VALUE is a constant defined in stm32f3xx_hal.h file (default value
+  *         (*) HSI_VALUE is a constant defined in stm32f0xx_hal.h file (default value
   *             8 MHz) but the real value may vary depending on the variations
   *             in voltage and temperature.
   *
-  *         (**) HSE_VALUE is a constant defined in stm32f3xx_hal.h file (default value
+  *         (**) HSE_VALUE is a constant defined in stm32f0xx_hal.h file (default value
   *              8 MHz), user has to ensure that HSE_VALUE is same as the real
   *              frequency of the crystal used. Otherwise, this function may
   *              have wrong result.
@@ -218,32 +209,34 @@ void SystemCoreClockUpdate (void)
       pllmull = RCC->CFGR & RCC_CFGR_PLLMUL;
       pllsource = RCC->CFGR & RCC_CFGR_PLLSRC;
       pllmull = ( pllmull >> 18) + 2;
+      predivfactor = (RCC->CFGR2 & RCC_CFGR2_PREDIV) + 1;
 
-#if defined (STM32F302xE) || defined (STM32F303xE) || defined (STM32F398xx)
-        predivfactor = (RCC->CFGR2 & RCC_CFGR2_PREDIV) + 1;
       if (pllsource == RCC_CFGR_PLLSRC_HSE_PREDIV)
       {
-        /* HSE oscillator clock selected as PREDIV1 clock entry */
-        SystemCoreClock = (HSE_VALUE / predivfactor) * pllmull;
+        /* HSE used as PLL clock source : SystemCoreClock = HSE/PREDIV * PLLMUL */
+        SystemCoreClock = (HSE_VALUE/predivfactor) * pllmull;
       }
+#if defined(STM32F042x6) || defined(STM32F048xx) || defined(STM32F072xB) || defined(STM32F078xx) || defined(STM32F091xC) || defined(STM32F098xx)
+      else if (pllsource == RCC_CFGR_PLLSRC_HSI48_PREDIV)
+      {
+        /* HSI48 used as PLL clock source : SystemCoreClock = HSI48/PREDIV * PLLMUL */
+        SystemCoreClock = (HSI48_VALUE/predivfactor) * pllmull;
+      }
+#endif /* STM32F042x6 || STM32F048xx || STM32F072xB || STM32F078xx || STM32F091xC || STM32F098xx */
       else
       {
-        /* HSI oscillator clock selected as PREDIV1 clock entry */
-        SystemCoreClock = (HSI_VALUE / predivfactor) * pllmull;
-      }
-#else      
-      if (pllsource == RCC_CFGR_PLLSRC_HSI_DIV2)
-      {
-        /* HSI oscillator clock divided by 2 selected as PLL clock entry */
+#if defined(STM32F042x6) || defined(STM32F048xx)  || defined(STM32F070x6) \
+ || defined(STM32F078xx) || defined(STM32F071xB)  || defined(STM32F072xB) \
+ || defined(STM32F070xB) || defined(STM32F091xC) || defined(STM32F098xx)  || defined(STM32F030xC)
+        /* HSI used as PLL clock source : SystemCoreClock = HSI/PREDIV * PLLMUL */
+        SystemCoreClock = (HSI_VALUE/predivfactor) * pllmull;
+#else
+        /* HSI used as PLL clock source : SystemCoreClock = HSI/2 * PLLMUL */
         SystemCoreClock = (HSI_VALUE >> 1) * pllmull;
+#endif /* STM32F042x6 || STM32F048xx || STM32F070x6 || 
+          STM32F071xB || STM32F072xB || STM32F078xx || STM32F070xB ||
+          STM32F091xC || STM32F098xx || STM32F030xC */
       }
-      else
-      {
-        predivfactor = (RCC->CFGR2 & RCC_CFGR2_PREDIV) + 1;
-        /* HSE oscillator clock selected as PREDIV1 clock entry */
-        SystemCoreClock = (HSE_VALUE / predivfactor) * pllmull;
-      }
-#endif /* STM32F302xE || STM32F303xE || STM32F398xx */
       break;
     default: /* HSI used as system clock */
       SystemCoreClock = HSI_VALUE;

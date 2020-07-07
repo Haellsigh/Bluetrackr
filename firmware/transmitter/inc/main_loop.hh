@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-void main_loop(UART_HandleTypeDef* huart, SPI_HandleTypeDef* hspi);
+void main_loop(SPI_HandleTypeDef* hspi);
 
 #ifdef __cplusplus
 }

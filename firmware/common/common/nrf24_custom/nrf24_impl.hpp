@@ -902,6 +902,7 @@ bool device<spi, csn, ce>::writeFast(const uint8_t* buf,
       writeRegister(status);
       return false;
     }
+    status = getStatus();
     // \todo: Handle timeout here
   }
 

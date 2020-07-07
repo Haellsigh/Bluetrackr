@@ -10,10 +10,10 @@ static void error_handler()
   using namespace time::literals;
 
   time::init();
-  using led_status = gpio::pin_out<PB, 3>;
+  using led_power = gpio::pin_out<PB, 9>;
 
   while (true) {
-    led_status::toggle();
+    led_power::toggle();
     time::delay(50_ms);
   }
 }
