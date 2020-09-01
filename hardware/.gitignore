@@ -3,6 +3,7 @@
 *.net
 fp-info-cache
 
-# KiCad outputs (gerbers, bom)
+# KiCad outputs
 out/
 bom/
+*-backups/
