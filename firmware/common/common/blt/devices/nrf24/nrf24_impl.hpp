@@ -1,8 +1,8 @@
 /**
  * \file nrf24_impl.hpp
  */
+#include <blt/devices/nrf24/nrf24.hh>
 #include <blt/utils.hh>
-#include <nrf24_custom/nrf24.hh>
 
 #include <algorithm>  // min/max
 #include <array>
@@ -215,9 +215,8 @@ register_t device<spi, csn, ce>::readRegister()
   begin();
 
   // Register read access
-  /*const uint8/_t status = */ spirw(
-      static_cast<uint8_t>(Command::kReadRegister) |
-      (kReadWriteCommandMask & register_t::register_address));
+  /*const uint8/_t status = */ spirw(static_cast<uint8_t>(Command::kReadRegister) |
+                                     (kReadWriteCommandMask & register_t::register_address));
   const uint8_t reg = spirw(static_cast<uint8_t>(Command::kNop));
 
   end();
@@ -264,8 +263,7 @@ Register::Status device<spi, csn, ce>::writeRegister(register_t reg)
 
 template <typename spi, typename csn, typename ce>
 template <typename register_t>
-Register::Status device<spi, csn, ce>::writeRegisterOffset(register_t reg,
-                                                           uint8_t    address_offset)
+Register::Status device<spi, csn, ce>::writeRegisterOffset(register_t reg, uint8_t address_offset)
 {
   begin();
 
@@ -433,9 +431,7 @@ uint8_t device<spi, csn, ce>::readPayload(uint8_t* buf, uint8_t len)
 }
 
 template <typename spi, typename csn, typename ce>
-uint8_t device<spi, csn, ce>::writePayload(const uint8_t* buf,
-                                           uint8_t        len,
-                                           const Command  type)
+uint8_t device<spi, csn, ce>::writePayload(const uint8_t* buf, uint8_t len, const Command type)
 {
   uint8_t status;
 
@@ -464,8 +460,7 @@ void device<spi, csn, ce>::startWriteFast(const uint8_t* buf,
                                           const bool     multicast,
                                           bool           startTx)
 {
-  writePayload(buf, len,
-               multicast ? Command::kWriteTxPayloadNoAck : Command::kWriteTxPayload);
+  writePayload(buf, len, multicast ? Command::kWriteTxPayloadNoAck : Command::kWriteTxPayload);
   if (startTx) {
     ce::set();
   }
@@ -769,9 +764,8 @@ void device<spi, csn, ce>::startListening()
     writeRegister<Register::RxAddressP0>(mP0RxAddress.data(), mAddressWidth);
   } else {
     // Close pipe 0
-    Register::EnabledRxAddresses en_rx_pipes =
-        readRegister<Register::EnabledRxAddresses>();
-    en_rx_pipes.field<Field::RxP0>() = 0;
+    Register::EnabledRxAddresses en_rx_pipes = readRegister<Register::EnabledRxAddresses>();
+    en_rx_pipes.field<Field::RxP0>()         = 0;
     writeRegister(en_rx_pipes);
   }
 
@@ -889,9 +883,7 @@ bool device<spi, csn, ce>::write(const uint8_t* buf, uint8_t len, const bool mul
  * OR false if the *previous* payload failed, and current payload wasn't sent.
  */
 template <typename spi, typename csn, typename ce>
-bool device<spi, csn, ce>::writeFast(const uint8_t* buf,
-                                     uint8_t        len,
-                                     const bool     multicast)
+bool device<spi, csn, ce>::writeFast(const uint8_t* buf, uint8_t len, const bool multicast)
 {
   Register::Status status = getStatus();
   // Block until Tx is successful or failed

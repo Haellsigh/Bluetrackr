@@ -4,11 +4,10 @@
 #include "usb_device.h"
 #include "usbd_hid.h"
 
-#include <cmath>
-
+#include <blt/devices/nrf24/nrf24.hh>
 #include <blt/gpio.hh>
+#include <blt/messages.hh>
 #include <blt/time.hh>
-#include <nrf24_custom/nrf24.hh>
 #include <spi/spi.hh>
 
 SPI_HandleTypeDef* g_hspi = nullptr;
@@ -18,8 +17,7 @@ auto               fhSpi()
 }
 
 const uint8_t nrf24_addresses[][6] = {"1Node", "2Node"};
-uint8_t       rx_buffer[32];
-char          tx_buffer[32] = {0};
+uint8_t       rx_buffer[blt::message::motion::size];
 
 void main_loop(SPI_HandleTypeDef* hspi)
 {
@@ -69,38 +67,16 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
   led_green::clear();
 
-  float total = 0;
-
-  struct mouseHID_t {
-    int16_t x;
-    int16_t y;
-    int16_t z;
-  };
-  struct mouseHID_t mouseHID;
-  int16_t           value = 0;
-
   while (true) {
-    value++;
-    mouseHID.x = (value - 5000) % 18000;
-    mouseHID.y = (value) % 18000;
-    mouseHID.z = (value + 5000) % 18000;
-    USBD_HID_SendReport(&hUsbDeviceFS, reinterpret_cast<uint8_t*>(&mouseHID),
-                        sizeof(struct mouseHID_t));
-
     led_blue::set();
     while (radio.available()) {
       led_blue::clear();
       led_orange::set();
-      radio.read(rx_buffer, 32);
-      total += 32;
-    }
-
-    if (HAL_GetTick() % 100 == 0) {
-      snprintf(tx_buffer, 32, "%f\r\n", total / (HAL_GetTick() / 1000.f));
-      // CDC_Transmit_FS(reinterpret_cast<uint8_t*>(tx_buffer), 32);
+      radio.read(rx_buffer, blt::message::motion::size);
     }
 
     led_orange::clear();
+    USBD_HID_SendReport(&hUsbDeviceFS, rx_buffer, blt::message::motion::size);
   }
 
   error_handler();

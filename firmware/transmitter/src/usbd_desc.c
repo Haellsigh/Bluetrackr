@@ -66,10 +66,10 @@
 #define USBD_VID     1155
 #define USBD_LANGID_STRING     1033
 #define USBD_MANUFACTURER_STRING     "STMicroelectronics"
-#define USBD_PID_FS     22315
-#define USBD_PRODUCT_STRING_FS     "Bluetrackr receiver"
-#define USBD_CONFIGURATION_STRING_FS     "HID Config"
-#define USBD_INTERFACE_STRING_FS     "HID Interface"
+#define USBD_PID_FS     0xdf11
+#define USBD_PRODUCT_STRING_FS     "STM32 DownLoad Firmware Update"
+#define USBD_CONFIGURATION_STRING_FS     "DFU Config"
+#define USBD_INTERFACE_STRING_FS     "DFU Interface"
 
 /* USER CODE BEGIN PRIVATE_DEFINES */
 
@@ -287,7 +287,7 @@ uint8_t * USBD_FS_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
    * ID */
   Get_SerialNum();
   /* USER CODE BEGIN USBD_FS_SerialStrDescriptor */
-  
+
   /* USER CODE END USBD_FS_SerialStrDescriptor */
   return (uint8_t *) USBD_StringSerial;
 }

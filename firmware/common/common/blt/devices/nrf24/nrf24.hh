@@ -346,9 +346,7 @@ class device : public blt::utils::noncopyable {
   template <typename register_t>
   inline Register::Status writeRegisterOffset(register_t reg, uint8_t address_offset);
   template <typename register_t>
-  Register::Status writeRegister(const uint8_t* buf,
-                                 uint8_t        len,
-                                 uint8_t        address_offset = 0);
+  Register::Status writeRegister(const uint8_t* buf, uint8_t len, uint8_t address_offset = 0);
 
   // Spi commands
   Register::Status getStatus();
@@ -363,10 +361,7 @@ class device : public blt::utils::noncopyable {
   uint8_t readPayload(uint8_t* buf, uint8_t len);
   uint8_t writePayload(const uint8_t* buf, uint8_t len, const Command type);
 
-  void startWriteFast(const uint8_t* buf,
-                      uint8_t        len,
-                      const bool     multicast,
-                      bool           startTx = true);
+  void startWriteFast(const uint8_t* buf, uint8_t len, const bool multicast, bool startTx = true);
 
  private:
   bool mPVariant = false;

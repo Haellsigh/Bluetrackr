@@ -2,10 +2,13 @@
 
 #include "error_handler.hh"
 
+#include <cmath>
+
+#include <blt/devices/nrf24/nrf24.hh>
 #include <blt/gpio.hh>
+#include <blt/messages.hh>
 #include <blt/time.hh>
 #include <blt/uart.hh>
-#include <nrf24_custom/nrf24.hh>
 #include <spi/spi.hh>
 
 SPI_HandleTypeDef* g_hspi = nullptr;
@@ -15,7 +18,6 @@ auto               fhSpi()
 }
 
 const uint8_t nrf24_addresses[][6] = {"1Node", "2Node"};
-uint8_t       tx_buffer[]          = "some data from transmitter!!!!\n";
 
 void main_loop(SPI_HandleTypeDef* hspi)
 {
@@ -38,6 +40,7 @@ void main_loop(SPI_HandleTypeDef* hspi)
   leds::clear();
 
   nrf24::device<spi::device<fhSpi>, csn, ce> radio;
+  blt::message::motion::type                 data;
 
   led_status::set();
   if (!radio.init()) {
@@ -64,14 +67,27 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
   led_status::clear();
 
-  // std::size_t index = 0;
+  int16_t value = 0;
 
   while (true) {
+    if (btn_pair::read()) {
+      dfu_run_bootloader();
+    }
+
+    float sv = sin(value / 1000.f);
+    float cv = cos(value / 1000.f);
+    data.x   = 1000 * sv;
+    data.y   = 1000 * cv;
+    data.z   = value % 1000;
+    data.rx  = (value - 5000) % 18000;
+    data.ry  = (value) % 18000;
+    data.rz  = (value + 5000) % 18000;
+    value++;
+    if (value >= (18000 - 5000))
+      value = -(18000 - 5000);
+
     led_status::toggle();
-    // radio.write(tx_buffer, 32);
-    // snprintf(reinterpret_cast<char*>(tx_buffer), 32, "%zu\n", index++);
-    radio.writeFast(tx_buffer, 32);
-    // time::delay(2_ms);
+    radio.writeFast(reinterpret_cast<uint8_t*>(&data), blt::message::motion::size);
   }
 
   error_handler();

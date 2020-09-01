@@ -54,7 +54,7 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void dfu_run_bootloader();
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -74,6 +74,18 @@ void Error_Handler(void);
 #define NRF_MISO_GPIO_Port GPIOA
 #define NRF_MOSI_Pin GPIO_PIN_7
 #define NRF_MOSI_GPIO_Port GPIOA
+#define IMU_RDY_M_Pin GPIO_PIN_10
+#define IMU_RDY_M_GPIO_Port GPIOB
+#define IMU_CS_M_Pin GPIO_PIN_11
+#define IMU_CS_M_GPIO_Port GPIOB
+#define IMU_CS_AG_Pin GPIO_PIN_12
+#define IMU_CS_AG_GPIO_Port GPIOB
+#define IMU_SCLK_Pin GPIO_PIN_13
+#define IMU_SCLK_GPIO_Port GPIOB
+#define IMU_MISO_Pin GPIO_PIN_14
+#define IMU_MISO_GPIO_Port GPIOB
+#define IMU_MOSI_Pin GPIO_PIN_15
+#define IMU_MOSI_GPIO_Port GPIOB
 #define BTN_PAIR_Pin GPIO_PIN_6
 #define BTN_PAIR_GPIO_Port GPIOB
 #define LED_STATUS_Pin GPIO_PIN_8
