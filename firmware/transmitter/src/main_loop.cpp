@@ -52,8 +52,8 @@ void main_loop(SPI_HandleTypeDef* hspi)
   }
 
   radio.setChannel(40);
-  radio.setRfPowerLevel<nrf24::Value::RfPowerMinus18dBm>();
-  radio.setDataRate<nrf24::Value::RfDatarate1Mbps>();
+  radio.setRfPowerLevel<nrf24::Value::RfPowerMinimum>();
+  radio.setDataRate<nrf24::Value::RfDatarate250kbps>();
   radio.setAutoAck(true);
   radio.setupAutoRetransmit<nrf24::Value::AutoRetransmitDelay1500us, 15>();
   radio.setAddressWidth(5);

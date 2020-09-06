@@ -5,11 +5,10 @@
 
 #include <cstdint>
 
-#include <blt/bit.hh>
 #include <blt/gpio.hh>
 #include <blt/memory.hh>
 
-namespace nrf24 {
+namespace blt::nrf24 {
 
 enum class Command : uint8_t {
   kNone                = 0b00000000,
@@ -324,7 +323,7 @@ class device : public blt::utils::noncopyable {
   bool writeFast(const uint8_t* buf, uint8_t len, const bool multicast = false);
   void read(uint8_t* buf, uint8_t len);
 
- private:
+ protected:
   /**
    * Helper function to write then read data from the spi device.
    */
@@ -363,7 +362,7 @@ class device : public blt::utils::noncopyable {
 
   void startWriteFast(const uint8_t* buf, uint8_t len, const bool multicast, bool startTx = true);
 
- private:
+ protected:
   bool mPVariant = false;
 
   uint8_t                mAddressWidth = 5;
@@ -373,6 +372,6 @@ class device : public blt::utils::noncopyable {
   bool    mDynamicPayload = false;
 };
 
-}  // namespace nrf24
+}  // namespace blt::nrf24
 
 #include "nrf24_impl.hpp"

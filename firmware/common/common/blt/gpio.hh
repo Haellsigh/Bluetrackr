@@ -10,6 +10,8 @@ namespace blt::gpio {
 
 namespace {
 
+struct pin_base {};
+
 /**
  * Generates functions to get the GPIO ports.
  * Ports are named PA, ..., PF.
@@ -47,8 +49,11 @@ PORT_HANDLE_FUNCTION(G)
 
 }  // namespace
 
+template <typename type>
+concept pin = std::is_base_of_v<pin_base, type>;
+
 template <GPIO_TypeDef* port(), uint16_t... pins>
-class pin_out {
+class pin_out : public pin_base {
   static constexpr uint16_t pins_flag = utils::disjunction_flag<pins...>();
 
  public:
@@ -87,17 +92,14 @@ class pin_out {
 };
 
 template <GPIO_TypeDef* port(), uint16_t pin>
-class pin_in {
+class pin_in : public pin_base {
   static constexpr uint16_t pin_flag = utils::disjunction_flag<pin>();
 
  public:
   /**
    * \note This is not an atomic function.
    */
-  static constexpr bool read()
-  {
-    return (port()->IDR & pin_flag) != (uint32_t)GPIO_PIN_RESET;
-  }
+  static constexpr bool read() { return (port()->IDR & pin_flag) != (uint32_t)GPIO_PIN_RESET; }
 };
 
 /*
@@ -114,47 +116,47 @@ class pin_in_inverted : public pin_in<p, pin> {
 };
 */
 
-template <typename pin>
-class invert {
+template <pin p>
+class invert : public pin_base {
  public:
-  static constexpr inline void write(bool v) { pin::write(!v); }
-  static constexpr inline void set() { pin::clear(); }
-  static constexpr inline void clear() { pin::set(); }
-  static constexpr inline bool read() { return !pin::read(); }
+  static constexpr inline void write(bool v) { perror::write(!v); }
+  static constexpr inline void set() { p::clear(); }
+  static constexpr inline void clear() { p::set(); }
+  static constexpr inline bool read() { return !p::read(); }
 };
 
 /**
  * \brief Settling time for pin_out.
  *
- * \tparam pin The pin to settle.
+ * \tparam p The pin to settle.
  * \tparam us  The settling time in microseconds.
  */
-template <typename pin, uint32_t us>
-class settle {
+template <pin p, uint32_t us>
+class settle : public pin_base {
   static constexpr time::Microseconds mTime{us};
 
  public:
   static constexpr inline void write(bool v)
   {
-    pin::write(v);
+    p::write(v);
     time::delay(mTime);
   }
 
   static constexpr inline void set()
   {
-    pin::set();
+    p::set();
     time::delay(mTime);
   }
 
   static constexpr inline void clear()
   {
-    pin::clear();
+    p::clear();
     time::delay(mTime);
   }
 
   static constexpr inline void toggle()
   {
-    pin::toggle();
+    p::toggle();
     time::delay(mTime);
   }
 };

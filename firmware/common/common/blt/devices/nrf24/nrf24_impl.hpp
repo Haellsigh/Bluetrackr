@@ -1,6 +1,7 @@
 /**
  * \file nrf24_impl.hpp
  */
+#pragma once
 #include <blt/devices/nrf24/nrf24.hh>
 #include <blt/utils.hh>
 
@@ -8,7 +9,7 @@
 #include <array>
 #include <cstring>  // memcpy
 
-namespace nrf24 {
+namespace blt::nrf24 {
 
 /**
  * \enum Command
@@ -910,4 +911,4 @@ void device<spi, csn, ce>::read(uint8_t* buf, uint8_t len)
   clearIRQFlags();
 }
 
-}  // namespace nrf24
+}  // namespace blt::nrf24

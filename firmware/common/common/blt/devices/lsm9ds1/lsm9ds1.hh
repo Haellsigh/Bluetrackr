@@ -2,13 +2,22 @@
 
 #include <cstdint>
 
+#include <blt/gpio.hh>
 #include <blt/utils.hh>
 
-namespace lsm9ds1 {
+namespace blt::lsm9ds1 {
 
-template<typename bus, typename csn, typename ce>
+template <typename bus, gpio::pin cs_ag, gpio::pin cs_m>
 class device : public blt::utils::noncopyable {
+ public:
+  void                            init();
+  std::tuple<float, float, float> readGyro();
+  std::tuple<float, float, float> readAccel();
+  // std::tuple<float, float, float> readMag();
 
+ protected:
 }
 
-}  // namespace lsm9ds1
+}  // namespace blt::lsm9ds1
+
+#include "lsm9ds1_impl.hh"
