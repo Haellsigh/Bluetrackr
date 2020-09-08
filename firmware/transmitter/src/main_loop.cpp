@@ -4,6 +4,7 @@
 
 #include <cmath>
 
+#include <blt/devices/lsm9ds1/lsm9ds1.hh>
 #include <blt/devices/nrf24/nrf24.hh>
 #include <blt/gpio.hh>
 #include <blt/messages.hh>
@@ -11,15 +12,21 @@
 #include <blt/uart.hh>
 #include <spi/spi.hh>
 
-SPI_HandleTypeDef* g_hspi = nullptr;
-auto               fhSpi()
+SPI_HandleTypeDef* g_hspi1 = nullptr;
+auto               fhSpi1()
 {
-  return g_hspi;
+  return g_hspi1;
+}
+
+SPI_HandleTypeDef* g_hspi2 = nullptr;
+auto               fhSpi2()
+{
+  return g_hspi2;
 }
 
 const uint8_t nrf24_addresses[][6] = {"1Node", "2Node"};
 
-void main_loop(SPI_HandleTypeDef* hspi)
+void main_loop(SPI_HandleTypeDef* hspi1, SPI_HandleTypeDef* hspi2)
 {
   using namespace blt;
   using namespace gpio;
@@ -31,16 +38,28 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
   using btn_pair = gpio::pin_in<PB, 6>;
 
-  using csn = gpio::pin_out<PA, 4>;
-  using ce  = gpio::pin_out<PA, 3>;
+  using csn_nrf = gpio::pin_out<PA, 4>;
+  using ce_nrf  = gpio::pin_out<PA, 3>;
+  using cs_ag   = gpio::pin_out<PB, 12>;
+  using cs_m    = gpio::pin_out<PB, 11>;
 
-  g_hspi = hspi;
+  // Allows accessing the bootloading before any bullshit :)
+  if (btn_pair::read()) {
+    dfu_run_bootloader();
+  }
+
+  g_hspi1 = hspi1;
+  g_hspi2 = hspi2;
+
+  using spi1 = spi::device<fhSpi1>;
+  using spi2 = spi::device<fhSpi2>;
 
   time::init();
   leds::clear();
 
-  nrf24::device<spi::device<fhSpi>, csn, ce> radio;
-  blt::message::motion::type                 data;
+  nrf24::device<spi1, csn_nrf, ce_nrf> radio;
+  lsm9ds1::device<spi2, cs_ag, cs_m>   imu;
+  blt::message::motion::type           data;
 
   led_status::set();
   if (!radio.init()) {
@@ -48,6 +67,10 @@ void main_loop(SPI_HandleTypeDef* hspi)
   }
 
   if (!radio.test()) {
+    error_handler();
+  }
+
+  if (!imu.init()) {
     error_handler();
   }
 
@@ -67,24 +90,20 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
   led_status::clear();
 
-  int16_t value = 0;
-
   while (true) {
     if (btn_pair::read()) {
       dfu_run_bootloader();
     }
 
-    float sv = sin(value / 1000.f);
-    float cv = cos(value / 1000.f);
-    data.x   = 1000 * sv;
-    data.y   = 1000 * cv;
-    data.z   = value % 1000;
-    data.rx  = (value - 5000) % 18000;
-    data.ry  = (value) % 18000;
-    data.rz  = (value + 5000) % 18000;
-    value++;
-    if (value >= (18000 - 5000))
-      value = -(18000 - 5000);
+    const auto [ax, ay, az] = imu.read_accel();
+    const auto [gx, gy, gz] = imu.read_gyro();
+
+    data.x  = ax;
+    data.y  = ay;
+    data.z  = az;
+    data.rx = gx;
+    data.ry = gy;
+    data.rz = gz;
 
     led_status::toggle();
     radio.writeFast(reinterpret_cast<uint8_t*>(&data), blt::message::motion::size);

@@ -119,7 +119,7 @@ class pin_in_inverted : public pin_in<p, pin> {
 template <pin p>
 class invert : public pin_base {
  public:
-  static constexpr inline void write(bool v) { perror::write(!v); }
+  static constexpr inline void write(bool v) { p::write(!v); }
   static constexpr inline void set() { p::clear(); }
   static constexpr inline void clear() { p::set(); }
   static constexpr inline bool read() { return !p::read(); }

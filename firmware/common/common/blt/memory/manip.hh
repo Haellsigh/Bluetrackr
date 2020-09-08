@@ -1,6 +1,8 @@
+#pragma once
+
 #include "utilities.hh"
 
-namespace blt::memory {
+namespace blt::memory2 {
 
 /*!
  * Access policies for registers and register fields
@@ -69,11 +71,12 @@ template <uint16_t            register_address,
           uint8_t             register_size = 8,
           access_policy::type register_ap   = access_policy::rw>
 struct reg : public reg_base {
-  static constexpr uint8_t size    = register_size;
-  static constexpr uint8_t address = register_address;
-  using ap                         = register_ap;
-  using register_t                 = reg<address, size, ap>;
-  using value_t                    = utilities::smallestint_t<size>;
+  static constexpr uint8_t size       = register_size;
+  static constexpr uint8_t size_bytes = utilities::bytecount<size>;
+  static constexpr uint8_t address    = register_address;
+  using ap                            = register_ap;
+  using register_t                    = reg<address, size, ap>;
+  using value_t                       = utilities::smallestint_t<size>;
 
   reg(value_t value = 0) : m_value(value) {}
 
@@ -85,10 +88,17 @@ struct reg : public reg_base {
 
   auto get() const { return m_value; }
 
+  template <std::size_t i>
+  requires(i < size_bytes) uint8_t getByte() const
+  {
+    return ((m_value >> (i * 8)) & 0xFF);
+  }
+  uint8_t getByte(std::size_t i) const { return ((m_value >> (i * 8)) & 0xFF); }
+
   template <compatible_field<register_t> field_t>
   requires field_t::ap::can_read auto get() const
   {
-    return (m_value >> field_t::offset) & ~(((1 << size) - 1) << field_t::size);
+    return (m_value >> field_t::offset) & ~(((value_t{1} << size) - 1) << field_t::size);
   }
 
   void set(value_t v) { m_value = v; }
@@ -96,12 +106,12 @@ struct reg : public reg_base {
   template <compatible_field<register_t> field_t>
   requires field_t::ap::can_write void set(typename field_t::value_t v)
   {
-    constexpr auto mask = (((1 << field_t::size) - 1) << field_t::offset);
-    m_value             = (m_value & (~mask)) | (mask & (v << field_t::offset));
+    constexpr auto mask = (((value_t{1} << field_t::size) - 1) << field_t::offset);
+    m_value             = (m_value & (~mask)) | (mask & (value_t{v} << field_t::offset));
   }
 
  private:
   value_t m_value;
 };
 
-}  // namespace blt::memory
+}  // namespace blt::memory2
