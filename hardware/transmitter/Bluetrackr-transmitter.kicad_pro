@@ -315,6 +315,8 @@
         "microvia_diameter": 0.7,
         "microvia_drill": 0.35,
         "name": "Default",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2,
         "via_diameter": 0.7,
         "via_drill": 0.35,
@@ -337,6 +339,8 @@
           "VBUS",
           "VCC"
         ],
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.4,
         "via_diameter": 0.7,
         "via_drill": 0.35,
@@ -354,8 +358,9 @@
       "idf": "",
       "netlist": "Bluetrackr-transmitter.net",
       "specctra_dsn": "",
-      "step": "",
-      "vmrl": ""
+      "step": "out/Bluetrackr-transmitter.step",
+      "vmrl": "",
+      "vrml": ""
     },
     "page_layout_descr_file": ""
   },

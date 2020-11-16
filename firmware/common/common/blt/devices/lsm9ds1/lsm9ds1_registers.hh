@@ -60,7 +60,7 @@ struct Int2AGControl : reg<0x0D> {
 
 struct WhoAmI : reg<0x0F> {};
 
-struct Control1Gyro : reg<0x10> {
+struct Control1AG : reg<0x10> {
   struct Bandwidth : reg::field<0, 2> {
     static constexpr field::value_t kSmall  = 0b00;
     static constexpr field::value_t kTiny   = 0b01;
@@ -83,22 +83,29 @@ struct Control1Gyro : reg<0x10> {
   };
 };
 
-struct Control2Gyro : reg<0x11> {
+struct Control2AG : reg<0x11> {
   using OutputSelection = reg::field<0, 2>;
   using IntSelection    = reg::field<2, 2>;
 };
 
-struct Control3Gyro : reg<0x12> {
+struct Control3AG : reg<0x12> {
   using HighPassCutoffFreq = reg::field<0, 4>;  //!< Between 0 and 9
   using HighPassEnable     = reg::field<6>;     //!< 1: enable
   using LowPowerEnable     = reg::field<7>;     //!< 1: enable
 };
 
 struct GyroOrientation : reg<0x13> {
-  using UserOrientation = reg::field<0, 3>;
-  using FlipZ           = reg::field<3>;
-  using FlipY           = reg::field<4>;
-  using FlipX           = reg::field<5>;
+  struct UserOrientation : reg::field<0, 3> {
+    static constexpr field::value_t kXYZ = 0b000;
+    static constexpr field::value_t kXZY = 0b001;
+    static constexpr field::value_t kYXZ = 0b010;
+    static constexpr field::value_t kYZX = 0b011;
+    static constexpr field::value_t kZXY = 0b100;
+    static constexpr field::value_t kZYX = 0b101;
+  };
+  using FlipZ = reg::field<3>;
+  using FlipY = reg::field<4>;
+  using FlipX = reg::field<5>;
 };
 
 struct GyroIntSource : reg<0x14> {
@@ -115,38 +122,26 @@ struct Temperature : reg<0x15, 16> {
   using Value = reg::field<0, 12>;
 
   using Low  = reg::field<0, 8>;
-  using High = reg::field<8, 4>;
+  using High = reg::field<8, 4, access_policy::ro, int16_t>;
 };
 
-struct Status1 : reg<0x17> {
-  using XLDA        = reg::field<0>;
-  using GDA         = reg::field<1>;
-  using TDA         = reg::field<2>;
-  using BOOT_STATUS = reg::field<3>;
-  using INACT       = reg::field<4>;
-  using IG_G        = reg::field<5>;
-  using IG_XL       = reg::field<6>;
+struct Status1AG : reg<0x17> {
+  using DataAvailableAcc  = reg::field<0>;
+  using DataAvailableGyro = reg::field<1>;
+  using DataAvailableTemp = reg::field<2>;
+  using BOOT_STATUS       = reg::field<3>;
+  using INACT             = reg::field<4>;
+  using IG_G              = reg::field<5>;
+  using IG_XL             = reg::field<6>;
 };
 
 struct Gyro : reg<0x18, 48> {
-  using X = reg::field<0, 16>;
-  using Y = reg::field<16, 16>;
-  using Z = reg::field<32, 16>;
+  using X = reg::field<0, 16, access_policy::ro, int16_t>;
+  using Y = reg::field<16, 16, access_policy::ro, int16_t>;
+  using Z = reg::field<32, 16, access_policy::ro, int16_t>;
 };
-/*struct GyroX : reg<0x18, 16> {
-  using Low  = reg::field<0, 8>;
-  using High = reg::field<8, 8>;
-};
-struct GyroY : reg<0x1A, 16> {
-  using Low  = reg::field<0, 8>;
-  using High = reg::field<8, 8>;
-};
-struct GyroZ : reg<0x1C, 16> {
-  using Low  = reg::field<0, 8>;
-  using High = reg::field<8, 8>;
-};*/
 
-struct Control4Gyro : reg<0x1E> {
+struct Control4AG : reg<0x1E> {
   struct Int4D : reg::field<0> {
     static constexpr field::value_t kUse6D = 0;
     static constexpr field::value_t kUse4D = 0;
@@ -154,10 +149,10 @@ struct Control4Gyro : reg<0x1E> {
   using LatchedInt    = reg::field<1>;
   using XOutputEnable = reg::field<3>;
   using YOutputEnable = reg::field<4>;
-  using ZOutputEnable = reg::field<3>;
+  using ZOutputEnable = reg::field<5>;
 };
 
-struct Control5Acc : reg<0x1F> {
+struct Control5AG : reg<0x1F> {
   using XOutputEnable = reg::field<3>;
   using YOutputEnable = reg::field<4>;
   using ZOutputEnable = reg::field<5>;
@@ -169,7 +164,7 @@ struct Control5Acc : reg<0x1F> {
   };
 };
 
-struct Control6Acc : reg<0x20> {
+struct Control6AG : reg<0x20> {
   struct FilterBandwidth : reg::field<0, 2> {
     static constexpr field::value_t k408Hz = 0b00;
     static constexpr field::value_t k211Hz = 0b01;
@@ -197,22 +192,19 @@ struct Control6Acc : reg<0x20> {
   };
 };
 
-struct Control7Acc : reg<0x21> {
-  using HPIS1 = reg::field<0>;
-  struct FDS : reg::field<2> {
-    static constexpr field::value_t kBypassInternalFilter = 0;
-    static constexpr field::value_t kUseInternalFilter    = 1;
-  };
-  struct LPFilterCutoff : reg::field<5, 2> {
+struct Control7AG : reg<0x21> {
+  using HPIS1         = reg::field<0>;
+  using DisableFilter = reg::field<2>;
+  struct FilterCutoff : reg::field<5, 2> {
     static constexpr field::value_t kOdr_50  = 0b00;
     static constexpr field::value_t kOdr_100 = 0b01;
     static constexpr field::value_t kOdr_9   = 0b10;
     static constexpr field::value_t kOdr_400 = 0b11;
   };
-  using HR = reg::field<7>;
+  using EnableHighResolution = reg::field<7>;
 };
 
-struct Control8 : reg<0x22> {
+struct Control8AG : reg<0x22> {
   struct SWReset : reg::field<0> {
     static constexpr field::value_t kResetDevice = 1;
   };
@@ -228,7 +220,7 @@ struct Control8 : reg<0x22> {
   using Boot               = reg::field<7>;
 };
 
-struct Control9 : reg<0x23> {
+struct Control9AG : reg<0x23> {
   using StopOnFifoThreshold   = reg::field<0>;
   using FifoEnable            = reg::field<1>;
   using I2CDisable            = reg::field<2>;
@@ -237,7 +229,7 @@ struct Control9 : reg<0x23> {
   using GyroSleepEnable       = reg::field<6>;
 };
 
-struct Control10 : reg<0x24> {
+struct Control10AG : reg<0x24> {
   using AccSelfTestEnable  = reg::field<0>;
   using GyroSelfTestEnable = reg::field<2>;
 };
@@ -252,7 +244,7 @@ struct AccIntSource : reg<0x26> {
   using Active = reg::field<6>;
 };
 
-struct Status2 : reg<0x27> {
+struct Status2AG : reg<0x27> {
   using XLDA        = reg::field<0>;
   using GDA         = reg::field<1>;
   using TDA         = reg::field<2>;
@@ -263,27 +255,13 @@ struct Status2 : reg<0x27> {
 };
 
 struct Acc : reg<0x28, 48> {
-  using X = reg::field<0, 16>;
-  using Y = reg::field<16, 16>;
-  using Z = reg::field<32, 16>;
+  using X = reg::field<0, 16, access_policy::ro, int16_t>;
+  using Y = reg::field<16, 16, access_policy::ro, int16_t>;
+  using Z = reg::field<32, 16, access_policy::ro, int16_t>;
 };
-/*
-struct AccX : reg<0x28, 16> {
-  using Low  = reg::field<0, 8>;
-  using High = reg::field<8, 8>;
-};
-struct AccY : reg<0x2A, 16> {
-  using Low  = reg::field<0, 8>;
-  using High = reg::field<8, 8>;
-};
-struct AccZ : reg<0x2C, 16> {
-  using Low  = reg::field<0, 8>;
-  using High = reg::field<8, 8>;
-};
-*/
 
 struct FifoControl : reg<0x2E> {
-  using FifoThresholdLevel = reg::field<0, 5>;
+  using FifoThresholdLevel = reg::field<0, 5>;  //!<  < 31
   struct FifoModeSelection : reg::field<5, 3> {
     static constexpr field::value_t kOff                    = 0b000;
     static constexpr field::value_t kFifo                   = 0b001;
@@ -339,5 +317,125 @@ struct GyroIntDuration : reg<0x37> {
 /*!
  * Magnetometer registers
  */
+struct MagXOffset : reg<0x05, 16> {
+  using Offset = reg::field<0, 16, access_policy::rw, int16_t>;
+};
+
+struct MagYOffset : reg<0x07, 16> {
+  using Offset = reg::field<0, 16, access_policy::rw, int16_t>;
+};
+
+struct MagZOffset : reg<0x09, 16> {
+  using Offset = reg::field<0, 16, access_policy::rw, int16_t>;
+};
+
+// struct WhoAmi {}; // same as acc/gyro
+
+struct Ctrl1M : reg<0x20> {
+  using EnableSelfTest = reg::field<0>;
+  using EnableFastODR  = reg::field<1>;
+  struct DataRate : reg::field<2, 3> {
+    static constexpr field::value_t k0_625Hz = 0b000;
+    static constexpr field::value_t k1_25Hz  = 0b001;
+    static constexpr field::value_t k2_5Hz   = 0b010;
+    static constexpr field::value_t k5Hz     = 0b011;
+    static constexpr field::value_t k10Hz    = 0b100;
+    static constexpr field::value_t k20Hz    = 0b101;
+    static constexpr field::value_t k40Hz    = 0b110;
+    static constexpr field::value_t k80Hz    = 0b111;
+  };
+  struct XYOperativeMode : reg::field<5, 2> {
+    static constexpr field::value_t kLowPerf       = 0b00;
+    static constexpr field::value_t kMediumPerf    = 0b01;
+    static constexpr field::value_t kHighPerf      = 0b10;
+    static constexpr field::value_t kUltraHighPerf = 0b11;
+  };
+  using EnableTemperatureComp = reg::field<7>;
+};
+
+struct Ctrl2M : reg<0x21> {
+  using SoftReset    = reg::field<2>;
+  using RebootMemory = reg::field<3>;
+  struct ScaleSelection : reg::field<5, 2> {
+    static constexpr field::value_t k4gauss  = 0b00;
+    static constexpr field::value_t k8gauss  = 0b01;
+    static constexpr field::value_t k12gauss = 0b10;
+    static constexpr field::value_t k16gauss = 0b11;
+  };
+};
+
+struct Ctrl3M : reg<0x22> {
+  struct OperatingMode : reg::field<0, 2> {
+    static constexpr field::value_t kContinuous       = 0b00;
+    static constexpr field::value_t kSingleConversion = 0b01;
+    static constexpr field::value_t kPowerDown        = 0b10;
+    static constexpr field::value_t kPowerDown2       = 0b11;
+  };
+  struct SPIWrite : reg::field<2> {
+    static constexpr field::value_t kWriteOnly = 0;
+    static constexpr field::value_t kReadWrite = 1;
+  };
+  using LowPower   = reg::field<5>;
+  using I2CDisable = reg::field<7>;
+};
+
+struct Ctrl4M : reg<0x23> {
+  struct Endianness : reg::field<1> {
+    static constexpr field::value_t kLSBFirst = 0;
+    static constexpr field::value_t kMSBFirst = 1;
+  };
+  struct ZOperativeMode : reg::field<2, 2> {
+    static constexpr field::value_t kLowPerf       = 0b00;
+    static constexpr field::value_t kMediumPerf    = 0b01;
+    static constexpr field::value_t kHighPerf      = 0b10;
+    static constexpr field::value_t kUltraHighPerf = 0b11;
+  };
+};
+
+struct Ctrl5M : reg<0x24> {
+  using BlockDataUpdate = reg::field<6>;
+  using FastRead        = reg::field<7>;
+};
+
+struct MStatus : reg<0x27> {
+  using XDataReady     = reg::field<0>;
+  using YDataReady     = reg::field<1>;
+  using ZDataReady     = reg::field<2>;
+  using XYZDataReady   = reg::field<3>;
+  using XDataOverrun   = reg::field<4>;
+  using YDataOverrun   = reg::field<5>;
+  using ZDataOverrun   = reg::field<6>;
+  using XYZDataOverrun = reg::field<7>;
+};
+
+struct Mag : reg<0x28, 48> {
+  using X = reg::field<0, 16, access_policy::ro, int16_t>;
+  using Y = reg::field<16, 16, access_policy::ro, int16_t>;
+  using Z = reg::field<32, 16, access_policy::ro, int16_t>;
+};
+
+struct IntConfigM : reg<0x30> {
+  using Enable  = reg::field<0>;
+  using Latch   = reg::field<1>;
+  using Active  = reg::field<2>;
+  using EnableZ = reg::field<5>;
+  using EnableY = reg::field<6>;
+  using EnableX = reg::field<7>;
+};
+
+struct IntSourceM : reg<0x31> {
+  using Int                      = reg::field<0>;
+  using MeasurementRangeOverflow = reg::field<1>;
+  using ZNegativeThreshold       = reg::field<2>;
+  using YNegativeThreshold       = reg::field<3>;
+  using XNegativeThreshold       = reg::field<4>;
+  using ZPositiveThreshold       = reg::field<5>;
+  using YPositiveThreshold       = reg::field<6>;
+  using XPositiveThreshold       = reg::field<7>;
+};
+
+struct IntThresholdM : reg<0x32, 16> {
+  using Threshold = reg::field<0, 15>;
+};
 
 }  // namespace blt::lsm9ds1

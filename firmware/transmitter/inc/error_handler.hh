@@ -1,19 +1,20 @@
 #pragma once
 
+#include <blt/chrono.hh>
 #include <blt/gpio.hh>
-#include <blt/time.hh>
+
+#include "main_loop.hh"
 
 static void error_handler()
 {
   using namespace blt;
   using namespace gpio;
-  using namespace time::literals;
+  using namespace chrono::literals;
 
-  time::init();
   using led_power = gpio::pin_out<PB, 9>;
 
   while (true) {
     led_power::toggle();
-    time::delay(50_ms);
+    chrono::delay(50ms);
   }
 }

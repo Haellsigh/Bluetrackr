@@ -1,7 +1,7 @@
 #pragma once
 
+#include <blt/chrono.hh>
 #include <blt/hal_include.hh>
-#include <blt/time.hh>
 #include <blt/utils.hh>
 
 #include <initializer_list>
@@ -133,31 +133,31 @@ class invert : public pin_base {
  */
 template <pin p, uint32_t us>
 class settle : public pin_base {
-  static constexpr time::Microseconds mTime{us};
+  static constexpr chrono::clock::duration mTime{us};
 
  public:
   static constexpr inline void write(bool v)
   {
     p::write(v);
-    time::delay(mTime);
+    chrono::delay(mTime);
   }
 
   static constexpr inline void set()
   {
     p::set();
-    time::delay(mTime);
+    chrono::delay(mTime);
   }
 
   static constexpr inline void clear()
   {
     p::clear();
-    time::delay(mTime);
+    chrono::delay(mTime);
   }
 
   static constexpr inline void toggle()
   {
     p::toggle();
-    time::delay(mTime);
+    chrono::delay(mTime);
   }
 };
 

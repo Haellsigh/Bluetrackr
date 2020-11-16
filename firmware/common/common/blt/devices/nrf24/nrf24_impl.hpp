@@ -476,16 +476,16 @@ template <typename spi, typename csn, typename ce>
 bool device<spi, csn, ce>::init()
 {
   using namespace blt;
-  using namespace blt::time::literals;
+  using namespace blt::chrono::literals;
 
   ce::clear();
   cs::clear();
 
   // Section 5.7: Power on Reset
-  time::delay(100_ms);
+  chrono::delay(100ms);
 
   // Power up delay
-  time::delay(5_ms);
+  chrono::delay(5ms);
 
   /// Arbitrary default values for the registers
   // Reset config & enable 16-bit CRC
@@ -780,15 +780,15 @@ template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::stopListening()
 {
   using namespace blt;
-  using namespace blt::time::literals;
+  using namespace blt::chrono::literals;
 
   ce::clear();
   // \todo: 450 us is the maximum delay. It can be lower on 1Mbps and 2Mbps datarates
-  time::delay(450_us);
+  chrono::delay(450us);
 
   if (Register::Feature feature = readRegister<Register::Feature>();
       feature.field<Field::AckPayloadEnabled>()) {
-    time::delay(450_us);
+    chrono::delay(450us);
     flushTx();
   }
 
@@ -823,7 +823,7 @@ template <typename spi, typename csn, typename ce>
 void device<spi, csn, ce>::powerUp()
 {
   using namespace blt;
-  using namespace blt::time::literals;
+  using namespace blt::chrono::literals;
 
   Register::Config config = readRegister<Register::Config>();
 
@@ -832,7 +832,7 @@ void device<spi, csn, ce>::powerUp()
     config.field<Field::PowerUp>() = true;
     writeRegister(config);
     // Wait for power up
-    time::delay(5_ms);
+    chrono::delay(5ms);
   }
 }
 

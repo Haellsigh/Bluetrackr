@@ -8,9 +8,9 @@ namespace motion {
 
 struct type {
   int16_t x = 0, y = 0, z = 0;
-  int16_t rx = 0, ry = 0, rz = 0;
+  int16_t roll = 0, pitch = 0, yaw = 0;
 };
-constexpr uint8_t size = sizeof(type);
+constexpr int size = sizeof(type);
 
 }  // namespace motion
 

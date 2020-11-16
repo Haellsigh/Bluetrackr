@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-void main_loop(SPI_HandleTypeDef* hspi);
+void main_loop(SPI_HandleTypeDef* hspi, TIM_HandleTypeDef* htim);
 
 #ifdef __cplusplus
 }

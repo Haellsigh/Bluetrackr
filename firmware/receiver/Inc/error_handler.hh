@@ -1,15 +1,13 @@
 #pragma once
 
+#include <blt/chrono.hh>
 #include <blt/gpio.hh>
-#include <blt/time.hh>
 
 static void error_handler()
 {
   using namespace blt;
   using namespace gpio;
-  using namespace time::literals;
-
-  time::init();
+  using namespace chrono::literals;
 
   using led_red    = gpio::pin_out<PC, 6>;
   using led_blue   = gpio::pin_out<PC, 7>;
@@ -19,6 +17,6 @@ static void error_handler()
 
   while (true) {
     leds::toggle();
-    time::delay(50_ms);
+    chrono::delay(50ms);
   }
 }

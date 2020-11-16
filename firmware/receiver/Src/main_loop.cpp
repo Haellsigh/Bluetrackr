@@ -4,14 +4,16 @@
 #include "usb_device.h"
 #include "usbd_hid.h"
 
+#include <blt/chrono.hh>
 #include <blt/devices/nrf24/nrf24.hh>
 #include <blt/gpio.hh>
 #include <blt/messages.hh>
-#include <blt/time.hh>
 #include <spi/spi.hh>
 
 SPI_HandleTypeDef* g_hspi = nullptr;
-auto               fhSpi()
+TIM_HandleTypeDef* g_htim = nullptr;
+
+auto fhSpi()
 {
   return g_hspi;
 }
@@ -19,11 +21,11 @@ auto               fhSpi()
 const uint8_t nrf24_addresses[][6] = {"1Node", "2Node"};
 uint8_t       rx_buffer[blt::message::motion::size];
 
-void main_loop(SPI_HandleTypeDef* hspi)
+void main_loop(SPI_HandleTypeDef* hspi, TIM_HandleTypeDef* htim)
 {
   using namespace blt;
   using namespace gpio;
-  using namespace time::literals;
+  using namespace chrono::literals;
 
   using led_red    = gpio::pin_out<PC, 6>;
   using led_blue   = gpio::pin_out<PC, 7>;
@@ -33,13 +35,19 @@ void main_loop(SPI_HandleTypeDef* hspi)
 
   using btn_pair = gpio::pin_in<PA, 0>;
 
+  using ce  = gpio::pin_out<PB, 1>;
   using csn = gpio::pin_out<PB, 2>;
-  using ce  = gpio::pin_out<PB, 5>;
 
   g_hspi = hspi;
+  g_htim = htim;
 
-  time::init();
+  HAL_TIM_Base_Start(g_htim);
+  chrono::init([]() noexcept {
+    return chrono::clock::time_point{chrono::clock::duration{__HAL_TIM_GET_COUNTER(g_htim)}};
+  });
   leds::clear();
+
+  chrono::delay(10ms);
 
   nrf24::device<spi::device<fhSpi>, csn, ce> radio;
 
@@ -54,11 +62,12 @@ void main_loop(SPI_HandleTypeDef* hspi)
   }
 
   radio.setChannel(40);
-  radio.setRfPowerLevel<nrf24::Value::RfPowerMinimum>();
+  radio.setRfPowerLevel<nrf24::Value::RfPower0dBm>();
   radio.setDataRate<nrf24::Value::RfDatarate250kbps>();
-  radio.setAutoAck(true);
-  radio.setupAutoRetransmit<nrf24::Value::AutoRetransmitDelay1500us, 15>();
+  // radio.setAutoAck(true);
+  // radio.setupAutoRetransmit<nrf24::Value::AutoRetransmitDelay500us, 15>();
   radio.setAddressWidth(5);
+  radio.setPayloadSize(blt::message::motion::size);
   radio.openWritingPipe(nrf24_addresses[0]);
   radio.openReadingPipe(1, nrf24_addresses[1]);
 
@@ -68,15 +77,12 @@ void main_loop(SPI_HandleTypeDef* hspi)
   led_green::clear();
 
   while (true) {
-    led_blue::set();
-    while (radio.available()) {
-      led_blue::clear();
-      led_orange::set();
-      radio.read(rx_buffer, blt::message::motion::size);
-    }
-
-    led_orange::clear();
+    while (!radio.available())
+      ;
+    led_orange::set();
+    radio.read(rx_buffer, blt::message::motion::size);
     USBD_HID_SendReport(&hUsbDeviceFS, rx_buffer, blt::message::motion::size);
+    led_orange::clear();
   }
 
   error_handler();
